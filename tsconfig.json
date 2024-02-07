@@ -19,6 +19,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "esModuleInterop": true,
+
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
@@ -27,7 +29,7 @@
       "@assets/*": ["src/assets/*"]
     },
 
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client", "jest"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
