@@ -30,6 +30,17 @@ const color = {
   gray06: '#1e1e1e',
 };
 
+const gap = {
+  gap1: '8px',
+  gap2: '16px',
+  gap3: '24px',
+  gap4: '32px',
+  gap5: '40px',
+  gap6: '48px',
+  gap7: '56px',
+  gap8: '72px',
+};
+
 const typography = {
   title: {
     h1: `
@@ -118,6 +129,7 @@ const typography = {
 const theme: DefaultTheme = {
   layoutComponent,
   typography,
+  gap,
   color,
 };
 
