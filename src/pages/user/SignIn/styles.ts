@@ -10,6 +10,10 @@ export const LoginHeader = styled.div`
   .logo {
     margin-bottom: ${theme.gap.gap1};
   }
+
+  @media (max-width: 500px) {
+    text-align: left;
+  }
 `;
 
 export const LoginTitle = styled.h1`

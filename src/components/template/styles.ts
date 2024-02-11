@@ -13,4 +13,21 @@ export const TemplateInner = styled.div`
   max-width: calc(1200px + 24px * 2);
   padding: 0 16px;
   margin: 0 auto;
+
+  .mobile,
+  .pad {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .pad {
+      display: block;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .mobile {
+      display: block;
+    }
+  }
 `;

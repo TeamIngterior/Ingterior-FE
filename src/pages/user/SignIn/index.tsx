@@ -10,7 +10,10 @@ function SignIn() {
     <>
       <S.LoginHeader>
         <Logo width={56} height={56} className="logo" />
-        <S.LoginTitle>잉테리어의 더 많은 서비스를 시작해 보세요!</S.LoginTitle>
+        <S.LoginTitle>
+          잉테리어의 더 많은 서비스를 <br className="pad" />
+          시작해 보세요!
+        </S.LoginTitle>
         <S.LoginSubTitle>
           <strong>1분</strong>이면 회원가입 가능해요.
         </S.LoginSubTitle>
