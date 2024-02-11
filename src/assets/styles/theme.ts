@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 const layoutComponent = {
-  header_height: 100,
+  header_height: 48,
   footer_height: 100,
 };
 
@@ -30,8 +30,94 @@ const color = {
   gray06: '#1e1e1e',
 };
 
+const typography = {
+  title: {
+    h1: `
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0em;
+      color: ${color.gray06};
+    `,
+    h2: `
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+    h3: `
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+    h4: `
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+    h5: `
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+  },
+  body: {
+    b1: `
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+    b2: `
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+  },
+  link: {
+    l1: `
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+    l2: `
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+  },
+  caption: {
+    c1: `
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+    c2: `
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+  },
+  label: {
+    lb1: `
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: ${color.gray06};      
+    `,
+  },
+};
+
 const theme: DefaultTheme = {
   layoutComponent,
+  typography,
   color,
 };
 

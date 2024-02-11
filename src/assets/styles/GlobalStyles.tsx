@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-import './tailwind.css';
-
 const GlobalStyles = createGlobalStyle`
   *,
   *::after,

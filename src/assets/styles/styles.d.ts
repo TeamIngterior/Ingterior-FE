@@ -9,9 +9,16 @@ type ColorProps = Color & {
   [key in keyof Color]: string;
 };
 
+type Typography = {
+  [key: string]: {
+    [key: string]: string;
+  };
+};
+
 declare module 'styled-components' {
   export interface DefaultTheme {
     layoutComponent: LayoutComponentProps;
+    typography: TypoProps;
     color: ColorProps;
   }
 }
