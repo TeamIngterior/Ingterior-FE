@@ -13,7 +13,6 @@ export const SOCIAL_LOGIN = [
     style: {
       backgroundColor: '#FFEB00',
       color: `${theme.color.gray06}`,
-      marginBottom: `${theme.gap.gap1}`,
     },
   },
   {
@@ -23,7 +22,6 @@ export const SOCIAL_LOGIN = [
     style: {
       backgroundColor: '#03C75A',
       color: `${theme.color.gray01}`,
-      marginBottom: `${theme.gap.gap1}`,
     },
   },
   {
@@ -33,7 +31,7 @@ export const SOCIAL_LOGIN = [
     style: {
       backgroundColor: `${theme.color.gray01}`,
       color: `${theme.color.gray06}`,
-      marginBottom: `${theme.gap.gap1}`,
+
       border: `1px solid ${theme.color.gray03}`,
     },
   },

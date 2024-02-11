@@ -16,24 +16,26 @@ function SignIn() {
         </S.LoginSubTitle>
       </S.LoginHeader>
 
-      {SOCIAL_LOGIN.map(
-        (item, index) => (
-          console.log('item', SOCIAL_LOGIN[index].style),
-          (
-            <Button
-              key={index}
-              type="button"
-              icon={SOCIAL_LOGIN[index].icon}
-              $fullWidth={SOCIAL_LOGIN[index].$fullWidth}
-              $bgType="revert"
-              style={SOCIAL_LOGIN[index].style}
-              onClickHandler={() => console.log(`${item.title}`)}
-            >
-              {item.title}
-            </Button>
+      <S.LoginContent>
+        {SOCIAL_LOGIN.map(
+          (item, index) => (
+            console.log('item', SOCIAL_LOGIN[index].style),
+            (
+              <Button
+                key={index}
+                type="button"
+                icon={SOCIAL_LOGIN[index].icon}
+                $fullWidth={SOCIAL_LOGIN[index].$fullWidth}
+                $bgType="revert"
+                style={SOCIAL_LOGIN[index].style}
+                onClickHandler={() => console.log(`${item.title}`)}
+              >
+                {item.title}
+              </Button>
+            )
           )
-        )
-      )}
+        )}
+      </S.LoginContent>
     </>
   );
 }

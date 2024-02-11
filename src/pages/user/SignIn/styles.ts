@@ -25,3 +25,17 @@ export const LoginSubTitle = styled.p`
     color: ${theme.color.primary};
   }
 `;
+
+export const LoginContent = styled.div`
+  width: 100%;
+  max-width: 588px;
+  margin: 0 auto;
+
+  button {
+    margin-bottom: ${theme.gap.gap1};
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;
