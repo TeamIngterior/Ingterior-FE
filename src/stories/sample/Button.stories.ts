@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+// eslint-disable-next-line storybook/story-exports
 const meta = {
   title: 'Example/Button',
   component: Button,
@@ -16,6 +17,7 @@ const meta = {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
+  excludeStories: ['Primary', 'Secondary', 'Large', 'Small'],
 } satisfies Meta<typeof Button>;
 
 export default meta;

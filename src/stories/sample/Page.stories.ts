@@ -3,6 +3,7 @@ import { within, userEvent, expect } from '@storybook/test';
 
 import { Page } from './Page';
 
+// eslint-disable-next-line storybook/story-exports
 const meta = {
   title: 'Example/Page',
   component: Page,
@@ -10,6 +11,7 @@ const meta = {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'fullscreen',
   },
+  excludeStories: ['LoggedIn', 'LoggedOut'],
 } satisfies Meta<typeof Page>;
 
 export default meta;

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Header } from './Header';
 
+// eslint-disable-next-line storybook/story-exports
 const meta = {
   title: 'Example/Header',
   component: Header,
@@ -11,6 +12,7 @@ const meta = {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'fullscreen',
   },
+  excludeStories: ['LoggedIn', 'LoggedOut'],
 } satisfies Meta<typeof Header>;
 
 export default meta;
