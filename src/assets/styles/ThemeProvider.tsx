@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function EmotionProvider({ children }: Props) {
+function StyledThemeProvider({ children }: Props) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -15,4 +15,4 @@ function EmotionProvider({ children }: Props) {
   );
 }
 
-export default EmotionProvider;
+export default StyledThemeProvider;
