@@ -1,9 +1,9 @@
 import * as S from './styles';
 
 export interface ButtonCSSProps {
-  size?: 'sm' | 'md' | 'lg'; // 버튼 사이즈, default: md
-  $bgType?: 'default' | 'revert';
-  $styleType?: 'solid' | 'outline' | 'disabled' | 'warning' | 'text'; // 버튼 디자인 타입, default: solid
+  size?: 'sm' | 'md' | 'lg' | 'initial'; // 버튼 사이즈, default: md
+  $bgType?: 'default' | 'revert' | 'initial';
+  $styleType?: 'solid' | 'outline' | 'disabled' | 'warning' | 'text' | 'icon'; // 버튼 디자인 타입, default: solid
   $fullWidth?: boolean; // 버튼 가로 너비 100%, default: false
 }
 
