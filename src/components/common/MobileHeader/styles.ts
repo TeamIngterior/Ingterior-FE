@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const MobileHeaderContainer = styled.header`
   position: relative;
-  display: flex;
   align-items: center;
   justify-content: center;
   height: 48px;
+  display: none;
 
   .prevButton {
     position: absolute;
@@ -15,6 +15,10 @@ export const MobileHeaderContainer = styled.header`
     width: 40px;
     min-width: 40px;
     height: 40px;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
   }
 `;
 
