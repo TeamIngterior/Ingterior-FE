@@ -28,6 +28,8 @@ const color = {
   gray04: '#9a9a9a',
   gray05: '#5d5d5d',
   gray06: '#1e1e1e',
+
+  error: '#a52a2a',
 };
 
 const gap = {
