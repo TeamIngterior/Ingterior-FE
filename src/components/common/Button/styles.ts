@@ -8,6 +8,7 @@ const handleButtonSize = (props: ButtonCSSProps) => {
       return css`
         min-width: 62px;
         height: 32px;
+        ${({ theme }) => theme.typography.caption.c2};
       `;
     case 'md':
       return css`
@@ -30,7 +31,6 @@ const handleBgColor = (props: ButtonCSSProps) => {
   switch (props.$bgType) {
     case 'default':
       return css`
-        ${({ theme }) => theme.typography.label.lb1};
         background-color: ${theme.color.primary};
         color: ${theme.color.gray01};
 
@@ -40,9 +40,9 @@ const handleBgColor = (props: ButtonCSSProps) => {
       `;
     case 'revert':
       return css`
-        ${({ theme }) => theme.typography.label.lb1};
         background-color: ${theme.color.gray01};
         border: 1px solid ${theme.color.gray03};
+        color: ${theme.color.gray06};
 
         &:active {
           background-color: ${theme.color.gray02};
@@ -102,6 +102,9 @@ export const Button = styled.button<ButtonCSSProps>`
   max-width: ${(props) => (props.$fullWidth ? '100%' : 'fit-content')};
   border-radius: 4px;
   border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0em;
   white-space: nowrap;
   appearance: none;
 
@@ -109,7 +112,7 @@ export const Button = styled.button<ButtonCSSProps>`
     margin-right: ${theme.gap.gap1};
   }
 
-  ${(props) => handleButtonSize(props)}
   ${(props) => handleButtonType(props)}
+  ${(props) => handleButtonSize(props)}
   ${(props) => handleBgColor(props)}
 `;
