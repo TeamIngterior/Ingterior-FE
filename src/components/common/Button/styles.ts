@@ -6,10 +6,15 @@ const handleButtonSize = (props: ButtonCSSProps) => {
   switch (props.size) {
     case 'sm':
       return css`
+        min-width: 62px;
+        height: 32px;
+      `;
+    case 'md':
+      return css`
         min-width: 106px;
         height: 40px;
       `;
-    case 'md':
+    case 'lg':
       return css`
         min-width: 328px;
         height: 48px;
@@ -26,12 +31,20 @@ const handleBgColor = (props: ButtonCSSProps) => {
         ${({ theme }) => theme.typography.label.lb1};
         background-color: ${theme.color.primary};
         color: ${theme.color.gray01};
+
+        &:active {
+          background-color: ${theme.color.primary06};
+        }
       `;
     case 'revert':
       return css`
         ${({ theme }) => theme.typography.label.lb1};
         background-color: ${theme.color.gray01};
         border: 1px solid ${theme.color.gray03};
+
+        &:active {
+          background-color: ${theme.color.gray02};
+        }
       `;
   }
 };
@@ -52,8 +65,8 @@ const handleButtonType = (props: ButtonCSSProps) => {
       `;
     case 'disabled':
       return css`
-        background-color: ${theme.color.gray100};
-        color: ${theme.color.gray500};
+        background-color: ${theme.color.gray03};
+        color: ${theme.color.gray01};
         pointer-events: none;
         cursor: default;
       `;

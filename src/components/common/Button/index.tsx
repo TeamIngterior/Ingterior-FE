@@ -21,7 +21,7 @@ interface ButtonProps extends ButtonCSSProps {
 
 function Button({
   type = 'submit',
-  size = 'md',
+  size = 'lg',
   $styleType = 'solid',
   $bgType = 'default',
   children,
