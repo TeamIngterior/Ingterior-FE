@@ -3,13 +3,9 @@ import { SOCIAL_LOGIN } from '@/constants/socialLogin';
 import Logo from '@assets/ingteriorLogo.svg?react';
 import Button from '@/components/common/Button';
 
-import useMobileHeader from '@/hooks/useMobileHeader';
-
 import * as S from './styles';
 
 function SignIn() {
-  useMobileHeader('/', '로그인');
-
   return (
     <>
       <S.LoginHeader>
