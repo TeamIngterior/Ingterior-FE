@@ -1,30 +1,14 @@
-import { useEffect } from 'react';
 import { SOCIAL_LOGIN } from '@/constants/socialLogin';
-
-import { useSetRecoilState } from 'recoil';
-import { mobileHeaderState } from '@/atom/globalState';
 
 import Logo from '@assets/ingteriorLogo.svg?react';
 import Button from '@/components/common/Button';
 
+import useMobileHeader from '@/hooks/useMobileHeader';
+
 import * as S from './styles';
 
 function SignIn() {
-  const setMobileHeader = useSetRecoilState(mobileHeaderState);
-
-  useEffect(() => {
-    setMobileHeader({
-      prevLink: '/',
-      title: '로그인',
-    });
-
-    return () => {
-      setMobileHeader({
-        prevLink: '',
-        title: '',
-      });
-    };
-  }, []);
+  useMobileHeader('/', '로그인');
 
   return (
     <>
