@@ -18,7 +18,7 @@ export const TemplateContainer = styled.main`
 
 export const TemplateInner = styled.div`
   width: 100%;
-  max-width: calc(1200px + 24px * 2);
+  max-width: calc(588px + 16px * 2);
   padding: 0 16px;
   margin: 0 auto;
 
