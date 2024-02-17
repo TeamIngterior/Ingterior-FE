@@ -18,11 +18,13 @@ const SIDE_MENU_LIST = [
 function Sidebar() {
   return (
     <S.SideMenu>
-      <S.SideMenuList>
-        {SIDE_MENU_LIST.map((item, index) => (
-          <S.SideMenuItem key={index}>{item.name}</S.SideMenuItem>
-        ))}
-      </S.SideMenuList>
+      <nav>
+        <S.SideMenuList>
+          {SIDE_MENU_LIST.map((item, index) => (
+            <S.SideMenuItem key={index}>{item.name}</S.SideMenuItem>
+          ))}
+        </S.SideMenuList>
+      </nav>
     </S.SideMenu>
   );
 }

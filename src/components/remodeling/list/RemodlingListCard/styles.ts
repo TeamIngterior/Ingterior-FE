@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '@/assets/styles/theme';
 
-export const RemodelingListCardContainer = styled.div`
+export const RemodelingListCardContainer = styled.article`
   margin-bottom: 40px;
 
   @media screen and (max-width: 768px) {
