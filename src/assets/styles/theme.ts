@@ -1,8 +1,10 @@
 import { DefaultTheme } from 'styled-components';
 
 const layoutComponent = {
-  header_height: 48,
-  footer_height: 100,
+  header_height: 80,
+  footer_height: 264,
+  header_mobile_height: 56,
+  footer_mobile_height: 320,
 };
 
 const color = {

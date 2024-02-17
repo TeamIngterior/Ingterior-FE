@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import Header from './components/common/Header';
 import MainTemplate from './components/template/MainTemplate';
+import Footer from './components/common/Footer';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Outlet />
         </Suspense>
       </MainTemplate>
+      <Footer />
     </>
   );
 }

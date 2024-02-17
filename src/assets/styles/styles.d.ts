@@ -1,8 +1,7 @@
 import 'styled-components';
 
 interface LayoutComponentProps {
-  header_height: number;
-  footer_height: number;
+  [key: string]: string | number;
 }
 
 type ColorProps = Color & {
