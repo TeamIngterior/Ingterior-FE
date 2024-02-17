@@ -16,6 +16,7 @@ function Header() {
     <S.HeaderContainer>
       <S.HeaderInner>
         <LogoHorizontal
+          className="logo"
           onClick={() => {
             navigate('/');
           }}
