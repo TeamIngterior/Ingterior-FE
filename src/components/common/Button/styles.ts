@@ -14,42 +14,20 @@ const handleButtonSize = (props: ButtonCSSProps) => {
       return css`
         min-width: 106px;
         height: 40px;
+        font-size: 16px;
+        font-weight: 500;
       `;
     case 'lg':
       return css`
         min-width: 328px;
         height: 48px;
+        font-size: 16px;
+        font-weight: 500;
       `;
     case 'initial':
       return css``;
     default:
       return '';
-  }
-};
-
-const handleBgColor = (props: ButtonCSSProps) => {
-  switch (props.$bgType) {
-    case 'default':
-      return css`
-        background-color: ${theme.color.primary};
-        color: ${theme.color.gray01};
-
-        &:active {
-          background-color: ${theme.color.primary06};
-        }
-      `;
-    case 'revert':
-      return css`
-        background-color: ${theme.color.gray01};
-        border: 1px solid ${theme.color.gray03};
-        color: ${theme.color.gray06};
-
-        &:active {
-          background-color: ${theme.color.gray02};
-        }
-      `;
-    case 'initial':
-      return css``;
   }
 };
 
@@ -69,6 +47,17 @@ const handleButtonType = (props: ButtonCSSProps) => {
         border: 1px solid ${theme.color.primary};
         padding: 0 16px;
       `;
+    case 'revert':
+      return css`
+        background-color: ${theme.color.gray01};
+        border: 1px solid ${theme.color.gray03};
+        color: ${theme.color.gray06};
+
+        &:active {
+          background-color: ${theme.color.gray02};
+        }
+      `;
+
     case 'disabled':
       return css`
         background-color: ${theme.color.gray03};
@@ -79,8 +68,6 @@ const handleButtonType = (props: ButtonCSSProps) => {
       `;
     case 'warning':
       return css``;
-    case 'icon':
-      return css``;
     case 'text':
       return css`
         height: auto;
@@ -88,22 +75,26 @@ const handleButtonType = (props: ButtonCSSProps) => {
         color: ${theme.color.primary};
         padding: 0 16px;
       `;
+    case 'initial':
+      return css``;
     default:
       return css``;
   }
 };
 
 export const Button = styled.button<ButtonCSSProps>`
+  ${(props) => handleButtonType(props)}
+  ${(props) => handleButtonSize(props)}
+  
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   max-width: ${(props) => (props.$fullWidth ? '100%' : 'fit-content')};
+  min-width: ${(props) => props.$fullWidth && '100%'};
   border-radius: 4px;
   border: 1px solid transparent;
-  font-size: 16px;
-  font-weight: 500;
   letter-spacing: 0em;
   white-space: nowrap;
   appearance: none;
@@ -111,8 +102,4 @@ export const Button = styled.button<ButtonCSSProps>`
   svg {
     margin-right: ${theme.gap.gap1};
   }
-
-  ${(props) => handleButtonType(props)}
-  ${(props) => handleButtonSize(props)}
-  ${(props) => handleBgColor(props)}
 `;

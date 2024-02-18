@@ -2,8 +2,14 @@ import * as S from './styles';
 
 export interface ButtonCSSProps {
   size?: 'sm' | 'md' | 'lg' | 'initial'; // 버튼 사이즈, default: md
-  $bgType?: 'default' | 'revert' | 'initial';
-  $styleType?: 'solid' | 'outline' | 'disabled' | 'warning' | 'text' | 'icon'; // 버튼 디자인 타입, default: solid
+  $styleType?:
+    | 'solid'
+    | 'outline'
+    | 'disabled'
+    | 'warning'
+    | 'text'
+    | 'revert'
+    | 'initial'; // 버튼 디자인 타입, default: solid
   $fullWidth?: boolean; // 버튼 가로 너비 100%, default: false
 }
 
@@ -23,7 +29,6 @@ function Button({
   type = 'submit',
   size = 'lg',
   $styleType = 'solid',
-  $bgType = 'default',
   children,
   style,
   icon,
@@ -37,7 +42,6 @@ function Button({
       type={type}
       size={size}
       className={className}
-      $bgType={$bgType}
       $styleType={$styleType}
       $fullWidth={$fullWidth}
       style={{
