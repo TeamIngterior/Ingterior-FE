@@ -30,6 +30,7 @@ function Button({
   $fullWidth = false,
   className,
   onClickHandler,
+  ...props
 }: ButtonProps) {
   return (
     <S.Button
@@ -43,6 +44,7 @@ function Button({
         ...style,
       }}
       onClick={onClickHandler}
+      {...props}
     >
       {icon}
       {children}
