@@ -37,6 +37,7 @@ const handleButtonType = (props: ButtonCSSProps) => {
       return css`
         background-color: ${theme.color.primary};
         color: ${theme.color.gray01};
+        border: 1px solid transparent;
         border: 1px solid ${theme.color.primary};
         padding: 0 16px;
       `;
@@ -57,10 +58,10 @@ const handleButtonType = (props: ButtonCSSProps) => {
           background-color: ${theme.color.gray02};
         }
       `;
-
     case 'disabled':
       return css`
         background-color: ${theme.color.gray03};
+        border: 1px solid transparent;
         color: ${theme.color.gray01};
         pointer-events: none;
         cursor: default;
@@ -94,7 +95,6 @@ export const Button = styled.button<ButtonCSSProps>`
   max-width: ${(props) => (props.$fullWidth ? '100%' : 'fit-content')};
   min-width: ${(props) => props.$fullWidth && '100%'};
   border-radius: 4px;
-  border: 1px solid transparent;
   letter-spacing: 0em;
   white-space: nowrap;
   appearance: none;
