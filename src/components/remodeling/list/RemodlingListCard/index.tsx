@@ -17,8 +17,6 @@ function RemodelingListCard({
 }) {
   const navigate = useNavigate();
 
-  console.log('cardData:', cardData);
-
   return (
     <S.RemodelingListCardContainer>
       {/* 현장 라벨 */}
