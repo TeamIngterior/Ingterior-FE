@@ -17,7 +17,7 @@ export const TemplateContainer = styled.main`
   }
 `;
 
-export const TemplateInner = styled.div`
+export const TemplateInner = styled.section`
   width: 100%;
   max-width: calc(588px + 16px * 2);
   padding: 0 16px;

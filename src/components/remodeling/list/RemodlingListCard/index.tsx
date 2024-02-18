@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 import { RemodelingListDataModel } from '@/apis/remodeling';
 
 import { TiStarFullOutline } from 'react-icons/ti';
@@ -14,6 +16,8 @@ function RemodelingListCard({
   cardData: RemodelingListDataModel;
 }) {
   const navigate = useNavigate();
+
+  console.log('cardData:', cardData);
 
   return (
     <S.RemodelingListCardContainer>
@@ -67,14 +71,15 @@ function RemodelingListCard({
             현장코드:&nbsp;
             <span>{cardData.remodelingSiteCode}</span>
           </S.LinkShareText>
-          <Button
-            type="button"
-            size="sm"
-            $bgType="revert"
-            onClickHandler={() => console.log('복사')}
+
+          <CopyToClipboard
+            text={cardData.remodelingSiteCode}
+            onCopy={() => alert('클립보드에 복사되었습니다.')}
           >
-            코드 공유
-          </Button>
+            <Button size="sm" $bgType="revert">
+              코드 공유
+            </Button>
+          </CopyToClipboard>
         </S.LinkShareContainer>
       </S.ListCardInfoContainer>
     </S.RemodelingListCardContainer>
