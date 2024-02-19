@@ -15,15 +15,38 @@ const generateRemodelingData = (id: number, isOwner: boolean) => {
   };
 };
 
+const remodelingList = Array.from({ length: 10 }, (_, index) => {
+  const id = index + 1;
+  const isOwner = index === 0;
+  return generateRemodelingData(id, isOwner);
+});
+
 export const handlers = [
   // 현장 목록 리스트
   http.get('/api/remodeling/list', () => {
-    const remodelingList = Array.from({ length: 10 }, (_, index) => {
-      const id = index + 1;
-      const isOwner = index === 0;
-      return generateRemodelingData(id, isOwner);
-    });
-
     return HttpResponse.json(remodelingList);
+  }),
+
+  // 현장 목록을 현장 코드로 조회해서 있는지 검증
+  http.get<{ code: string }>('/api/remodeling/list/code', ({ request }) => {
+    const url = new URL(request.url);
+    const productId = url.searchParams.get('code');
+
+    const isExist = remodelingList.some(
+      (remodeling) => remodeling.remodelingSiteCode === productId
+    );
+
+    if (isExist) {
+      return HttpResponse.json(
+        remodelingList.find(
+          (remodeling) => remodeling.remodelingSiteCode === productId
+        )
+      );
+    } else {
+      return HttpResponse.json({
+        status: 404,
+        message: '존재하지 않는 현장입니다.',
+      });
+    }
   }),
 ];
