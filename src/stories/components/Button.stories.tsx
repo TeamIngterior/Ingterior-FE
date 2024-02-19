@@ -11,7 +11,6 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     style: { control: 'object' },
     size: { control: 'radio', options: ['sm', 'md'] },
-    $bgType: { control: 'radio', options: ['default', 'revert'] },
     $fullWidth: { control: 'boolean', defaultValue: false },
   },
 };
