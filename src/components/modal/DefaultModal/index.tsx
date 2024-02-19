@@ -4,16 +4,31 @@ import { modalState } from '@/atom/modalState';
 import { useModal } from '@/hooks/useModal';
 
 import * as CS from '../styles';
+import * as S from './styles';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '@/components/common/Button';
 
 interface DefaultModalProps {
   name: string;
+  title?: string;
   children: React.ReactNode;
   props?: any;
+  button?: React.ReactNode;
+  buttonName?: string;
+  buttonHandler?: () => void;
+  onReset?: () => void;
 }
 
-function DefaultModal({ name, children, ...props }: DefaultModalProps) {
+function DefaultModal({
+  name,
+  title,
+  children,
+  button,
+  buttonName = '확인',
+  buttonHandler,
+  onReset,
+  ...props
+}: DefaultModalProps) {
   const [allModalState, setAllModalState] = useRecoilState<{
     [key: string]: any;
   }>(modalState);
@@ -23,7 +38,7 @@ function DefaultModal({ name, children, ...props }: DefaultModalProps) {
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      closeModal();
+      closeModal(onReset);
     }
   };
 
@@ -44,14 +59,36 @@ function DefaultModal({ name, children, ...props }: DefaultModalProps) {
             type="button"
             size="initial"
             $styleType="initial"
-            onClickHandler={closeModal}
+            onClickHandler={() => closeModal(onReset)}
             className="closeButton"
           >
             <AiOutlineClose />
           </Button>
 
           {/* 모달 컨텐츠 */}
-          {children}
+          <S.ModalContainer>
+            <S.ModalContent>
+              <S.ModalHeader>{title}</S.ModalHeader>
+              {children}
+            </S.ModalContent>
+
+            {/* 버튼  */}
+            <S.ModalButtonContainer>
+              {button ? (
+                button
+              ) : (
+                <>
+                  <Button
+                    size="lg"
+                    $fullWidth={true}
+                    onClickHandler={() => buttonHandler && buttonHandler()}
+                  >
+                    {buttonName}
+                  </Button>
+                </>
+              )}
+            </S.ModalButtonContainer>
+          </S.ModalContainer>
         </CS.ModalContainer>
       </CS.ModalOverlay>
     )
