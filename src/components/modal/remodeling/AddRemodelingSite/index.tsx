@@ -19,20 +19,26 @@ function AddRemodlingSite() {
   });
   const { joinSiteMutation, isValidateData } = useRemodelingList();
 
-  const [isValidate, setIsValidate] = useState<boolean | null>(null);
+  const [isValidate, setIsValidate] = useState<{ status: number | null }>({
+    status: null,
+  });
+
   const [validData, setValidData] = useState<any>();
 
   // 현장 코드 검증
   const onEnterCodeSubmit = async (data: any) => {
     try {
       const response = await isValidateData(data.siteCode);
+      const status = response.data?.status;
+      const responseData = response.data?.data ?? null;
 
-      if (response.data?.status === 404) {
-        setIsValidate(false);
-      } else {
-        setIsValidate(true);
-        setValidData(response.data);
-        console.log(response.data);
+      setIsValidate({ status });
+
+      if (status === 409) {
+        setValidData(responseData);
+      } else if (status === 200) {
+        setValidData(responseData);
+        console.log(responseData);
       }
     } catch (error) {
       console.error('Error Fetching data: ', error);
@@ -75,14 +81,21 @@ function AddRemodlingSite() {
 
           {
             // 현장 코드 검증 결과
-            isValidate === false ? (
+            isValidate.status === 404 ? (
               <>
                 <S.ValidateError>
                   코드를 잘못 입력했습니다. <br />
                   입력하신 코드명을 다시 확인해 주세요.
                 </S.ValidateError>
               </>
-            ) : isValidate === true ? (
+            ) : isValidate.status === 409 ? (
+              <>
+                <S.ValidateError>
+                  이미 등록된 현장입니다. <br />
+                  다른 현장 코드를 입력해 주세요.
+                </S.ValidateError>
+              </>
+            ) : isValidate.status === 200 ? (
               <>
                 <S.ListCardModalContainer>
                   <S.ListCardModalTitle>
@@ -93,12 +106,12 @@ function AddRemodlingSite() {
                     <CS.ListCardInfo>
                       <CS.ListCardProfileImg>
                         <img
-                          src={validData?.user.profileImg}
+                          src={validData?.user?.profileImg}
                           alt="현장 이미지"
                         />
                       </CS.ListCardProfileImg>
                       <CS.ListCardProfileInfo>
-                        <p>생성자: {validData?.user.usercode}</p>
+                        <p>생성자: {validData?.user?.usercode}</p>
                         <p>{validData?.createdAt}</p>
                       </CS.ListCardProfileInfo>
                     </CS.ListCardInfo>
