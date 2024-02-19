@@ -1,4 +1,5 @@
 import { HttpResponse, http } from 'msw';
+import { PathParams } from 'msw';
 
 const generateRemodelingData = (id: number, isOwner: boolean) => {
   return {
@@ -61,6 +62,39 @@ export const handlers = [
           ),
         });
       }
+    } else {
+      return HttpResponse.json({
+        status: 404,
+        message: '존재하지 않는 현장입니다.',
+      });
+    }
+  }),
+
+  // 현장 목록을 현장 코드로 조회해서 추가 요청
+  http.post('/api/remodeling/join', async ({ request }: any) => {
+    const remodelingSiteBody = await request.json();
+    const { remodelingSiteCode } = remodelingSiteBody;
+
+    const remodeling = remodelingList.find(
+      (remodeling) => remodeling.remodelingSiteCode === remodelingSiteCode
+    );
+
+    // 이미 추가된 현장인지 확인
+    const isExist = personalRemodelingList.some(
+      (remodeling) => remodeling.remodelingSiteCode === remodelingSiteCode
+    );
+
+    if (remodeling && !isExist) {
+      personalRemodelingList.unshift(remodeling);
+      return HttpResponse.json({
+        status: 200,
+        message: '현장 추가 성공',
+      });
+    } else if (isExist) {
+      return HttpResponse.json({
+        status: 409,
+        message: '이미 추가된 현장입니다.',
+      });
     } else {
       return HttpResponse.json({
         status: 404,
