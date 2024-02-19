@@ -27,3 +27,23 @@ export const ModalHeader = styled.div`
   text-align: center;
   margin-bottom: ${theme.gap.gap2};
 `;
+
+export const ListCardModalContainer = styled.div`
+  margin-top: ${theme.gap.gap3};
+`;
+
+export const ListCardModalTitle = styled.h3`
+  ${theme.typography.title.h5};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  margin-bottom: ${theme.gap.gap1};
+`;
+
+export const ValidateError = styled.p`
+  ${theme.typography.body.b2};
+  color: ${theme.color.error};
+  margin-top: ${theme.gap.gap2};
+  line-height: 1.5;
+`;
