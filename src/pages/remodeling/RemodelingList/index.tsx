@@ -35,14 +35,25 @@ function RemodelingList() {
   return (
     <>
       <AddRemodlingSite />
-      <S.RemodelingListContainer>
-        {remodelingListData?.map(
-          (item: RemodelingListDataModel, index: number) => (
-            <RemodelingListCard cardData={item} key={index} />
-          )
+      <S.RemodelingListContainer className="remodelingList">
+        {remodelingListData?.length !== 0 ? (
+          <>
+            {remodelingListData?.map(
+              (item: RemodelingListDataModel, index: number) => (
+                <RemodelingListCard cardData={item} key={index} />
+              )
+            )}
+          </>
+        ) : (
+          <S.NoDataContainer>
+            <p>
+              아래의 + 버튼을 눌러 <br />
+              새로운 현장을 추가해 보세요!
+            </p>
+          </S.NoDataContainer>
         )}
 
-        <div className="constructionButtonContainer" ref={ref}>
+        <div className={`constructionButtonContainer `} ref={ref}>
           <S.AddConstructionConatiner
             style={{
               position: isButtonContainerVisible ? 'static' : 'fixed',

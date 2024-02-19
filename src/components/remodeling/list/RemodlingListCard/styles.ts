@@ -4,6 +4,12 @@ import { theme } from '@/assets/styles/theme';
 export const RemodelingListCardContainer = styled.article`
   margin-bottom: 40px;
 
+  .remodelingList & {
+    &:last-of-type {
+      margin-bottom: 120px;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     margin-bottom: 32px;
   }
