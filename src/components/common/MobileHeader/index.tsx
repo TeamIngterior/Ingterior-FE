@@ -18,8 +18,7 @@ function MobileHeader({ prevLink, title }: RemodelingListProps) {
       <Button
         type="button"
         size="initial"
-        $bgType="initial"
-        $styleType="icon"
+        $styleType="initial"
         className="prevButton"
         onClickHandler={() => navigate(prevLink)}
       >
