@@ -82,7 +82,7 @@ function AddRemodlingSite() {
                   입력하신 코드명을 다시 확인해 주세요.
                 </S.ValidateError>
               </>
-            ) : (
+            ) : isValidate === true ? (
               <>
                 <S.ListCardModalContainer>
                   <S.ListCardModalTitle>
@@ -105,7 +105,7 @@ function AddRemodlingSite() {
                   </CS.ListCardInfoContainer>
                 </S.ListCardModalContainer>
               </>
-            )
+            ) : null
           }
         </S.ModalContent>
 
