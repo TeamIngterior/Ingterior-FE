@@ -8,7 +8,11 @@ import * as S from './styles';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '@/components/common/Button';
 
-interface DefaultModalProps {
+export interface DefaultModalCSSProps {
+  height?: string;
+}
+
+interface DefaultModalProps extends DefaultModalCSSProps {
   name: string;
   title?: string;
   children: React.ReactNode;

@@ -5,7 +5,6 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  height: 400px;
   padding: ${theme.gap.gap7} 0 ${theme.gap.gap4};
 `;
 

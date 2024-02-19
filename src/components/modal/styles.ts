@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '@/assets/styles/theme';
+import { DefaultModalCSSProps } from './DefaultModal';
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -11,11 +12,13 @@ export const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
 `;
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.div<DefaultModalCSSProps>`
   position: fixed;
   z-index: 2;
   width: 100%;
   max-width: 328px;
+  height: 100%;
+  max-height: ${({ height }) => height || '100%'};
   min-height: 328px;
   background-color: white;
   border-radius: 4px;

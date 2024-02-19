@@ -77,6 +77,7 @@ function AddRemodlingSite() {
     <DefaultModal
       name="addRemodelingSite"
       title="현장 코드를 입력해 주세요."
+      height="400px"
       button={
         <>
           <form onSubmit={handleSubmit(onSubmit)}>
