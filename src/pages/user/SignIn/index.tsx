@@ -29,7 +29,7 @@ function SignIn() {
                 type="button"
                 icon={SOCIAL_LOGIN[index].icon}
                 $fullWidth={SOCIAL_LOGIN[index].$fullWidth}
-                $bgType="revert"
+                $styleType="revert"
                 style={SOCIAL_LOGIN[index].style}
                 onClickHandler={() => console.log(`${item.title}`)}
               >
