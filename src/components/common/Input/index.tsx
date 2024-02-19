@@ -3,7 +3,7 @@ import * as S from './Input.styles';
 
 export interface InputCSSProps {
   size?: 'sm' | 'md' | 'lg'; // 버튼 사이즈, default: md
-  isHorizontal?: boolean; // 버튼이 가로로 배치되어야 하는 경우 전달
+  $isHorizontal?: boolean; // 버튼이 가로로 배치되어야 하는 경우 전달
   readOnly?: boolean;
 }
 
@@ -34,7 +34,7 @@ function Input(
     type = 'text',
     size = 'md',
     value,
-    isHorizontal,
+    $isHorizontal,
     inputType,
     name,
     label,
@@ -68,7 +68,10 @@ function Input(
     <S.InputContainer>
       {label && <S.InputLabel htmlFor={name}>{label}</S.InputLabel>}
 
-      <S.InputContentContainer className="relative" isHorizontal={isHorizontal}>
+      <S.InputContentContainer
+        className="relative"
+        $isHorizontal={$isHorizontal}
+      >
         {inputType === 'textarea' ? (
           <S.Textarea
             className={errorKEY && 'error'}

@@ -47,8 +47,8 @@ export const InputContainer = styled.div<InputCSSProps>`
 
 export const InputContentContainer = styled.div<InputCSSProps>`
   position: relative;
-  display: ${(props) => props.isHorizontal && 'flex'};
-  gap: ${(props) => props.isHorizontal && theme.gap.gap1};
+  display: ${(props) => props.$isHorizontal && 'flex'};
+  gap: ${(props) => props.$isHorizontal && theme.gap.gap1};
 `;
 
 export const InputLabel = styled.label`
