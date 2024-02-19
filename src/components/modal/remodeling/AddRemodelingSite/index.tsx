@@ -8,7 +8,8 @@ import Button from '@/components/common/Button';
 import DefaultModal from '../../DefaultModal';
 
 import * as S from './styles';
-import * as CS from '@components/remodeling/list/RemodlingListCard/styles';
+import * as CS from '@/components/modal/styles';
+import * as LS from '@components/remodeling/list/RemodlingListCard/styles';
 import Input from '@/components/common/Input';
 
 function AddRemodlingSite() {
@@ -74,12 +75,71 @@ function AddRemodlingSite() {
   };
 
   return (
-    <DefaultModal
-      name="addRemodelingSite"
-      title="현장 코드를 입력해 주세요."
-      height="400px"
-      button={
-        <>
+    <DefaultModal name="addRemodelingSite" height="400px" onReset={onReset}>
+      {/* 모달 컨텐츠 */}
+      <CS.ModalContentContainer>
+        <CS.ModalHeader>현장 코드 입력</CS.ModalHeader>
+        <CS.ModalContent>
+          <form onSubmit={handleSubmit(onEnterCodeSubmit)}>
+            <Input
+              type="text"
+              size="sm"
+              inputType="input"
+              $isHorizontal={true}
+              placeholder="공유받은 코드를 입력해 주세요."
+              {...register('siteCode')}
+              errors={errors}
+            >
+              <Button size="sm" $styleType="revert">
+                코드 입력
+              </Button>
+            </Input>
+          </form>
+
+          {
+            // 현장 코드 검증 결과
+            isValidate.status === 404 ? (
+              <>
+                <S.ValidateError>
+                  코드를 잘못 입력했습니다. <br />
+                  입력하신 코드명을 다시 확인해 주세요.
+                </S.ValidateError>
+              </>
+            ) : isValidate.status === 409 ? (
+              <>
+                <S.ValidateError>
+                  이미 등록된 현장입니다. <br />
+                  다른 현장 코드를 입력해 주세요.
+                </S.ValidateError>
+              </>
+            ) : isValidate.status === 200 ? (
+              <>
+                <S.ListCardModalContainer>
+                  <S.ListCardModalTitle>
+                    {validData?.title}
+                  </S.ListCardModalTitle>
+
+                  <LS.ListCardInfoContainer>
+                    <LS.ListCardInfo>
+                      <LS.ListCardProfileImg>
+                        <img
+                          src={validData?.user?.profileImg}
+                          alt="현장 이미지"
+                        />
+                      </LS.ListCardProfileImg>
+                      <LS.ListCardProfileInfo>
+                        <p>생성자: {validData?.user?.usercode}</p>
+                        <p>{validData?.createdAt}</p>
+                      </LS.ListCardProfileInfo>
+                    </LS.ListCardInfo>
+                  </LS.ListCardInfoContainer>
+                </S.ListCardModalContainer>
+              </>
+            ) : null
+          }
+        </CS.ModalContent>
+
+        <CS.ModalButtonContainer>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Button
               $styleType={isValidate.status === 200 ? 'solid' : 'disabled'}
@@ -89,63 +149,8 @@ function AddRemodlingSite() {
               추가하기
             </Button>
           </form>
-        </>
-      }
-      onReset={onReset}
-    >
-      {/* 모달 컨텐츠 */}
-      <form onSubmit={handleSubmit(onEnterCodeSubmit)}>
-        <Input
-          type="text"
-          size="sm"
-          inputType="input"
-          $isHorizontal={true}
-          placeholder="공유받은 코드를 입력해 주세요."
-          {...register('siteCode')}
-          errors={errors}
-        >
-          <Button size="sm" $styleType="revert">
-            코드 입력
-          </Button>
-        </Input>
-      </form>
-
-      {
-        // 현장 코드 검증 결과
-        isValidate.status === 404 ? (
-          <>
-            <S.ValidateError>
-              코드를 잘못 입력했습니다. <br />
-              입력하신 코드명을 다시 확인해 주세요.
-            </S.ValidateError>
-          </>
-        ) : isValidate.status === 409 ? (
-          <>
-            <S.ValidateError>
-              이미 등록된 현장입니다. <br />
-              다른 현장 코드를 입력해 주세요.
-            </S.ValidateError>
-          </>
-        ) : isValidate.status === 200 ? (
-          <>
-            <S.ListCardModalContainer>
-              <S.ListCardModalTitle>{validData?.title}</S.ListCardModalTitle>
-
-              <CS.ListCardInfoContainer>
-                <CS.ListCardInfo>
-                  <CS.ListCardProfileImg>
-                    <img src={validData?.user?.profileImg} alt="현장 이미지" />
-                  </CS.ListCardProfileImg>
-                  <CS.ListCardProfileInfo>
-                    <p>생성자: {validData?.user?.usercode}</p>
-                    <p>{validData?.createdAt}</p>
-                  </CS.ListCardProfileInfo>
-                </CS.ListCardInfo>
-              </CS.ListCardInfoContainer>
-            </S.ListCardModalContainer>
-          </>
-        ) : null
-      }
+        </CS.ModalButtonContainer>
+      </CS.ModalContentContainer>
     </DefaultModal>
   );
 }

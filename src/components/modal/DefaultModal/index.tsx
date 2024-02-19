@@ -14,22 +14,15 @@ export interface DefaultModalCSSProps {
 
 interface DefaultModalProps extends DefaultModalCSSProps {
   name: string;
-  title?: string;
+
   children: React.ReactNode;
   props?: any;
-  button?: React.ReactNode;
-  buttonName?: string;
-  buttonHandler?: () => void;
   onReset?: () => void;
 }
 
 function DefaultModal({
   name,
-  title,
   children,
-  button,
-  buttonName = '확인',
-  buttonHandler,
   onReset,
   ...props
 }: DefaultModalProps) {
@@ -70,29 +63,7 @@ function DefaultModal({
           </Button>
 
           {/* 모달 컨텐츠 */}
-          <S.ModalContainer>
-            <S.ModalContent>
-              <S.ModalHeader>{title}</S.ModalHeader>
-              {children}
-            </S.ModalContent>
-
-            {/* 버튼  */}
-            <S.ModalButtonContainer>
-              {button ? (
-                button
-              ) : (
-                <>
-                  <Button
-                    size="lg"
-                    $fullWidth={true}
-                    onClickHandler={() => buttonHandler && buttonHandler()}
-                  >
-                    {buttonName}
-                  </Button>
-                </>
-              )}
-            </S.ModalButtonContainer>
-          </S.ModalContainer>
+          {children}
         </CS.ModalContainer>
       </CS.ModalOverlay>
     )
