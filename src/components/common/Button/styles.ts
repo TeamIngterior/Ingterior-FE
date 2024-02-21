@@ -40,6 +40,15 @@ const handleButtonType = (props: ButtonCSSProps) => {
         border: 1px solid transparent;
         border: 1px solid ${theme.color.primary};
         padding: 0 16px;
+
+        &:active {
+          background-color: ${theme.color.primary06};
+          border: 1px solid ${theme.color.primary06};
+        }
+        &:hover {
+          background-color: ${theme.color.primary04};
+          border: 1px solid ${theme.color.primary04};
+        }
       `;
     case 'outline':
       return css`
@@ -56,6 +65,11 @@ const handleButtonType = (props: ButtonCSSProps) => {
 
         &:active {
           background-color: ${theme.color.gray02};
+          border: 1px solid ${theme.color.gray03};
+        }
+        &:hover {
+          border: 1px solid ${theme.color.gray05};
+          background-color: ${theme.color.gray01};
         }
       `;
     case 'disabled':
