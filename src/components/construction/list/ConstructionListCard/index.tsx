@@ -67,11 +67,11 @@ function RemodelingListCard({
           <S.LinkShareContainer>
             <S.LinkShareText>
               현장코드:&nbsp;
-              <span>{cardData.remodelingSiteCode}</span>
+              <span>{cardData.constructionSiteCode}</span>
             </S.LinkShareText>
 
             <CopyToClipboard
-              text={cardData.remodelingSiteCode}
+              text={cardData.constructionSiteCode}
               onCopy={() => alert('클립보드에 복사되었습니다.')}
             >
               <Button size="sm" $styleType="revert">
