@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '@/assets/styles/theme';
 
-export const RemodelingListContainer = styled.div`
+export const ConstructionListContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;

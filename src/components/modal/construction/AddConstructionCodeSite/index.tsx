@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useRemodelingList } from '@/pages/remodeling/RemodelingList/useRemodelingList';
+import { useConstructionList } from '@/pages/construction/ConstructionList/useConstructionList';
 import { useModal } from '@/hooks/useModal';
 
 import Button from '@/components/common/Button';
@@ -9,10 +9,10 @@ import DefaultModal from '../../DefaultModal';
 
 import * as S from './styles';
 import * as CS from '@/components/modal/styles';
-import * as LS from '@components/remodeling/list/RemodlingListCard/styles';
-import Input from '@/components/common/Input';
+import * as LS from '@components/construction/list/ConstructionListCard/styles';
+import Input from '@components/common/Input';
 
-function AddRemodlingSite() {
+function AddConstructionCodeSite() {
   const {
     register,
     handleSubmit,
@@ -22,8 +22,8 @@ function AddRemodlingSite() {
     mode: 'onBlur',
   });
 
-  const { joinSiteMutation, isValidateData } = useRemodelingList();
-  const { closeModal } = useModal('addRemodelingSite');
+  const { joinSiteMutation, isValidateData } = useConstructionList();
+  const { closeModal } = useModal('addConstructionSite');
 
   const [isValidate, setIsValidate] = useState<{ status: number | null }>({
     status: null,
@@ -76,8 +76,8 @@ function AddRemodlingSite() {
 
   return (
     <DefaultModal
-      name="addRemodelingSite"
-      className="addRemodelingSite"
+      name="addConstructionSite"
+      className="addConstructionSite"
       onReset={onReset}
     >
       {/* 모달 컨텐츠 */}
@@ -159,4 +159,4 @@ function AddRemodlingSite() {
   );
 }
 
-export default AddRemodlingSite;
+export default AddConstructionCodeSite;

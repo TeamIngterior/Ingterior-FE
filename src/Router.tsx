@@ -5,9 +5,11 @@ import App from './App';
 
 const Home = lazy(() => import('./pages/Home'));
 const SignIn = lazy(() => import('./pages/user/SignIn'));
-const RemodelingList = lazy(() => import('./pages/remodeling/RemodelingList'));
+const ConstructionList = lazy(
+  () => import('./pages/construction/ConstructionList')
+);
 const AddConstruction = lazy(
-  () => import('./pages/remodeling/AddConstruction')
+  () => import('./pages/construction/AddConstruction')
 );
 
 const router = createBrowserRouter([
@@ -26,15 +28,15 @@ const router = createBrowserRouter([
         children: [{ index: true, element: <SignIn /> }],
       },
       {
-        path: 'remodeling',
+        path: 'construction',
         children: [
           {
             path: 'list',
-            element: <RemodelingList />,
+            element: <ConstructionList />,
           },
           {
             path: 'detail/:id',
-            element: <div>Remodeling Detail</div>,
+            element: <div>Construction Detail</div>,
           },
           {
             path: 'addition',

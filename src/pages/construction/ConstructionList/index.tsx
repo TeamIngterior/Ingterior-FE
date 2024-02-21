@@ -1,25 +1,25 @@
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { useRemodelingList } from './useRemodelingList';
+import { useConstructionList } from './useConstructionList';
 import { useModal } from '@/hooks/useModal';
 
-import { RemodelingListDataModel } from '@/apis/remodeling';
+import { ConstructionListDataModel } from '@/apis/construction';
 
 import { FiPlus } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdInput } from 'react-icons/md';
-import RemodelingListCard from '@/components/remodeling/list/RemodlingListCard';
-import AddRemodlingSite from '@/components/modal/remodeling/AddRemodelingSite';
+import ConstructionListCard from '@/components/construction/list/ConstructionListCard';
+import AddConstructionCodeSite from '@/components/modal/construction/AddConstructionCodeSite';
 import Button from '@/components/common/Button';
 
 import { theme } from '@/assets/styles/theme';
 import * as CS from '@/components/template/styles';
 import * as S from './styles';
 
-function RemodelingList() {
-  const { openModal } = useModal('addRemodelingSite');
-  const { remodelingListData } = useRemodelingList();
+function ConstructionList() {
+  const { openModal } = useModal('addConstructionSite');
+  const { constructionListData } = useConstructionList();
   const { ref } = useInView({
     threshold: 1,
     onChange: (inView) => {
@@ -35,16 +35,16 @@ function RemodelingList() {
 
   return (
     <>
-      <AddRemodlingSite />
+      <AddConstructionCodeSite />
 
-      <S.RemodelingListContainer className="remodelingList">
+      <S.ConstructionListContainer className="constructionList">
         <CS.TemplateTitle>현장 목록</CS.TemplateTitle>
 
-        {remodelingListData?.length !== 0 ? (
+        {constructionListData?.length !== 0 ? (
           <>
-            {remodelingListData?.map(
-              (item: RemodelingListDataModel, index: number) => (
-                <RemodelingListCard cardData={item} key={index} />
+            {constructionListData?.map(
+              (item: ConstructionListDataModel, index: number) => (
+                <ConstructionListCard cardData={item} key={index} />
               )
             )}
           </>
@@ -107,9 +107,9 @@ function RemodelingList() {
             </Button>
           </S.AddConstructionConatiner>
         </div>
-      </S.RemodelingListContainer>
+      </S.ConstructionListContainer>
     </>
   );
 }
 
-export default RemodelingList;
+export default ConstructionList;
