@@ -6,6 +6,9 @@ import App from './App';
 const Home = lazy(() => import('./pages/Home'));
 const SignIn = lazy(() => import('./pages/user/SignIn'));
 const RemodelingList = lazy(() => import('./pages/remodeling/RemodelingList'));
+const AddConstruction = lazy(
+  () => import('./pages/remodeling/AddConstruction')
+);
 
 const router = createBrowserRouter([
   {
@@ -32,6 +35,10 @@ const router = createBrowserRouter([
           {
             path: 'detail/:id',
             element: <div>Remodeling Detail</div>,
+          },
+          {
+            path: 'addition',
+            element: <AddConstruction />,
           },
         ],
       },
