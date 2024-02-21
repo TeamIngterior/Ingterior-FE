@@ -5,7 +5,7 @@ const layoutComponent = {
   footer_height: 264,
   header_mobile_height: 56,
   footer_mobile_height: 320,
-  main_template_padding: 104,
+  main_template_padding: 56,
 };
 
 const color = {
