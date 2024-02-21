@@ -1,5 +1,12 @@
+import PageNav from '@/components/common/PageNav';
 import * as S from './styles';
 import * as CS from '@components/template/styles';
+import { useForm, Controller } from 'react-hook-form';
+import Input from '@/components/common/Input';
+import Checkbox from '@/components/common/Checkbox';
+import { useEffect } from 'react';
+
+import { IoMdCheckmark } from 'react-icons/io';
 
 const ADD_CONSTRUCTION_NAV = [
   {
@@ -17,10 +24,80 @@ const ADD_CONSTRUCTION_NAV = [
 ];
 
 function AddConstruction() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm({
+    mode: 'onBlur',
+  });
+
+  const onSubmit = async (data: any) => {
+    console.log(data);
+  };
+
+  // watch('constructionType');
+
+  useEffect(() => {
+    console.log(watch('constructionType'));
+  }, [watch('constructionType')]);
+
   return (
     <>
       <S.AddConstructionContainer className="addConstructionContainer">
         <CS.TemplateTitle>새 현장 추가</CS.TemplateTitle>
+
+        {/* 페이지 네비게이션 */}
+        <PageNav navList={ADD_CONSTRUCTION_NAV} />
+
+        <S.AddConstructionForm onSubmit={handleSubmit(onSubmit)}>
+          {/* 현장 주소 */}
+          <Input
+            type="text"
+            inputType="input"
+            label="현장 주소(이름)를 입력해 주세요."
+            labelOption={<span className="required">*</span>}
+            {...register('constructionName')}
+            placeholder="공백 포함 최대 00자"
+            errors={errors}
+          />
+
+          {/* 현장 유형 */}
+          <Controller
+            name="constructionType"
+            control={control}
+            render={({ field: { onChange } }) => (
+              <Checkbox
+                label="현장의 유형을 선택해주세요."
+                labelOption={
+                  <>
+                    <span className="required">*</span>&nbsp;
+                    <span className="subLabel">다중선택가능</span>
+                  </>
+                }
+                name="constructionType"
+                options={[
+                  {
+                    id: 'constructionType1',
+                    icon: <IoMdCheckmark />,
+                    text: '하자체크',
+                  },
+                  {
+                    id: 'constructionType2',
+                    icon: <IoMdCheckmark />,
+                    text: '공사관리',
+                  },
+                ]}
+                onSelectedOption={(option: any) => onChange(option)}
+                errors={errors}
+              />
+            )}
+          />
+
+          {/* 현장 도면 이미지 */}
+        </S.AddConstructionForm>
       </S.AddConstructionContainer>
     </>
   );
