@@ -14,6 +14,7 @@ import AddRemodlingSite from '@/components/modal/remodeling/AddRemodelingSite';
 import Button from '@/components/common/Button';
 
 import { theme } from '@/assets/styles/theme';
+import * as CS from '@/components/template/styles';
 import * as S from './styles';
 
 function RemodelingList() {
@@ -35,7 +36,10 @@ function RemodelingList() {
   return (
     <>
       <AddRemodlingSite />
+
       <S.RemodelingListContainer className="remodelingList">
+        <CS.TemplateTitle>현장 목록</CS.TemplateTitle>
+
         {remodelingListData?.length !== 0 ? (
           <>
             {remodelingListData?.map(
