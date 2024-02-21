@@ -23,6 +23,7 @@ export const SOCIAL_LOGIN = [
     style: {
       backgroundColor: '#03C75A',
       color: `${theme.color.gray01}`,
+      border: '1px solid #03C75A',
     },
   },
   {
