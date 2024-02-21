@@ -18,8 +18,8 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
   width: 100%;
   max-width: 328px;
   height: 100%;
-  max-height: ${({ height }) => height || '100%'};
   min-height: 328px;
+  max-height: ${({ height }) => height || '100%'};
   background-color: white;
   border-radius: 4px;
   padding: 0 ${theme.gap.gap2};
@@ -39,6 +39,15 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
 
     svg {
       margin: 0;
+    }
+  }
+
+  .addRemodelingSite & {
+    max-width: 588px;
+    max-height: 400px;
+
+    @media (max-width: 620px) {
+      max-width: calc(100% - 32px);
     }
   }
 `;

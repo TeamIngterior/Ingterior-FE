@@ -53,7 +53,7 @@ function RemodelingList() {
           </S.NoDataContainer>
         )}
 
-        <div className={`constructionButtonContainer `} ref={ref}>
+        <div className={`constructionButtonContainer`} ref={ref}>
           <S.AddConstructionConatiner
             style={{
               position: isButtonContainerVisible ? 'static' : 'fixed',

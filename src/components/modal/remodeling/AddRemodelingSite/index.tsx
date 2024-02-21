@@ -75,7 +75,11 @@ function AddRemodlingSite() {
   };
 
   return (
-    <DefaultModal name="addRemodelingSite" height="400px" onReset={onReset}>
+    <DefaultModal
+      name="addRemodelingSite"
+      className="addRemodelingSite"
+      onReset={onReset}
+    >
       {/* 모달 컨텐츠 */}
       <CS.ModalContentContainer>
         <CS.ModalHeader>현장 코드 입력</CS.ModalHeader>

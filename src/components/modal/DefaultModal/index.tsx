@@ -14,8 +14,8 @@ export interface DefaultModalCSSProps {
 
 interface DefaultModalProps extends DefaultModalCSSProps {
   name: string;
-
   children: React.ReactNode;
+  className?: string;
   props?: any;
   onReset?: () => void;
 }
@@ -23,6 +23,7 @@ interface DefaultModalProps extends DefaultModalCSSProps {
 function DefaultModal({
   name,
   children,
+  className,
   onReset,
   ...props
 }: DefaultModalProps) {
@@ -49,7 +50,7 @@ function DefaultModal({
 
   return (
     isOpen && (
-      <CS.ModalOverlay onClick={handleModalClick}>
+      <CS.ModalOverlay className={className} onClick={handleModalClick}>
         <CS.ModalContainer {...props}>
           {/* 닫기 버튼 */}
           <Button
