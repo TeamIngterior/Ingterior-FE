@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { RemodelingListDataModel } from '@/apis/remodeling';
+import { ConstructionListDataModel } from '@/apis/construction';
 
 import { TiStarFullOutline } from 'react-icons/ti';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -13,7 +13,7 @@ import * as S from './styles';
 function RemodelingListCard({
   cardData,
 }: {
-  cardData: RemodelingListDataModel;
+  cardData: ConstructionListDataModel;
 }) {
   const navigate = useNavigate();
 
