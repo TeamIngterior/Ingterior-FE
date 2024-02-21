@@ -1,12 +1,15 @@
-import PageNav from '@/components/common/PageNav';
-import * as S from './styles';
-import * as CS from '@components/template/styles';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import Input from '@/components/common/Input';
-import Checkbox from '@/components/common/Checkbox';
-import { useEffect } from 'react';
 
 import { IoMdCheckmark } from 'react-icons/io';
+
+import PageNav from '@/components/common/PageNav';
+import Input from '@/components/common/Input';
+import Checkbox from '@/components/common/Checkbox';
+import Button from '@/components/common/Button';
+
+import * as S from './styles';
+import * as CS from '@components/template/styles';
 
 const ADD_CONSTRUCTION_NAV = [
   {
@@ -35,14 +38,8 @@ function AddConstruction() {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    console.log('새 현장 추가', data);
   };
-
-  // watch('constructionType');
-
-  useEffect(() => {
-    console.log(watch('constructionType'));
-  }, [watch('constructionType')]);
 
   return (
     <>
@@ -97,6 +94,17 @@ function AddConstruction() {
           />
 
           {/* 현장 도면 이미지 */}
+
+          <Button
+            $styleType={
+              watch('constructionName') && watch('constructionType')
+                ? 'solid'
+                : 'disabled'
+            }
+            $fullWidth={true}
+          >
+            새 현장 추가하기
+          </Button>
         </S.AddConstructionForm>
       </S.AddConstructionContainer>
     </>
