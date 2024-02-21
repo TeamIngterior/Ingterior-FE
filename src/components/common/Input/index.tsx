@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import * as S from './Input.styles';
+import * as S from './styles';
 
 export interface InputCSSProps {
   size?: 'sm' | 'md' | 'lg'; // 버튼 사이즈, default: md
@@ -10,6 +10,7 @@ export interface InputCSSProps {
 interface InputProps extends InputCSSProps {
   name: string;
   inputType: 'textarea' | 'input';
+  labelOption?: React.ReactNode;
   type?: string; // text:default, password - input 타입에서 필수로 받아야 하는 값
   value?: string; // input에 value 표시해야 하는 경우 전달
   label?: string; // input에 라벨 표시해야 하는 경우 전달
@@ -38,6 +39,7 @@ function Input(
     inputType,
     name,
     label,
+    labelOption,
     placeholder,
     defaultValue,
     readOnly,
@@ -66,7 +68,12 @@ function Input(
 
   return (
     <S.InputContainer>
-      {label && <S.InputLabel htmlFor={name}>{label}</S.InputLabel>}
+      {label && (
+        <S.InputLabel htmlFor={name}>
+          {label}
+          {labelOption}
+        </S.InputLabel>
+      )}
 
       <S.InputContentContainer
         className="relative"
