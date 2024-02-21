@@ -45,6 +45,10 @@ export const TemplateTitle = styled.h1`
   ${theme.typography.title.h1};
   margin-bottom: ${theme.gap.gap3};
 
+  .addConstructionContainer & {
+    margin-bottom: ${theme.gap.gap2};
+  }
+
   @media (max-width: 500px) {
     margin-bottom: ${theme.gap.gap2};
   }

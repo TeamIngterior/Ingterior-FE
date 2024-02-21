@@ -42,7 +42,7 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
     }
   }
 
-  .addRemodelingSite & {
+  .addConstructionSite & {
     max-width: 588px;
     max-height: 400px;
 
