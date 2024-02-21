@@ -43,6 +43,10 @@ export const commonInputStyle = css`
 
 export const InputContainer = styled.div<InputCSSProps>`
   width: 100%;
+
+  .addConstructionContainer & {
+    margin-bottom: ${theme.gap.gap5};
+  }
 `;
 
 export const InputContentContainer = styled.div<InputCSSProps>`
@@ -52,8 +56,18 @@ export const InputContentContainer = styled.div<InputCSSProps>`
 `;
 
 export const InputLabel = styled.label`
+  ${theme.typography.title.h5}
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: ${theme.gap.gap2};
+
+  .required {
+    color: ${theme.color.secondary05};
+  }
+
+  .subLabel {
+    ${theme.typography.caption.c2}
+    color: ${theme.color.gray04};
+  }
 `;
 
 export const Input = styled.input<InputCSSProps>`
@@ -89,6 +103,46 @@ export const Textarea = styled.textarea`
 
   &::placeholder {
     white-space: pre-wrap;
+  }
+`;
+
+export const CheckboxContainer = styled.div<InputCSSProps>`
+  display: flex;
+  width: 100%;
+  gap: ${theme.gap.gap1};
+`;
+
+export const Checkbox = styled.div<InputCSSProps>`
+  width: 100%;
+`;
+
+export const InputCheckbox = styled.input<InputCSSProps>`
+  display: none;
+
+  & + label {
+    ${theme.typography.label.lb1}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+    background-color: ${theme.color.gray02};
+    color: ${theme.color.gray04};
+    border-radius: 4px;
+    cursor: pointer;
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: ${theme.gap.gap1};
+    }
+  }
+
+  &:checked + label {
+    border: 1px solid ${theme.color.primary04};
+    background-color: ${theme.color.primary04};
+    color: ${theme.color.gray01};
   }
 `;
 
