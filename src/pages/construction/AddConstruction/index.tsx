@@ -10,6 +10,8 @@ import Button from '@/components/common/Button';
 
 import * as S from './styles';
 import * as CS from '@components/template/styles';
+import AddConstructionImage from '@/components/modal/construction/AddConstructionImage';
+import { useModal } from '@/hooks/useModal';
 
 const ADD_CONSTRUCTION_NAV = [
   {
@@ -27,6 +29,8 @@ const ADD_CONSTRUCTION_NAV = [
 ];
 
 function AddConstruction() {
+  const { openModal } = useModal('addConstructionImage');
+
   const {
     register,
     handleSubmit,
@@ -41,8 +45,13 @@ function AddConstruction() {
     console.log('새 현장 추가', data);
   };
 
+  useEffect(() => {
+    openModal();
+  }, []);
+
   return (
     <>
+      <AddConstructionImage />
       <S.AddConstructionContainer className="addConstructionContainer">
         <CS.TemplateTitle>새 현장 추가</CS.TemplateTitle>
 
