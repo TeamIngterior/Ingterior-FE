@@ -16,7 +16,7 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
   position: fixed;
   z-index: 2;
   width: 100%;
-  max-width: 328px;
+  max-width: 588px;
   height: 100%;
   min-height: 328px;
   max-height: ${({ height }) => height || '100%'};
@@ -42,9 +42,18 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
     }
   }
 
+  /* 현장 목록 - 코드로 입장 */
   .addConstructionSite & {
-    max-width: 588px;
     max-height: 400px;
+
+    @media (max-width: 620px) {
+      max-width: calc(100% - 32px);
+    }
+  }
+
+  /* 새 현장 추가 - 이미지 추가  */
+  .addConstructionImage & {
+    max-height: 890px;
 
     @media (max-width: 620px) {
       max-width: calc(100% - 32px);
