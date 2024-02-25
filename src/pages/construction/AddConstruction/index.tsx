@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
+import { useModal } from '@/hooks/useModal';
+
 import { IoMdCheckmark } from 'react-icons/io';
 
 import PageNav from '@/components/common/PageNav';
 import Input from '@/components/common/Input';
 import Checkbox from '@/components/common/Checkbox';
 import Button from '@/components/common/Button';
+import AddConstructionImage from '@/components/modal/construction/AddConstructionImage';
+import MultiUploader from '@/components/common/FileUploader/MultiUploader';
 
 import * as S from './styles';
 import * as CS from '@components/template/styles';
-import AddConstructionImage from '@/components/modal/construction/AddConstructionImage';
-import { useModal } from '@/hooks/useModal';
 
 const ADD_CONSTRUCTION_NAV = [
   {
@@ -30,6 +32,7 @@ const ADD_CONSTRUCTION_NAV = [
 
 function AddConstruction() {
   const { openModal } = useModal('addConstructionImage');
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const {
     register,
@@ -51,7 +54,6 @@ function AddConstruction() {
 
   return (
     <>
-      <AddConstructionImage />
       <S.AddConstructionContainer className="addConstructionContainer">
         <CS.TemplateTitle>새 현장 추가</CS.TemplateTitle>
 
@@ -103,7 +105,9 @@ function AddConstruction() {
           />
 
           {/* 현장 도면 이미지 */}
+          <MultiUploader onSelectItem={(files) => setSelectedFiles(files)} />
 
+          {/* 제출 버튼 */}
           <Button
             $styleType={
               watch('constructionName') && watch('constructionType')
@@ -116,6 +120,9 @@ function AddConstruction() {
           </Button>
         </S.AddConstructionForm>
       </S.AddConstructionContainer>
+
+      {/* 현장 도면 이미지 업로드 모달 */}
+      <AddConstructionImage />
     </>
   );
 }
