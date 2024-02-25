@@ -32,7 +32,7 @@ function Footer() {
               </S.FooterContentListItem>
             ))}
           </S.FooterContentList>
-          <S.FooterContentList>
+          <S.FooterContentList className="business">
             {BUSINESS_INFO.map((info, index) => (
               <S.FooterContentListItem key={index}>
                 {info}

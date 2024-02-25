@@ -49,6 +49,13 @@ export const FooterContentList = styled.ul`
 
 export const FooterContentListItem = styled.li`
   ${theme.typography.body.b2}
+
+  .business & {
+    @media (max-width: 768px) {
+      width: 100%;
+      text-align: center;
+    }
+  }
 `;
 
 export const FooterLinkContainer = styled.ul``;
