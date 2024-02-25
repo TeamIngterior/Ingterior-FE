@@ -105,7 +105,17 @@ function AddConstruction() {
           />
 
           {/* 현장 도면 이미지 */}
-          <MultiUploader onSelectItem={(files) => setSelectedFiles(files)} />
+          {/* <MultiUploader onSelectItem={(files) => setSelectedFiles(files)} /> */}
+
+          {/* 클릭하면, 업로드를 현장도면 이미지 업로드 모달에서 업로드를 하고, 이미지를 받아서 썸네일을 그려줌. 따라서 여기에서는 파일을 가지고 썸네일을 그리는 로직이 필요함, input으로 받은 이미지를 썸네일로 그려야함 */}
+          {/* <S.ThumbnailContainer>
+            {selectedFiles.length !== 0 &&
+              selectedFiles.map((file, index) => (
+                <S.Thumbnail key={index}>
+                  <img src={URL.createObjectURL(file)} alt="현장도면 이미지" />
+                </S.Thumbnail>
+              ))}
+          </S.ThumbnailContainer> */}
 
           {/* 제출 버튼 */}
           <Button
