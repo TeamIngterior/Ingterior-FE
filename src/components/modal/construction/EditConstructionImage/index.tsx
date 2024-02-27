@@ -1,14 +1,19 @@
+import { useEffect, useRef, useState } from 'react';
+import { useImageEdit } from '@/hooks/useImageEdit';
+
 import Button from '@/components/common/Button';
 import DefaultModal from '../../DefaultModal';
 
 import * as S from './styles';
 import * as CS from '@/components/modal/styles';
 import ImageEditor from '@/components/common/FileUploader/ImageEditor';
+import { useModal } from '@/hooks/useModal';
 
 function EditConstructionImage() {
-  const handleImageChange = (editedImage: string | null) => {
-    //    수정된 이미지 데이터를 받아서 처리하는 로직
-  };
+  const canvasRef = useRef(null);
+
+  const { changeImage, applyChanges } = useImageEdit(canvasRef);
+  const { closeModal } = useModal('editConstructionImage');
 
   return (
     <DefaultModal
@@ -19,11 +24,29 @@ function EditConstructionImage() {
       <CS.ModalContentContainer>
         <CS.ModalHeader>영역 안에 이미지를 맞춰주세요.</CS.ModalHeader>
         <CS.ModalContent>
-          <ImageEditor isEditor={true} onImageChange={handleImageChange} />
+          <ImageEditor isEditor={true} canvasRef={canvasRef} />
         </CS.ModalContent>
 
         <CS.ModalButtonContainer>
-          <Button size="lg" $fullWidth={true}>
+          <Button
+            size="lg"
+            $fullWidth={true}
+            $styleType="revert"
+            onClickHandler={() => {
+              changeImage();
+            }}
+          >
+            이미지 변경
+          </Button>
+
+          <Button
+            size="lg"
+            $fullWidth={true}
+            onClickHandler={() => {
+              applyChanges();
+              closeModal();
+            }}
+          >
             추가하기
           </Button>
         </CS.ModalButtonContainer>
