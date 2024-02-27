@@ -10,10 +10,10 @@ import Input from '@/components/common/Input';
 import Checkbox from '@/components/common/Checkbox';
 import Button from '@/components/common/Button';
 import EditConstructionImage from '@/components/modal/construction/EditConstructionImage';
-import MultiUploader from '@/components/common/FileUploader/MultiUploader';
 
 import * as S from './styles';
 import * as CS from '@components/template/styles';
+import ImageEditor from '@/components/common/FileUploader/ImageEditor';
 
 const ADD_CONSTRUCTION_NAV = [
   {
@@ -33,6 +33,7 @@ const ADD_CONSTRUCTION_NAV = [
 function AddConstruction() {
   const { openModal } = useModal('editConstructionImage');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [uploaedFiles, setUploadedFiles] = useState<any>([]);
 
   const {
     register,
@@ -51,6 +52,14 @@ function AddConstruction() {
   useEffect(() => {
     openModal();
   }, []);
+
+  // 디버깅용 코드
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) =>
+      console.log(value, name, type)
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <>
@@ -105,17 +114,19 @@ function AddConstruction() {
           />
 
           {/* 현장 도면 이미지 */}
-          {/* <MultiUploader onSelectItem={(files) => setSelectedFiles(files)} /> */}
-
-          {/* 클릭하면, 업로드를 현장도면 이미지 업로드 모달에서 업로드를 하고, 이미지를 받아서 썸네일을 그려줌. 따라서 여기에서는 파일을 가지고 썸네일을 그리는 로직이 필요함, input으로 받은 이미지를 썸네일로 그려야함 */}
-          {/* <S.ThumbnailContainer>
-            {selectedFiles.length !== 0 &&
-              selectedFiles.map((file, index) => (
-                <S.Thumbnail key={index}>
-                  <img src={URL.createObjectURL(file)} alt="현장도면 이미지" />
-                </S.Thumbnail>
-              ))}
-          </S.ThumbnailContainer> */}
+          <Controller
+            name="constructionImage"
+            control={control}
+            render={({ field: { onChange } }) => (
+              <ImageEditor
+                isEditor={false}
+                onImageChange={(editedImage: string | null) => {
+                  console.log('이미지 변경', editedImage);
+                  onChange(editedImage);
+                }}
+              />
+            )}
+          />
 
           {/* 제출 버튼 */}
           <Button
@@ -132,7 +143,7 @@ function AddConstruction() {
       </S.AddConstructionContainer>
 
       {/* 현장 도면 이미지 업로드 모달 */}
-      <EditConstructionImage />
+      {/* <EditConstructionImage /> */}
     </>
   );
 }
