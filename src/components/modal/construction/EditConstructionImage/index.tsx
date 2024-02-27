@@ -3,7 +3,7 @@ import DefaultModal from '../../DefaultModal';
 
 import * as S from './styles';
 import * as CS from '@/components/modal/styles';
-import ImageEditor from '@/components/common/ImageEditor';
+import ImageEditor from '@/components/common/FileUploader/ImageEditor';
 
 function EditConstructionImage() {
   const handleImageChange = (editedImage: string | null) => {
