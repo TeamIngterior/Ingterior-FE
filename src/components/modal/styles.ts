@@ -51,8 +51,8 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
     }
   }
 
-  /* 새 현장 추가 - 이미지 추가  */
-  .addConstructionImage & {
+  /* 새 현장 추가 - 이미지 편집  */
+  .editConstructionImage & {
     max-height: 890px;
 
     @media (max-width: 620px) {

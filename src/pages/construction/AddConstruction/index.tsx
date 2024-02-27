@@ -9,7 +9,7 @@ import PageNav from '@/components/common/PageNav';
 import Input from '@/components/common/Input';
 import Checkbox from '@/components/common/Checkbox';
 import Button from '@/components/common/Button';
-import AddConstructionImage from '@/components/modal/construction/AddConstructionImage';
+import EditConstructionImage from '@/components/modal/construction/EditConstructionImage';
 import MultiUploader from '@/components/common/FileUploader/MultiUploader';
 
 import * as S from './styles';
@@ -31,7 +31,7 @@ const ADD_CONSTRUCTION_NAV = [
 ];
 
 function AddConstruction() {
-  const { openModal } = useModal('addConstructionImage');
+  const { openModal } = useModal('editConstructionImage');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const {
@@ -132,7 +132,7 @@ function AddConstruction() {
       </S.AddConstructionContainer>
 
       {/* 현장 도면 이미지 업로드 모달 */}
-      <AddConstructionImage />
+      <EditConstructionImage />
     </>
   );
 }
