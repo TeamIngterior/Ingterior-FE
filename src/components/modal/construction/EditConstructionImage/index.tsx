@@ -19,7 +19,7 @@ function EditConstructionImage() {
       <CS.ModalContentContainer>
         <CS.ModalHeader>영역 안에 이미지를 맞춰주세요.</CS.ModalHeader>
         <CS.ModalContent>
-          <ImageEditor onImageChange={handleImageChange} />
+          <ImageEditor isEditor={true} onImageChange={handleImageChange} />
         </CS.ModalContent>
 
         <CS.ModalButtonContainer>
