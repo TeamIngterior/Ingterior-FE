@@ -1,17 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { editImageState, uploadImageState } from '@/atom/imageState';
+import { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useRecoilState } from 'recoil';
 
-export const useImageEdit = (onImageChange: (image: string) => void) => {
-  const [image, setImage] = useState<any>(null);
-  const [editedImage, setEditedImage] = useState<string | null>(null);
+export const useImageEdit = (
+  canvasRef?: React.RefObject<HTMLCanvasElement>
+) => {
+  const [image, setImage] = useRecoilState(uploadImageState);
+  const [editedImage, setEditedImage] = useRecoilState(editImageState);
+
   const [rotation, setRotation] = useState(0);
   const [flippedHorizontally, setFlippedHorizontally] = useState(false);
   const [flippedVertically, setFlippedVertically] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   //   캔버스 요소가 생성되고 이미지가 변경될 때마다 캔버스에 이미지를 그리고, 그 이미지를 editedImage에 저장
   useEffect(() => {
-    if (canvasRef.current && image) {
+    if (canvasRef?.current) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
 
@@ -21,11 +25,6 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
         canvas.width = img.width;
         canvas.height = img.height;
 
-        const dpr = window.devicePixelRatio;
-        canvas.width = canvas.width * dpr;
-        canvas.height = canvas.height * dpr;
-        ctx?.scale(dpr, dpr);
-
         ctx?.save();
         ctx?.clearRect(0, 0, canvas.width, canvas.height);
         ctx?.translate(canvas.width / 2, canvas.height / 2);
@@ -34,17 +33,15 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
         if (flippedVertically) ctx?.scale(1, -1);
         ctx?.drawImage(img, -img.width / 2, -img.height / 2);
         ctx?.restore();
-        setEditedImage(canvas.toDataURL());
       };
     }
-  }, [image, rotation, flippedHorizontally, flippedVertically]);
+  }, [editedImage, rotation, flippedHorizontally, flippedVertically]);
 
-  //   이미지가 변경되고, editedImage가 없을 때 이미지를 editedImage에 저장
   useEffect(() => {
-    if (image && !editedImage) {
-      onImageChange(image);
+    if (editedImage) {
+      setImage(editedImage);
     }
-  }, [editedImage, image, onImageChange]);
+  }, [editedImage]);
 
   const onDrop = (acceptedFiles: any[]) => {
     const file = acceptedFiles[0];
@@ -63,7 +60,10 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage(reader.result);
+      const result = reader.result;
+      if (typeof result === 'string') {
+        setImage(result);
+      }
     };
 
     reader.readAsDataURL(file);
@@ -92,7 +92,10 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
       const reader = new FileReader();
 
       reader.onload = () => {
-        setImage(reader.result);
+        if (typeof reader.result === 'string') {
+          setImage(reader.result);
+          setEditedImage(reader.result);
+        }
       };
 
       reader.readAsDataURL(file);
@@ -104,21 +107,20 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
     setRotation(0);
     setFlippedHorizontally(false);
     setFlippedVertically(false);
-    setEditedImage(null);
+    setEditedImage(image);
   };
 
   const deleteImage = () => {
-    setImage(null);
+    setImage('');
     setEditedImage(null);
   };
 
   const applyChanges = () => {
-    if (editedImage && editedImage !== canvasRef.current?.toDataURL()) {
-      console.log('이미지 변경', editedImage);
-      onImageChange(editedImage);
-    } else {
-      console.log('오리지널이미지');
-      onImageChange(image);
+    // 인자로 받은 캔버스 요소에 이미지를 그리고, 그 이미지를 editedImage에 저장
+    if (canvasRef?.current) {
+      const canvas = canvasRef.current;
+      const editedImage = canvas.toDataURL('image/jpeg');
+      setEditedImage(editedImage);
     }
   };
 
@@ -133,7 +135,6 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
     editedImage,
     deleteImage,
     changeImage,
-    canvasRef,
     applyChanges,
   };
 };
