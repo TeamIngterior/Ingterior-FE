@@ -31,7 +31,6 @@ const ADD_CONSTRUCTION_NAV = [
 ];
 
 function AddConstruction() {
-  const { openModal } = useModal('editConstructionImage');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploaedFiles, setUploadedFiles] = useState<any>([]);
 
@@ -48,10 +47,6 @@ function AddConstruction() {
   const onSubmit = async (data: any) => {
     console.log('새 현장 추가', data);
   };
-
-  useEffect(() => {
-    openModal();
-  }, []);
 
   // 디버깅용 코드
   useEffect(() => {
@@ -119,9 +114,14 @@ function AddConstruction() {
             control={control}
             render={({ field: { onChange } }) => (
               <ImageEditor
+                label="현장 도면 이미지를 업로드해주세요."
+                labelOption={
+                  <>
+                    <span className="subLabel">&nbsp;&#40;선택&#41;</span>
+                  </>
+                }
                 isEditor={false}
                 onImageChange={(editedImage: string | null) => {
-                  console.log('이미지 변경', editedImage);
                   onChange(editedImage);
                 }}
               />
@@ -143,7 +143,7 @@ function AddConstruction() {
       </S.AddConstructionContainer>
 
       {/* 현장 도면 이미지 업로드 모달 */}
-      {/* <EditConstructionImage /> */}
+      <EditConstructionImage />
     </>
   );
 }
