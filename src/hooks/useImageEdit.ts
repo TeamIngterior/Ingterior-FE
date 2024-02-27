@@ -9,6 +9,7 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
   const [flippedVertically, setFlippedVertically] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  //   캔버스 요소가 생성되고 이미지가 변경될 때마다 캔버스에 이미지를 그리고, 그 이미지를 editedImage에 저장
   useEffect(() => {
     if (canvasRef.current && image) {
       const canvas = canvasRef.current;
@@ -19,6 +20,12 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
       img.onload = () => {
         canvas.width = img.width;
         canvas.height = img.height;
+
+        const dpr = window.devicePixelRatio;
+        canvas.width = canvas.width * dpr;
+        canvas.height = canvas.height * dpr;
+        ctx?.scale(dpr, dpr);
+
         ctx?.save();
         ctx?.clearRect(0, 0, canvas.width, canvas.height);
         ctx?.translate(canvas.width / 2, canvas.height / 2);
@@ -31,6 +38,13 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
       };
     }
   }, [image, rotation, flippedHorizontally, flippedVertically]);
+
+  //   이미지가 변경되고, editedImage가 없을 때 이미지를 editedImage에 저장
+  useEffect(() => {
+    if (image && !editedImage) {
+      onImageChange(image);
+    }
+  }, [editedImage, image, onImageChange]);
 
   const onDrop = (acceptedFiles: any[]) => {
     const file = acceptedFiles[0];
