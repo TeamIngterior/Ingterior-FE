@@ -48,6 +48,18 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
 
   const onDrop = (acceptedFiles: any[]) => {
     const file = acceptedFiles[0];
+    const extension = file.name.split('.').pop()?.toLowerCase();
+
+    // 허용 확장자 : jpg, jpeg, gif, png
+    // 최대 용량 : 5MB
+    // 멀티 업로드 가능 여부 : true라면 최대 8개
+    if (!['jpg', 'jpeg', 'gif', 'png'].includes(extension)) {
+      alert(
+        '지원하지 않는 파일 형식입니다. jpg, jpeg, gif, png 형식의 파일만 업로드할 수 있습니다.'
+      );
+      return;
+    }
+
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -74,7 +86,7 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
   const changeImage = () => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.accept = 'image/*';
+    input.accept = '.jpg, .jpeg, .gif, .png';
     input.onchange = (e: any) => {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -106,7 +118,7 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
       onImageChange(editedImage);
     } else {
       console.log('오리지널이미지');
-      onImageChange(canvasRef.current?.toDataURL() || '');
+      onImageChange(image);
     }
   };
 
