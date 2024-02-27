@@ -57,6 +57,23 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
     setFlippedVertically(!flippedVertically);
   };
 
+  const changeImage = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e: any) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    };
+    input.click();
+  };
+
   const resetChanges = () => {
     setRotation(0);
     setFlippedHorizontally(false);
@@ -64,10 +81,18 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
     setEditedImage(null);
   };
 
+  const deleteImage = () => {
+    setImage(null);
+    setEditedImage(null);
+  };
+
   const applyChanges = () => {
-    if (editedImage) {
-      console.log(editedImage);
+    if (editedImage && editedImage !== canvasRef.current?.toDataURL()) {
+      console.log('이미지 변경', editedImage);
       onImageChange(editedImage);
+    } else {
+      console.log('오리지널이미지');
+      onImageChange(canvasRef.current?.toDataURL() || '');
     }
   };
 
@@ -80,6 +105,8 @@ export const useImageEdit = (onImageChange: (image: string) => void) => {
     flipVertically,
     resetChanges,
     editedImage,
+    deleteImage,
+    changeImage,
     canvasRef,
     applyChanges,
   };

@@ -2,8 +2,10 @@ import { useImageEdit } from '@/hooks/useImageEdit';
 
 function ImageEditor({
   onImageChange,
+  isEditor,
 }: {
   onImageChange: (editedImage: string) => void;
+  isEditor?: boolean;
 }) {
   const {
     image,
@@ -14,6 +16,8 @@ function ImageEditor({
     flipVertically,
     resetChanges,
     editedImage,
+    changeImage,
+    deleteImage,
     canvasRef,
     applyChanges,
   } = useImageEdit((editedImage: string) => {
@@ -32,7 +36,10 @@ function ImageEditor({
           <button onClick={flipHorizontally}>Flip Horizontally</button>
           <button onClick={flipVertically}>Flip Vertically</button>
           <button onClick={resetChanges}>Reset Changes</button>
+
+          <button onClick={changeImage}>Chane Image</button>
           <button onClick={applyChanges}>Apply Changes</button>
+          <button onClick={deleteImage}>Delete Image</button>
           <br />
           <canvas
             ref={canvasRef}
