@@ -32,6 +32,9 @@ function EditConstructionImage() {
             size="lg"
             $fullWidth={true}
             $styleType="revert"
+            style={{
+              marginBottom: '16px',
+            }}
             onClickHandler={() => {
               changeImage();
             }}

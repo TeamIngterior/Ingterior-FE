@@ -1,9 +1,10 @@
-import { useImageEdit } from '@/hooks/useImageEdit.1';
-import { useEffect, useId, useRef } from 'react';
+import { useImageEdit } from '@/hooks/useImageEdit';
+import { useId } from 'react';
 
 import { useModal } from '@/hooks/useModal';
 
-import { MdAdd } from 'react-icons/md';
+import FlipIcon from '@assets/icon/flip.svg?react';
+import { MdAdd, MdOutlineRefresh } from 'react-icons/md';
 import { RiPencilLine } from 'react-icons/ri';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '../../Button';
@@ -31,7 +32,6 @@ function ImageEditor({
     rotate,
     flipHorizontally,
     flipVertically,
-    // changeImage,
     resetChanges,
     editedImage,
     deleteImage,
@@ -43,15 +43,31 @@ function ImageEditor({
   // 편집 기능 O 단일 이미지 업로드
   const renderEditorButtons = () => (
     <S.ImageEditorCanvasContainer>
-      <button onClick={rotate}>Rotate</button>
-      <button onClick={flipHorizontally}>Flip Horizontally</button>
-      <button onClick={flipVertically}>Flip Vertically</button>
-      <button onClick={resetChanges}>Reset Changes</button>
-      <br />
+      <S.ImageEditorFuntionContainer className="vertical">
+        {/* 회전, 반전 */}
+        <S.ImageEditorFuntionContainer>
+          <S.ImageEditorButton className="icon" onClick={rotate}>
+            <MdOutlineRefresh />
+          </S.ImageEditorButton>
+          <S.ImageEditorButton className="icon" onClick={flipHorizontally}>
+            <FlipIcon />
+          </S.ImageEditorButton>
+          <S.ImageEditorButton className="icon" onClick={flipVertically}>
+            <FlipIcon
+              style={{
+                transform: 'rotate(90deg)',
+              }}
+            />
+          </S.ImageEditorButton>
+        </S.ImageEditorFuntionContainer>
+
+        {/* 원본 */}
+        <S.ImageEditorButton className="revert" onClick={resetChanges}>
+          이미지 원본으로 되돌리기
+        </S.ImageEditorButton>
+      </S.ImageEditorFuntionContainer>
+
       <canvas ref={canvasRef} />
-      <br />
-      {/* <button onClick={applyChanges}>Apply Changes</button> */}
-      {/* <button onClick={changeImage}>Change Image</button> */}
     </S.ImageEditorCanvasContainer>
   );
 

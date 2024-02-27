@@ -53,9 +53,47 @@ export const ImageEditorCanvasContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  button {
-    display: inline-flex;
-    border: 1px solid #000;
-    margin: 3px;
+  padding: 0 ${theme.gap.gap2};
+
+  canvas {
+    border-radius: 4px;
+    border: 1px solid ${theme.color.gray04};
+  }
+`;
+
+// 이미지 버튼
+export const ImageEditorFuntionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${theme.gap.gap2};
+
+  &.vertical {
+    flex-direction: column;
+  }
+`;
+
+export const ImageEditorButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: 1px solid ${theme.color.gray03};
+  border-radius: 4px;
+
+  &.icon {
+    width: 40px;
+    min-width: 40px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.revert {
+    ${theme.typography.label.lb1};
+    padding: 0 ${theme.gap.gap3};
+    margin-bottom: ${theme.gap.gap2};
   }
 `;
