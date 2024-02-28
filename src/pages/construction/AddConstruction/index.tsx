@@ -121,9 +121,6 @@ function AddConstruction() {
                   </>
                 }
                 isEditor={false}
-                onImageChange={(editedImage: string | null) => {
-                  onChange(editedImage);
-                }}
               />
             )}
           />
