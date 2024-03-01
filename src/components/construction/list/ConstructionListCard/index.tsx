@@ -10,35 +10,46 @@ import Button from '@/components/common/Button';
 
 import * as S from './styles';
 
-function RemodelingListCard({
+function ConstructionListCard({
   cardData,
+  type,
 }: {
   cardData: ConstructionListDataModel;
+  type?: string;
 }) {
   const navigate = useNavigate();
 
   return (
     <>
       <S.RemodelingListCardContainer>
-        {/* 현장 라벨 */}
-        <S.ListCardLabelContainer>
-          {cardData.category.map((category, index) => (
-            <S.ListCardLabel key={index}>{category}</S.ListCardLabel>
-          ))}
-        </S.ListCardLabelContainer>
+        {type !== 'card' && (
+          <>
+            {/* 현장 라벨 */}
+            <S.ListCardLabelContainer>
+              {cardData.category.map((category, index) => (
+                <S.ListCardLabel key={index}>{category}</S.ListCardLabel>
+              ))}
+            </S.ListCardLabelContainer>
+            {/* 현장 제목 & 즐겨찾기  */}{' '}
+            <S.ListCardTitleContainer>
+              <S.ListCardTitle>{cardData.title}</S.ListCardTitle>
 
-        {/* 현장 제목 & 즐겨찾기  */}
-        <S.ListCardTitleContainer>
-          <S.ListCardTitle>{cardData.title}</S.ListCardTitle>
-
-          {/* 즐겨찾기 아이콘 */}
-          <S.IconContainer>
-            <TiStarFullOutline className="bookmarkIcon" />
-          </S.IconContainer>
-        </S.ListCardTitleContainer>
+              {/* 즐겨찾기 아이콘 */}
+              <S.IconContainer>
+                <TiStarFullOutline className="bookmarkIcon" />
+              </S.IconContainer>
+            </S.ListCardTitleContainer>
+          </>
+        )}
 
         {/* 현장 정보 */}
         <S.ListCardInfoContainer className={cardData.isOwner ? 'owner' : ''}>
+          {type === 'card' && (
+            <S.ListCardTitle className="constructionManage">
+              {cardData.title}
+            </S.ListCardTitle>
+          )}
+
           <S.ListCardInfo>
             {/* 프로필 사진 */}
             <S.ListCardProfileImg>
@@ -51,18 +62,22 @@ function RemodelingListCard({
               <p>{cardData.createdAt}</p>
             </S.ListCardProfileInfo>
 
-            {/* 상세보기 버튼 */}
-            <Button
-              type="button"
-              size="initial"
-              $styleType="initial"
-              className="detailButton"
-              onClickHandler={() =>
-                navigate(`/construction/detail/${cardData.id}`)
-              }
-            >
-              <IoIosArrowForward />
-            </Button>
+            {type !== 'card' && (
+              <>
+                {/* 상세보기 버튼 */}
+                <Button
+                  type="button"
+                  size="initial"
+                  $styleType="initial"
+                  className="detailButton"
+                  onClickHandler={() =>
+                    navigate(`/construction/detail/${cardData.id}`)
+                  }
+                >
+                  <IoIosArrowForward />
+                </Button>
+              </>
+            )}
           </S.ListCardInfo>
 
           {/* 코드 공유 버튼 */}
@@ -87,4 +102,4 @@ function RemodelingListCard({
   );
 }
 
-export default RemodelingListCard;
+export default ConstructionListCard;

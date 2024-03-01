@@ -45,6 +45,12 @@ export const ListCardTitle = styled.h3`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  &.constructionManage {
+    ${({ theme }) => theme.typography.body.b1};
+    color: ${theme.color.gray06};
+    margin-bottom: ${theme.gap.gap2};
+  }
 `;
 
 export const IconContainer = styled.div`
