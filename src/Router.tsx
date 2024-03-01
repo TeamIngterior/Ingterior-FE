@@ -11,6 +11,9 @@ const ConstructionList = lazy(
 const AddConstruction = lazy(
   () => import('./pages/construction/AddConstruction')
 );
+const DetailConstruction = lazy(
+  () => import('./pages/construction/DetailConstruction')
+);
 
 const router = createBrowserRouter([
   {
@@ -36,7 +39,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'detail/:id',
-            element: <div>Construction Detail</div>,
+            element: <DetailConstruction />,
           },
           {
             path: 'addition',
