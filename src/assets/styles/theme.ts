@@ -44,6 +44,7 @@ const gap = {
   gap6: '48px',
   gap7: '56px',
   gap8: '72px',
+  gap9: '80px',
 };
 
 const typography = {
