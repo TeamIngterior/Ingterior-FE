@@ -57,7 +57,9 @@ function RemodelingListCard({
               size="initial"
               $styleType="initial"
               className="detailButton"
-              onClickHandler={() => console.log('이동')}
+              onClickHandler={() =>
+                navigate(`/construction/detail/${cardData.id}`)
+              }
             >
               <IoIosArrowForward />
             </Button>
