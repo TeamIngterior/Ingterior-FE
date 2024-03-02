@@ -50,7 +50,15 @@ function DetailConstruction() {
       <CS.TemplateTitle>하자 체크</CS.TemplateTitle>
 
       {/* 페이지 네비게이션 */}
-      <PageNav navList={DETAIL_CONSTRUCTION_NAV} />
+      <PageNav
+        navList={
+          selectedTab === 'defect'
+            ? DETAIL_CONSTRUCTION_NAV
+            : DETAIL_CONSTRUCTION_NAV.map((nav, index) =>
+                index === 2 ? { ...nav, title: '공사관리' } : nav
+              )
+        }
+      />
 
       <S.DetailConstructionContentContainer>
         {/* 탭 */}
