@@ -109,7 +109,7 @@ function MultiUploader({
         {/* 안내 메세지 */}
         <S.FileUploaderGuideText>
           <MdAdd />
-          <p>이미지 추가하기</p>
+          이미지 추가하기
         </S.FileUploaderGuideText>
 
         {/* 파일 업로드 Input */}
