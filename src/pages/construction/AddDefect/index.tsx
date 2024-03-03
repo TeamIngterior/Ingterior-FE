@@ -8,6 +8,9 @@ import Button from '@/components/common/Button';
 import * as S from './styles';
 import * as CS from '@components/template/styles';
 import * as IS from '@components/common/Input/styles';
+import * as IES from '@components/common/FileUploader/ImageEditor/styles';
+
+import MultiUploader from '@/components/common/FileUploader/MultiUploader';
 
 const DEFECT_ADDITION_NAV = [
   {
@@ -29,6 +32,8 @@ const DEFECT_ADDITION_NAV = [
 ];
 
 function AddDefect() {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
   const {
     register,
     handleSubmit,
@@ -52,6 +57,8 @@ function AddDefect() {
   const onSubmit = async (data: any) => {
     console.log('하자 추가', data);
   };
+
+  console.log(watch('defectImage'));
 
   return (
     <S.AddDefectContainer>
@@ -114,6 +121,33 @@ function AddDefect() {
                         : '빈 칸으로 남겨둘 수 없습니다'}
                     </IS.InputErrorMessage>
                   )}
+                </div>
+              )}
+            />
+
+            {/* 하자 이미지 */}
+            <Controller
+              name="defectImage"
+              control={control}
+              render={({ field: { onChange } }) => (
+                <div>
+                  <IS.InputLabel>
+                    하자 이미지 추가하기
+                    <span className="subLabel">&nbsp;&#40;선택&#41;</span>
+                  </IS.InputLabel>
+                  <MultiUploader
+                    onSelectItem={(files) => {
+                      setSelectedFiles(files);
+                      onChange(files);
+                    }}
+                  />
+                  <IES.ImageEditorContext className="detail">
+                    &#8211;&nbsp;최대 8장까지 추가 가능합니다.
+                    <br />
+                    &#8211;&nbsp;파일 형식은 Jpg, Jpeg, Png, Gif만 가능합니다.
+                    <br />
+                    &#8211;&nbsp;최대 5MB까지 업로드 가능합니다.
+                  </IES.ImageEditorContext>
                 </div>
               )}
             />

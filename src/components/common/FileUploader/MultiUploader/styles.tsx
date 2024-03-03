@@ -1,32 +1,28 @@
 import styled from 'styled-components';
+import { theme } from '@assets/styles/theme';
 
 export const FileUploaderContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 24px;
 `;
 
 export const FileUploaderWrapper = styled.div`
   position: relative;
-  display: inline-flex;
-  flex-direction: column;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 188px;
-  height: 188px;
-  padding: 28px 10px;
-  background-color: ${(props) => props.theme.color.lightGray};
-  color: #aaa6a6;
-
-  .cameraIcon {
-    width: 66px;
-    height: 66px;
-  }
+  width: 100%;
+  height: 48px;
+  border: 1px solid ${theme.color.gray03};
+  border-radius: 4px;
+  margin-bottom: ${theme.gap.gap2};
 `;
 
 export const FileUploaderGuideText = styled.p`
-  font-size: 20px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  ${theme.typography.label.lb1};
 `;
 
 export const FileCountContainer = styled.div`
@@ -51,9 +47,8 @@ export const FileUploaderLabel = styled.label`
 // Thumbnail
 export const ThumbnailContainer = styled.div`
   position: relative;
-  width: 188px;
-  height: 188px;
-  border: 1px solid ${(props) => props.theme.color.lightGray};
+  width: 78px;
+  height: 78px;
 
   img {
     width: 100%;
@@ -64,15 +59,11 @@ export const ThumbnailContainer = styled.div`
 
 export const DeleteRegisterImageButton = styled.button`
   position: absolute;
-  top: -5px;
-  right: -8px;
-
+  top: 4px;
+  right: 4px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 50%;
 `;

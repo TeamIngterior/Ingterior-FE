@@ -131,8 +131,7 @@ function ImageEditor({
           </S.ImageEditorDropzone>
 
           <S.ImageEditorContext className="detail">
-            &#8211;&nbsp;최대 {isMultiple ? '8개' : '1개'}개까지 추가
-            가능합니다.
+            &#8211;&nbsp;최대 {isMultiple ? '8개' : '1개'}까지 추가 가능합니다.
             <br />
             &#8211;&nbsp;파일 형식은 Jpg, Jpeg, Png, Gif만 가능합니다.
             <br />

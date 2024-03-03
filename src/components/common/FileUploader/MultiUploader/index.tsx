@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as S from './styles';
 
-import { AiFillCamera, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
+import { MdAdd } from 'react-icons/md';
 
 interface MultiUploaderProps {
   storedImageList?: string[];
@@ -16,7 +17,7 @@ function MultiUploader({
   onAlertMessage,
   onSelectItem,
 }: MultiUploaderProps) {
-  const MAX_REGISTER_IMAGE_COUNT = 7; //최대 이미지 등록 개수
+  const MAX_REGISTER_IMAGE_COUNT = 8; //최대 이미지 등록 개수
   const [imageList, setImageList] = useState<File[]>([]); //이미지 리스트
 
   const storedLength = storedImageList ? storedImageList.length : 0;
@@ -46,11 +47,6 @@ function MultiUploader({
 
     // MAX_RESISTER_IMAGE_COUNT 개수를 초과하면, 이미지 등록 불가
     if (files.length + totalImageCount > MAX_REGISTER_IMAGE_COUNT) {
-      // onAlertMessage({
-      //   title: '이미지 등록 개수 초과',
-      //   message: '최대 이미지 등록 개수를 초과하였습니다.',
-      // });
-
       alert('최대 이미지 등록 개수를 초과하였습니다.');
       return;
     }
@@ -69,26 +65,6 @@ function MultiUploader({
 
   return (
     <S.FileUploaderContainer>
-      {/* 파일 업로드 컨테이너 */}
-      <S.FileUploaderWrapper>
-        {/* 안내 메세지 */}
-        <AiFillCamera className="cameraIcon" />
-        <S.FileUploaderGuideText>이미지 등록</S.FileUploaderGuideText>
-        <S.FileCountContainer>
-          {totalImageCount}/{MAX_REGISTER_IMAGE_COUNT}
-        </S.FileCountContainer>
-
-        {/* 파일 업로드 Input */}
-        <S.FileUploaderLabel>
-          <S.FileUploaderInput
-            type="file"
-            accept="image/*"
-            onChange={(event) => handleFileUpload(event)}
-            multiple
-          />
-        </S.FileUploaderLabel>
-      </S.FileUploaderWrapper>
-
       {/* 파일 썸네일 컨테이너 */}
       {storedImageList &&
         storedImageList.length > 0 &&
@@ -112,6 +88,7 @@ function MultiUploader({
           </S.ThumbnailContainer>
         ))}
 
+      {/* 이미지 썸네일 리스트 */}
       {imageList.map((file, index) => (
         <S.ThumbnailContainer key={index}>
           {/* 파일 썸네일 */}
@@ -126,6 +103,25 @@ function MultiUploader({
           </S.DeleteRegisterImageButton>
         </S.ThumbnailContainer>
       ))}
+
+      {/* 파일 업로드 컨테이너 */}
+      <S.FileUploaderWrapper>
+        {/* 안내 메세지 */}
+        <S.FileUploaderGuideText>
+          <MdAdd />
+          <p>이미지 추가하기</p>
+        </S.FileUploaderGuideText>
+
+        {/* 파일 업로드 Input */}
+        <S.FileUploaderLabel>
+          <S.FileUploaderInput
+            type="file"
+            accept="image/*"
+            onChange={(event) => handleFileUpload(event)}
+            multiple
+          />
+        </S.FileUploaderLabel>
+      </S.FileUploaderWrapper>
     </S.FileUploaderContainer>
   );
 }
