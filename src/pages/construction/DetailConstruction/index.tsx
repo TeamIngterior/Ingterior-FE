@@ -4,7 +4,7 @@ import * as CS from '@components/template/styles';
 import { useEffect, useState } from 'react';
 import Button from '@/components/common/Button';
 import { FiPlus } from 'react-icons/fi';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConstructionListCard from '@/components/construction/list/ConstructionListCard';
 
 const DETAIL_CONSTRUCTION_NAV = [
@@ -35,14 +35,15 @@ const DETAIL_CONSTRUCTION_TAB = [
 
 function DetailConstruction() {
   const { pathname } = useLocation();
+  const id = pathname.split('/').pop();
+  const navigate = useNavigate();
+
   // 탭 상태 : defect - 하자 체크(default), manage - 공사 관리
   const [selectedTab, setSelectedTab] = useState<string>('defect');
   const defectList = [];
 
   useEffect(() => {
     console.log('하자 체크 페이지');
-
-    const id = pathname.split('/').pop();
   }, []);
 
   return (
@@ -80,7 +81,14 @@ function DetailConstruction() {
             <>
               {/* 버튼 */}
               <S.DetailConstructionFunctionContainer>
-                <Button type="button" size="md" className="addDefectButton">
+                <Button
+                  type="button"
+                  size="md"
+                  className="addDefectButton"
+                  onClickHandler={() =>
+                    navigate(`/construction/defect/addition/${id}`)
+                  }
+                >
                   <FiPlus />새 하자 추가
                 </Button>
               </S.DetailConstructionFunctionContainer>

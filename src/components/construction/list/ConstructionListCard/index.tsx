@@ -71,7 +71,7 @@ function ConstructionListCard({
                   $styleType="initial"
                   className="detailButton"
                   onClickHandler={() =>
-                    navigate(`/construction/detail/${cardData.id}`)
+                    navigate(`/construction/${cardData.id}`)
                   }
                 >
                   <IoIosArrowForward />
