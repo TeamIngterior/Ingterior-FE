@@ -93,13 +93,25 @@ export const Input = styled.input<InputCSSProps>`
   }
 `;
 
-export const Textarea = styled.textarea`
+export const Textarea = styled.textarea<InputCSSProps>`
   ${commonInputStyle}
-  padding: 16px;
-  min-height: 158px;
+  padding:  ${theme.gap.gap2};
+
+  height: ${(props) => props.$isValiableHeight && 'auto'};
+  min-height: ${(props) => props.$isValiableHeight && '120px'};
+  padding: ${(props) => props.$isValiableHeight && `${theme.gap.gap2}`};
   resize: none;
-  overflow-y: scroll;
-  overflow-y: overlay;
+
+  &.valiableHeight {
+    height: 0;
+    min-height: 50px;
+    padding: 14px 16px;
+    max-height: 152px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   &::placeholder {
     white-space: pre-wrap;

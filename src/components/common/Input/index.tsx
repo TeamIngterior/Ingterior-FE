@@ -4,6 +4,7 @@ import * as S from './styles';
 export interface InputCSSProps {
   size?: 'sm' | 'md' | 'lg'; // 버튼 사이즈, default: md
   $isHorizontal?: boolean; // 버튼이 가로로 배치되어야 하는 경우 전달
+  $isValiableHeight?: boolean; // textarea의 경우 높이 조절이 필요한 경우 전달
   readOnly?: boolean;
 }
 
@@ -39,6 +40,7 @@ function Input(
     inputType,
     name,
     label,
+    $isValiableHeight,
     labelOption,
     placeholder,
     defaultValue,
@@ -85,6 +87,7 @@ function Input(
             spellCheck="false"
             style={style}
             readOnly={readOnly}
+            $isValiableHeight={$isValiableHeight}
             ref={ref as React.Ref<HTMLTextAreaElement>}
             {...inputCommonProps}
           />
