@@ -126,6 +126,20 @@ function RoomMessageList() {
         content: '안녕하세요5',
         time: new Date('2024-03-10T15:32:00'),
       },
+      {
+        user_profile: 'https://via.placeholder.com/150',
+        userId: 2,
+        messageId: 6,
+        content: '안녕하세요6',
+        time: new Date('2024-03-10T15:33:00'),
+      },
+      {
+        user_profile: 'https://via.placeholder.com/150',
+        userId: 2,
+        messageId: 7,
+        content: '안녕하세요7',
+        time: new Date('2024-03-10T15:33:00'),
+      },
     ]);
   }, [roomId]);
 
@@ -159,43 +173,17 @@ function RoomMessageList() {
       <S.RoomMessageListContent>
         {combineMessages([...(messages || []), ...liveMessageList]).map(
           (userSentMessage, index, array) => {
-            const previousMessage = array[index - 1];
             const nextMessage = array[index + 1];
 
-            // previousMessage가 없는 경우, 즉 첫번째 메세지라면 nextMessage와 비교해서 시간을 보여줄지 결정한다.
-            // 작성자가 다른 경우에만 시간을 보여준다.
-            if (!previousMessage) {
-              const otherUserSentMessage =
-                nextMessage?.userId !== userSentMessage.userId;
+            // 다음 메세지가 현재 메세지와 다른 유저가 보낸 메세지라면 시간을 표시
+            const differentUserSentNextMessage =
+              nextMessage?.userId !== userSentMessage.userId;
 
-              const isShowTime = otherUserSentMessage;
-              return (
-                <RoomMessageCard
-                  message={userSentMessage}
-                  key={userSentMessage.messageId}
-                  isShowTime={isShowTime}
-                />
-              );
-            }
-
-            //  이전의 메세지가 다른 사용자가 보낸 메세지라면 무조건 시간을 보여준다.
-            const otherUserSentMessage =
-              previousMessage.userId !== userSentMessage.userId;
-
-            // 이전의 메세지가 같은 사용자가 보낸 메세지고, 다른 시간에 보낸 거라면 시간을 보여준다.
-            const differentTimeSentMessage =
-              previousMessage.userId === userSentMessage.userId &&
-              previousMessage.time.getTime() !== userSentMessage.time.getTime();
-
-            // 다음 메세지가 같은 사용자가 보낸 메세지고, 같은 시간에 보낸 거라면 현재 메세지의 시간을 보여주지 않는다.
-            const sameTimeSentMessage =
-              nextMessage?.userId === userSentMessage.userId &&
-              nextMessage?.time.getTime() === userSentMessage.time.getTime();
-
+            // 1분 이상 차이나는 경우 시간을 표시
             const isShowTime =
-              otherUserSentMessage ||
-              differentTimeSentMessage ||
-              sameTimeSentMessage;
+              differentUserSentNextMessage ||
+              nextMessage?.time.getTime() - userSentMessage.time.getTime() >
+                1000 * 60;
 
             return (
               <RoomMessageCard
