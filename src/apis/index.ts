@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAccessToken } from '@/utils/token';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -8,10 +9,22 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+instance.interceptors.request.use((config) => {
+  if (!config.headers) return config;
+  const accessToken = getAccessToken();
+
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+});
+
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const { config, response } = error;
+
+    // TODO : 401 에러 처리(로그인 연장)
 
     if (response && response.status) {
       switch (response.status) {
