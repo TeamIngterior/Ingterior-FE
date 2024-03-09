@@ -1,3 +1,5 @@
+import Chatting from '../chat';
+
 import * as S from './styles';
 
 interface MainTemplateProps {
@@ -8,6 +10,8 @@ function MainTemplate({ children }: MainTemplateProps) {
   return (
     <S.TemplateContainer>
       <S.TemplateInner>{children}</S.TemplateInner>
+      {/* 채팅(메세지) */}
+      <Chatting />
     </S.TemplateContainer>
   );
 }
