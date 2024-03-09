@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { theme } from '@assets/styles/theme';
 
 export const TemplateContainer = styled.main`
+  position: relative;
   width: 100%;
   min-height: ${`calc(100% - ${theme.layoutComponent.header_height}px - ${theme.layoutComponent.footer_height}px)`};
   padding: ${theme.layoutComponent.main_template_padding}px 0;
@@ -18,6 +19,7 @@ export const TemplateContainer = styled.main`
 `;
 
 export const TemplateInner = styled.section`
+  position: relative;
   width: 100%;
   max-width: calc(588px + 16px * 2);
   padding: 0 16px;
