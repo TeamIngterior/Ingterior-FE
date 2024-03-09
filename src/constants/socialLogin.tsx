@@ -1,4 +1,5 @@
 import { theme } from '@/assets/styles/theme';
+import { googleLoginRequest, kakaoLoginRequest } from '@/apis/login';
 
 import KakaoLogo from '@assets/socialLogin/logo_kakao.svg?react';
 import NaverLogo from '@assets/socialLogin/logo_naver.svg?react';
@@ -15,6 +16,7 @@ export const SOCIAL_LOGIN = [
       color: `${theme.color.gray06}`,
       border: '1px solid #FEE500',
     },
+    onClickHandler: kakaoLoginRequest,
   },
   {
     title: '네이버로 이용하기',
@@ -24,6 +26,9 @@ export const SOCIAL_LOGIN = [
       backgroundColor: '#03C75A',
       color: `${theme.color.gray01}`,
       border: '1px solid #03C75A',
+    },
+    onClickHandler: () => {
+      console.log('클릭');
     },
   },
   {
@@ -35,6 +40,7 @@ export const SOCIAL_LOGIN = [
       color: `${theme.color.gray06}`,
       border: `1px solid ${theme.color.gray03}`,
     },
+    onClickHandler: googleLoginRequest,
   },
   {
     title: '인스타그램으로 이용하기',
@@ -44,6 +50,9 @@ export const SOCIAL_LOGIN = [
       backgroundColor: `${theme.color.gray01}`,
       color: `${theme.color.gray06}`,
       border: `1px solid ${theme.color.gray03}`,
+    },
+    onClickHandler: () => {
+      console.log('클릭');
     },
   },
 ];
