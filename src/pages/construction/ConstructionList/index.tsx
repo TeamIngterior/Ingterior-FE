@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 import { useConstructionList } from './useConstructionList';
@@ -18,6 +19,8 @@ import * as CS from '@/components/template/styles';
 import * as S from './styles';
 
 function ConstructionList() {
+  const navigate = useNavigate();
+
   const { openModal } = useModal('addConstructionSite');
   const { constructionListData } = useConstructionList();
   const { ref } = useInView({
@@ -84,7 +87,7 @@ function ConstructionList() {
                   <Button
                     type="button"
                     size="md"
-                    onClickHandler={() => console.log('click')}
+                    onClickHandler={() => navigate('/construction/addition')}
                     style={{
                       borderColor: `${theme.color.primary05}`,
                       backgroundColor: `${theme.color.primary05}`,
