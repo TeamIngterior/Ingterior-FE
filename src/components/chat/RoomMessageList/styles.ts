@@ -2,13 +2,49 @@ import styled from 'styled-components';
 import { theme } from '@/assets/styles/theme';
 
 export const RooomMessageListContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
+export const ArrowButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+`;
+
+export const RoomMessageListHeading = styled.p`
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const MenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+
+  svg {
+    width: 24px;
+  }
+`;
+
 export const RoomMessageListContent = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
+
+  padding: 0 16px;
+  padding-top: ${theme.gap.gap5};
+
   overflow-y: auto;
   overflow-y: overlay;
 
