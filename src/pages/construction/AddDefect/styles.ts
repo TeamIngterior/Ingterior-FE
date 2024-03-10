@@ -12,6 +12,8 @@ export const CanvasContainer = styled.div`
   height: 588px;
   background-color: #f4f4f4;
   margin-bottom: ${theme.gap.gap3};
+  border: 1px solid ${theme.color.gray04};
+  border-radius: 4px;
 `;
 
 export const AddDefectContent = styled.div`
