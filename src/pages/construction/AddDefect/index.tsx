@@ -296,10 +296,7 @@ function AddDefect() {
         {/* 컨텐츠 */}
         <S.AddDefectContent>
           {/* 캔버스 영역 */}
-          <div
-            ref={mapContainerRef}
-            style={{ width: '100%', height: '400px' }}
-          ></div>
+          <S.CanvasContainer ref={mapContainerRef} />
 
           {/* 인풋 영역  */}
           <S.AddDefectInputContainer>
@@ -372,7 +369,7 @@ function AddDefect() {
                   <IES.ImageEditorContext className="detail">
                     &#8211;&nbsp;최대 8장까지 추가 가능합니다.
                     <br />
-                    &#8211;&nbsp;파일 형식은 Jpg, Jpeg, Png, Gif만 가능합니다.
+                    &#8211;&nbsp;파일 형식은 Jpg, Jpeg, Png만 가능합니다.
                     <br />
                     &#8211;&nbsp;최대 5MB까지 업로드 가능합니다.
                   </IES.ImageEditorContext>
