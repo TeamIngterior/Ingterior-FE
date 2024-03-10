@@ -1,9 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server';
+
 import { Controller, useForm } from 'react-hook-form';
 
 import PageNav from '@/components/common/PageNav';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
+import Marker from '@assets/marker_default.svg?react';
 
 import * as S from './styles';
 import * as CS from '@components/template/styles';
@@ -146,10 +149,14 @@ function AddDefect() {
     if (markers.length > 0 && !tooltipAdded) {
       // 첫 번째 마커
       const firstMarker = markers[0];
-      const markerElement = firstMarker.getElement() as HTMLElement;
+
+      const markerElement = document.createElement('div');
+      markerElement.className = 'marker-wrapper';
+      markerElement.innerHTML = ReactDOMServer.renderToString(<Marker />);
+      markerElement.style.width = '48px';
+      markerElement.style.height = '48px';
+
       const markerIndex = 1;
-      markerElement.className = `marker-${markerIndex}`;
-      markerElement.textContent = `${markerIndex}`;
 
       // 툴팁이 추가된 적이 없을 때만 툴팁 추가
       if (!firstMarker.get('tooltipAdded')) {
@@ -180,7 +187,7 @@ function AddDefect() {
         const tooltipOverlay = new Overlay({
           element: tooltipElement,
           position: firstMarker.getPosition(),
-          offset: [-120, 30],
+          offset: [-100, 60],
         });
         mapRef.current?.addOverlay(tooltipOverlay);
 
@@ -201,21 +208,22 @@ function AddDefect() {
     if (overlayRef.current) {
       console.log('coord', coord);
 
-      if (mapRef.current) {
-        mapRef.current.getOverlays().clear();
-      }
-      setMarkers([]);
-
       const markerElement = document.createElement('div');
-      markerElement.style.width = '20px';
-      markerElement.style.height = '20px';
-      markerElement.style.backgroundColor = 'red';
+      markerElement.className = 'marker-wrapper';
+      markerElement.innerHTML = ReactDOMServer.renderToString(<Marker />);
+      markerElement.style.width = '48px';
+      markerElement.style.height = '48px';
 
-      const markerIndex = 1;
-      markerElement.className = 'marker';
       overlayRef.current.setPosition(coord);
 
+      const offsetX = -24;
+      const offsetY = -24;
+      const position = [coord[0] + offsetX, coord[1] - offsetY];
+
       if (mapRef.current) {
+        mapRef.current.getOverlays().clear();
+        setMarkers([]);
+
         const marker = new Overlay({
           position: coord,
           element: markerElement,
@@ -224,6 +232,8 @@ function AddDefect() {
 
         setCoordinates([coord]);
         setMarkers([marker]);
+
+        mapRef.current.addOverlay(marker);
 
         markerElement.addEventListener('mousedown', (event) => {
           let isDragging = false;
@@ -253,8 +263,6 @@ function AddDefect() {
           document.addEventListener('mousemove', onMouseMove);
           document.addEventListener('mouseup', onMouseUp);
         });
-
-        mapRef.current.addOverlay(marker);
       }
     }
   };
