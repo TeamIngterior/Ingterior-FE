@@ -16,6 +16,7 @@ import { Map as OLMap, View } from 'ol';
 import { Image as ImageLayer } from 'ol/layer';
 import { ImageStatic as ImageStaticSource } from 'ol/source';
 import Overlay from 'ol/Overlay';
+import { useTheme } from 'styled-components';
 
 interface Marker {
   id: number;
@@ -52,6 +53,10 @@ function AddDefect() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [markers, setMarkers] = useState<Overlay[]>([]);
   const [cooridnates, setCoordinates] = useState<[number, number][]>([]);
+  const [tooltipAdded, setTooltipAdded] = useState(false);
+
+  // styled-components 의 theme를 사용할 수 있는 훅
+  const theme = useTheme();
 
   const {
     register,
@@ -138,7 +143,7 @@ function AddDefect() {
   useEffect(() => {
     console.log('markers', markers);
 
-    if (markers.length > 0) {
+    if (markers.length > 0 && !tooltipAdded) {
       // 첫 번째 마커
       const firstMarker = markers[0];
       const markerElement = firstMarker.getElement() as HTMLElement;
@@ -146,15 +151,15 @@ function AddDefect() {
       markerElement.className = `marker-${markerIndex}`;
       markerElement.textContent = `${markerIndex}`;
 
-      // 첫 번째 마커에만 툴팁 추가
+      // 툴팁이 추가된 적이 없을 때만 툴팁 추가
       if (!firstMarker.get('tooltipAdded')) {
         const tooltipElement = document.createElement('div');
         tooltipElement.className = 'tooltip';
         tooltipElement.style.position = 'absolute';
         tooltipElement.style.width = 'fit-content';
         tooltipElement.style.whiteSpace = 'nowrap';
-        tooltipElement.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        tooltipElement.style.color = 'white';
+        tooltipElement.style.padding = '8px 16px';
+        tooltipElement.style.backgroundColor = theme.color.secondary01;
         tooltipElement.textContent = '마커를 하자의 위치로 드래그하세요';
 
         // 툴팁 닫기 버튼 추가
@@ -171,10 +176,11 @@ function AddDefect() {
           tooltipElement.style.display = 'none';
         });
 
+        // 마커 기준으로 중앙 정렬
         const tooltipOverlay = new Overlay({
           element: tooltipElement,
           position: firstMarker.getPosition(),
-          offset: [0, -30], // 마커 위에 표시되도록 오프셋 지정
+          offset: [-120, 30],
         });
         mapRef.current?.addOverlay(tooltipOverlay);
 
@@ -185,6 +191,8 @@ function AddDefect() {
 
         // 툴팁이 추가되었음을 표시
         firstMarker.set('tooltipAdded', true);
+
+        setTooltipAdded(true);
       }
     }
   }, [markers]);
