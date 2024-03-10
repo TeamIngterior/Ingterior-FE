@@ -1,13 +1,20 @@
 import { useEffect, useState, useRef } from 'react';
 
-import { useRecoilValue } from 'recoil';
-import { chatRoomIdState } from '@/atom/chatState';
+import { useRecoilState } from 'recoil';
+import {
+  chatRoomIdState,
+  chatSidebarInfoState,
+  chatSidebarState,
+} from '@/atom/chatState';
 
 import { useForm } from 'react-hook-form';
 import { useInView } from 'react-intersection-observer';
 
 import Send from '@/assets/icon/send.svg?react';
+import BackArrow from '@/assets/icon/arrow_back.svg?react';
+import Menu from '@/assets/icon/menu.svg?react';
 import RoomMessageCard from '../RoomMessageCard';
+import ChatSidebar from '../ChatSidebar';
 
 import * as S from './styles';
 import * as CS from '../styles';
@@ -43,7 +50,9 @@ function RoomMessageList() {
   // TODO : 임의의 데이터로 대체
   const [data, setData] = useState<any>([]);
 
-  const roomId = useRecoilValue(chatRoomIdState);
+  const [roomId, setRoomId] = useRecoilState(chatRoomIdState);
+  const [info, setInfo] = useRecoilState(chatSidebarInfoState);
+  const [isMenu, setIsMenu] = useRecoilState(chatSidebarState);
   const [page, setPage] = useState<number>(0);
 
   // 채팅방 목록 페이지 진입 시 호출된 메세지가 message에, 실시간 메세지가 liveMessageList에 저장
@@ -141,6 +150,45 @@ function RoomMessageList() {
         time: new Date('2024-03-10T15:33:00'),
       },
     ]);
+
+    setInfo([
+      {
+        id: 1,
+        title: '영통구 인계동 5동 912호 전체공사 진행중',
+        createdAt: '2024.01.19',
+        user: {
+          usercode: '1GA001',
+          profileImg: 'https://via.placeholder.com/150',
+        },
+        constructionSiteCode: '1GA001A001',
+        isOwner: true,
+      },
+      {
+        title: '채팅방 멤버',
+        content: [
+          {
+            userId: 1,
+            user_profile: 'https://via.placeholder.com/150',
+            user_name: '1GA001',
+          },
+          {
+            userId: 2,
+            user_profile: 'https://via.placeholder.com/150',
+            user_name: '1GA001',
+          },
+          {
+            userId: 3,
+            user_profile: 'https://via.placeholder.com/150',
+            user_name: '1GA001',
+          },
+          {
+            userId: 4,
+            user_profile: 'https://via.placeholder.com/150',
+            user_name: '1GA001',
+          },
+        ],
+      },
+    ]);
   }, [roomId]);
 
   //   useEffect(() => {
@@ -166,7 +214,25 @@ function RoomMessageList() {
     <S.RooomMessageListContainer>
       {/* 채팅방 헤더  */}
       <CS.ChatRoomHeader>
-        <CS.ChatRoomHeaderInner>{data.title}</CS.ChatRoomHeaderInner>
+        <CS.ChatRoomHeaderInner>
+          {/* 이전 버튼 */}
+          <S.ArrowButton
+            type="button"
+            onClick={() => {
+              setRoomId(null);
+            }}
+          >
+            <BackArrow />
+          </S.ArrowButton>
+
+          {/* 타이틀 */}
+          <S.RoomMessageListHeading>{data.title}</S.RoomMessageListHeading>
+
+          {/* 메뉴 버튼  */}
+          <S.MenuButton type="button" onClick={() => setIsMenu(!isMenu)}>
+            <Menu />
+          </S.MenuButton>
+        </CS.ChatRoomHeaderInner>
       </CS.ChatRoomHeader>
 
       {/* 채팅방 컨텐츠 */}
@@ -185,11 +251,16 @@ function RoomMessageList() {
               nextMessage?.time.getTime() - userSentMessage.time.getTime() >
                 1000 * 60;
 
+            // 1분 이내에 해당 유저가 보낸 첫번째 메세지에만 프로필 이미지 표시
+            const isFirstMessageOfUser =
+              index === 0 || array[index - 1].userId !== userSentMessage.userId;
+
             return (
               <RoomMessageCard
                 message={userSentMessage}
                 key={userSentMessage.messageId}
                 isShowTime={isShowTime}
+                isShowProfile={isFirstMessageOfUser}
               />
             );
           }
@@ -212,6 +283,8 @@ function RoomMessageList() {
           <Send />
         </button>
       </S.RoomMessageSendForm>
+
+      {isMenu && <ChatSidebar />}
     </S.RooomMessageListContainer>
   );
 }
