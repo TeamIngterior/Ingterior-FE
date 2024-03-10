@@ -222,6 +222,11 @@ function AddDefect() {
         });
         mapRef.current?.addOverlay(tooltipOverlay);
 
+        // 마커의 위치가 변경이 되면 툴팁 삭제
+        firstMarker.on('change:position', () => {
+          tooltipOverlay.setPosition(undefined);
+        });
+
         // 툴팁이 추가되었음을 표시
         firstMarker.set('tooltipAdded', true);
       }
