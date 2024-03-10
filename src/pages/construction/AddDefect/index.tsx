@@ -135,50 +135,6 @@ function AddDefect() {
     console.log('coordinates', cooridnates);
   }, [cooridnates]);
 
-  //   useEffect(() => {
-  //     console.log('markers', markers);
-
-  //     markers.forEach((marker, index) => {
-  //       const markerIndex = index + 1;
-  //       const markerElement = marker.getElement() as HTMLElement;
-  //       markerElement.className = `marker-${markerIndex}`;
-  //       markerElement.textContent = `${markerIndex}`;
-
-  //       // 첫번째 마커에만 툴팁 추가
-  //       if (index === 0) {
-  //         const tooltipElement = document.createElement('div');
-  //         tooltipElement.className = 'tooltip';
-  //         tooltipElement.style.position = 'absolute';
-  //         tooltipElement.style.width = 'fit-content';
-  //         tooltipElement.style.whiteSpace = 'nowrap';
-  //         tooltipElement.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  //         tooltipElement.style.color = 'white';
-  //         tooltipElement.textContent = '마커를 하자의 위치로 드래그하세요';
-
-  //         // 툴팁 닫기 버튼 추가
-  //         const closeButton = document.createElement('span');
-  //         closeButton.className = 'close';
-  //         closeButton.textContent = 'x';
-  //         closeButton.addEventListener('click', () => {
-  //           tooltipElement.style.display = 'none';
-  //         });
-  //         tooltipElement.appendChild(closeButton);
-
-  //         // 툴팁 클릭 시 닫기
-  //         tooltipElement.addEventListener('click', () => {
-  //           tooltipElement.style.display = 'none';
-  //         });
-
-  //         const tooltipOverlay = new Overlay({
-  //           element: tooltipElement,
-  //           position: marker.getPosition(),
-  //           offset: [0, -30], // 마커 위에 표시되도록 오프셋 지정
-  //         });
-  //         mapRef.current?.addOverlay(tooltipOverlay);
-  //       }
-  //     });
-  //   }, [markers]);
-
   useEffect(() => {
     console.log('markers', markers);
 
@@ -237,12 +193,17 @@ function AddDefect() {
     if (overlayRef.current) {
       console.log('coord', coord);
 
+      if (mapRef.current) {
+        mapRef.current.getOverlays().clear();
+      }
+      setMarkers([]);
+
       const markerElement = document.createElement('div');
       markerElement.style.width = '20px';
       markerElement.style.height = '20px';
       markerElement.style.backgroundColor = 'red';
 
-      const markerIndex = markers.length + 1;
+      const markerIndex = 1;
       markerElement.className = 'marker';
       overlayRef.current.setPosition(coord);
 
@@ -253,8 +214,8 @@ function AddDefect() {
           stopEvent: false,
         });
 
-        setCoordinates((prevCoordinates) => [...prevCoordinates, coord]);
-        setMarkers((prevMarkers) => [...prevMarkers, marker]);
+        setCoordinates([coord]);
+        setMarkers([marker]);
 
         markerElement.addEventListener('mousedown', (event) => {
           let isDragging = false;
@@ -269,7 +230,7 @@ function AddDefect() {
               startMarkerPosition[1] - dy,
             ];
             marker.setPosition(newPosition);
-            setCoordinates((prevCoordinates) => [...prevCoordinates, coord]);
+            setCoordinates([[...coord]]);
             isDragging = true;
           };
 
