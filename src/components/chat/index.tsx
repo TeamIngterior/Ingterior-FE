@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 import ChatRoomList from './ChatRoomList';
+import Message from '@assets/icon/message.svg?react';
+import { IoClose } from 'react-icons/io5';
 
 import * as S from './styles';
 
@@ -51,9 +53,18 @@ function Chatting() {
 
       <S.ChattingButton
         type="button"
+        className={isChattingOpened ? 'opened' : ''}
         onClick={() => setIsChattingOpened(!isChattingOpened)}
       >
-        채팅
+        {isChattingOpened ? (
+          <>
+            <IoClose className="closeIcon" />
+          </>
+        ) : (
+          <>
+            <Message />
+          </>
+        )}
       </S.ChattingButton>
     </S.ChattingContainer>
   );

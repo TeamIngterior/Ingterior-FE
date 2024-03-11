@@ -3,8 +3,6 @@ import { theme } from '@/assets/styles/theme';
 
 export const ChattingContainer = styled.section`
   position: fixed;
-
-  /* top: 68.98dvh; */
   top: 75vh;
   left: 50%;
   transform: translateX(-50%);
@@ -16,7 +14,26 @@ export const ChattingContainer = styled.section`
   padding: 0 ${theme.gap.gap2};
 `;
 
-export const ChattingButton = styled.button``;
+export const ChattingButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  min-width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  background-color: ${theme.color.primary};
+  box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.4);
+
+  &.opened {
+    background-color: #fff;
+  }
+
+  .closeIcon {
+    width: 36px;
+    height: 36px;
+  }
+`;
 
 export const ChatRoomHeader = styled.div`
   width: 100%;
