@@ -225,7 +225,7 @@ function AddDefect() {
         setMarkers([]);
 
         const marker = new Overlay({
-          position: coord,
+          position: position,
           element: markerElement,
           stopEvent: false,
         });
