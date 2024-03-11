@@ -116,4 +116,10 @@ export const Button = styled.button<ButtonCSSProps>`
   svg {
     margin-right: ${theme.gap.gap1};
   }
+
+  /* 새 현장 추가, 코드로 현장 추가 버튼 */
+  &.addConstructionButton {
+    width: 100%;
+    max-width: 180px;
+  }
 `;

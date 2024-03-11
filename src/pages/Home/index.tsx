@@ -21,9 +21,6 @@ function Home() {
       <Button onClickHandler={() => navigate('/construction/list')}>
         현장목록 페이지 바로가기
       </Button>
-      <Button onClickHandler={() => navigate('/construction/addition')}>
-        현장추가 페이지 바로가기
-      </Button>
     </div>
   );
 }

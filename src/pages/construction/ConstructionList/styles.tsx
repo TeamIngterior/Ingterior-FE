@@ -26,21 +26,9 @@ export const ConstructionListContainer = styled.div`
 `;
 
 export const AddConstructionConatiner = styled.div`
-  bottom: 16px;
-`;
-
-export const AddConstructionList = styled.ul`
-  position: absolute;
-  right: 0;
-  bottom: 64px;
   display: flex;
-  flex-direction: column;
-  gap: ${theme.gap.gap1};
-
-  li {
-    display: flex;
-    justify-content: flex-end;
-  }
+  gap: 0 ${theme.gap.gap3};
+  margin-bottom: ${theme.gap.gap5};
 `;
 
 export const NoDataContainer = styled.div`
@@ -53,9 +41,9 @@ export const NoDataContainer = styled.div`
   border-radius: 4px;
 
   p {
+    ${theme.typography.body.b1};
     display: inline-flex;
     align-self: center;
-    ${theme.typography.body.b1};
     color: ${theme.color.gray05};
     line-height: 1.5;
     text-align: center;
