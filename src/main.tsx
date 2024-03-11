@@ -28,13 +28,13 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <ThemeProvider>
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </RecoilRoot>
-    </QueryClientProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <RecoilRoot>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </RecoilRoot>
+  </QueryClientProvider>
+  // </React.StrictMode>
 );
