@@ -1,40 +1,23 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
-
 import { useConstructionList } from './useConstructionList';
 import { useModal } from '@/hooks/useModal';
 
 import { ConstructionListDataModel } from '@/apis/construction';
 
 import { FiPlus } from 'react-icons/fi';
-import { AiOutlineClose } from 'react-icons/ai';
 import { MdInput } from 'react-icons/md';
 import ConstructionListCard from '@/components/construction/list/ConstructionListCard';
 import AddConstructionCodeSite from '@/components/modal/construction/AddConstructionCodeSite';
 import Button from '@/components/common/Button';
 
-import { theme } from '@/assets/styles/theme';
 import * as CS from '@/components/template/styles';
 import * as S from './styles';
+import { useNavigate } from 'react-router-dom';
 
 function ConstructionList() {
   const navigate = useNavigate();
 
   const { openModal } = useModal('addConstructionSite');
   const { constructionListData } = useConstructionList();
-  const { ref } = useInView({
-    threshold: 1,
-    onChange: (inView) => {
-      inView
-        ? setIsButtonContainerVisible(true)
-        : setIsButtonContainerVisible(false);
-    },
-  });
-
-  const [isButtonContainerVisible, setIsButtonContainerVisible] =
-    useState(false);
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   return (
     <>
@@ -43,6 +26,32 @@ function ConstructionList() {
       <S.ConstructionListContainer className="constructionList">
         <CS.TemplateTitle>현장 목록</CS.TemplateTitle>
 
+        <S.AddConstructionConatiner>
+          {/* 새 현장 추가 */}
+          <Button
+            type="button"
+            size="md"
+            className="addConstructionButton"
+            onClickHandler={() => navigate('/construction/addition')}
+          >
+            <FiPlus />
+            <span>새 현장 추가</span>
+          </Button>
+
+          {/* 코드로 현장 추가  */}
+          <Button
+            type="button"
+            size="md"
+            className="addConstructionButton"
+            $styleType="revert"
+            onClickHandler={openModal}
+          >
+            <MdInput />
+            코드로 현장 추가
+          </Button>
+        </S.AddConstructionConatiner>
+
+        {/*  현장 리스트 */}
         {constructionListData?.length !== 0 ? (
           <>
             {constructionListData?.map(
@@ -59,57 +68,6 @@ function ConstructionList() {
             </p>
           </S.NoDataContainer>
         )}
-
-        <div className={`constructionButtonContainer`} ref={ref}>
-          <S.AddConstructionConatiner
-            style={{
-              position: isButtonContainerVisible ? 'static' : 'fixed',
-            }}
-          >
-            {isButtonClicked && (
-              <S.AddConstructionList>
-                <li>
-                  <Button
-                    type="button"
-                    size="md"
-                    onClickHandler={openModal}
-                    style={{
-                      borderColor: `${theme.color.primary05}`,
-                      backgroundColor: `${theme.color.primary05}`,
-                      boxShadow: '0 0 4px 0 rgba(0, 0, 0, 0.4)',
-                    }}
-                  >
-                    <MdInput />
-                    코드로 현장 추가
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    type="button"
-                    size="md"
-                    onClickHandler={() => navigate('/construction/addition')}
-                    style={{
-                      borderColor: `${theme.color.primary05}`,
-                      backgroundColor: `${theme.color.primary05}`,
-                      boxShadow: '0 0 4px 0 rgba(0, 0, 0, 0.4)',
-                    }}
-                  >
-                    <FiPlus />
-                    <span>새 현장 추가</span>
-                  </Button>
-                </li>
-              </S.AddConstructionList>
-            )}
-            <Button
-              type="button"
-              size="md"
-              onClickHandler={() => setIsButtonClicked(!isButtonClicked)}
-            >
-              {isButtonClicked ? <AiOutlineClose /> : <FiPlus />}
-              현장 추가
-            </Button>
-          </S.AddConstructionConatiner>
-        </div>
       </S.ConstructionListContainer>
     </>
   );
