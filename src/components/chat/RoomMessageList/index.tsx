@@ -111,7 +111,7 @@ function RoomMessageList() {
         user_profile: 'https://via.placeholder.com/150',
         userId: 1,
         messageId: 2,
-        content: '안녕하세요2',
+        content: '안녕하세요2 1유저입니다. 긴 텍스트의 테스트 문구입니다.',
         time: new Date('2024-03-10T15:30:00'),
       },
       {
@@ -125,7 +125,7 @@ function RoomMessageList() {
         user_profile: 'https://via.placeholder.com/150',
         userId: 2,
         messageId: 4,
-        content: '안녕하세요4',
+        content: '안녕하세요4 2유저입니다. 긴 텍스트의 테스트 문구입니다.',
         time: new Date('2024-03-10T15:31:00'),
       },
       {
