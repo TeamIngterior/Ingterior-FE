@@ -11,8 +11,16 @@ interface MainTemplateProps {
 function MainTemplate({ children }: MainTemplateProps) {
   const { pathname } = useLocation();
   const [isChatting, setIsChatting] = useState<boolean>(true);
+  const [isContainer, setIsContainer] = useState<boolean>(false);
 
   useEffect(() => {
+    const regex = /\/construction\/\d+$/;
+    if (regex.test(pathname)) {
+      setIsContainer(false);
+    } else {
+      setIsContainer(true);
+    }
+
     // 채팅은 현장추가, 하자추가, 공사추가 화면에서는 보이지 않게 처리
     if (pathname.includes('addition') || pathname.includes('defect/addition')) {
       setIsChatting(false);
@@ -23,7 +31,7 @@ function MainTemplate({ children }: MainTemplateProps) {
 
   return (
     <S.TemplateContainer>
-      <S.TemplateInner>{children}</S.TemplateInner>
+      {isContainer ? <S.TemplateInner>{children}</S.TemplateInner> : children}
 
       {/** 채팅(메세지) */}
       {isChatting && <Chatting />}
