@@ -8,6 +8,36 @@ import * as S from './styles';
 import Calendar from '@/components/common/calendar/Calendar';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { calendarScheduleListState } from '@/atom/calendarState';
+
+const scheduleList = [
+  {
+    title: '공사',
+    openDate: 'Mar 14 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 15 2024 06:01:56 GMT+0900',
+  },
+  {
+    title: '공사1',
+    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
+  },
+  {
+    title: '공사2',
+    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
+  },
+  {
+    title: '공사3',
+    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
+  },
+  {
+    title: '공사4',
+    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 15 2024 06:01:56 GMT+0900',
+  },
+];
 
 const DetailInfo = ({
   open,
@@ -26,12 +56,16 @@ function DetailManage() {
   const id = pathname.split('/').pop();
   const navigate = useNavigate();
 
+  const [scheduleListState, setScheduleListState] = useRecoilState(
+    calendarScheduleListState
+  );
+
   const { selectedDate, isOpenScheduleDialog, setIsOpenScheduleDialog } =
     useCalendar();
 
   useEffect(() => {
-    console.log(isOpenScheduleDialog, 'isOpenScheduleDialog');
-  }, [isOpenScheduleDialog]);
+    setScheduleListState(scheduleList);
+  }, [scheduleList]);
 
   return (
     <>
@@ -63,6 +97,8 @@ function DetailManage() {
           </S.DetailManageContent>
         </S.DetailManageContainer>
       )}
+
+      {scheduleList.length === 0 && <>일정이 없습니다.</>}
     </>
   );
 }

@@ -6,45 +6,14 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import * as S from './styles';
 import { useCalendar } from '@/hooks/useCalendar';
-
-const scheduleList = [
-  {
-    title: '공사',
-    openDate: 'Mar 14 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 15 2024 06:01:56 GMT+0900',
-  },
-  {
-    title: '공사1',
-    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
-  },
-  {
-    title: '공사2',
-    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
-  },
-  {
-    title: '공사3',
-    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
-  },
-  {
-    title: '공사4',
-    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 15 2024 06:01:56 GMT+0900',
-  },
-];
+import { useRecoilValue } from 'recoil';
+import { calendarScheduleListState } from '@/atom/calendarState';
 
 const Calendar = () => {
-  const {
-    onDateClick,
-    onChangeDate,
-    eventContent,
-    period,
-    selectedDate,
-    isOpenScheduleDialog,
-    setIsOpenScheduleDialog,
-  } = useCalendar(scheduleList);
+  const scheduleList = useRecoilValue(calendarScheduleListState);
+
+  const { onDateClick, onChangeDate, eventContent, period } =
+    useCalendar(scheduleList);
 
   const events = scheduleList?.map((schedule) => {
     const openDate = new Date(schedule.openDate);
