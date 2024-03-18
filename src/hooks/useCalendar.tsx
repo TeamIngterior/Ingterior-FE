@@ -1,8 +1,12 @@
-import { calendarInfoState } from '@/atom/calendarState';
+import {
+  calendarDateState,
+  calendarInfoState,
+  calendarScheduleListState,
+} from '@/atom/calendarState';
 import EventContent from '@/components/common/calendar/EventContent';
 import { DatesSetArg, EventContentArg } from '@fullcalendar/core';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 interface IGetScheduleForm {
@@ -16,9 +20,16 @@ export const useCalendar = (scheduleList?: any[]) => {
     endDate: null,
   });
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useRecoilState<Date | null>(
+    calendarDateState
+  );
+
   const [isOpenScheduleDialog, setIsOpenScheduleDialog] =
     useRecoilState(calendarInfoState);
+
+  const [scheduleListState, setScheduleListState] = useRecoilState(
+    calendarScheduleListState
+  );
 
   const onDateClick = ({ date }: any) => {
     onOpenScheduleDialog(date);
@@ -44,6 +55,10 @@ export const useCalendar = (scheduleList?: any[]) => {
     );
   };
 
+  useEffect(() => {
+    setScheduleListState(scheduleList ?? []);
+  }, [scheduleList]);
+
   return {
     onDateClick,
     onChangeDate,
@@ -52,5 +67,6 @@ export const useCalendar = (scheduleList?: any[]) => {
     selectedDate,
     isOpenScheduleDialog,
     setIsOpenScheduleDialog,
+    scheduleListState,
   };
 };
