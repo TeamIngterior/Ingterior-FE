@@ -5,6 +5,7 @@ import PageNav from '@/components/common/PageNav';
 import * as S from './styles';
 import * as CS from '@components/template/styles';
 import * as DS from '@components/construction/detail/DetailManage/styles';
+import * as CAS from '@components/construction/list/ConstructionListCard/styles';
 import DetailDefact from '@/components/construction/detail/DetailDefact';
 import DetailManage from '@/components/construction/detail/DetailManage';
 import Button from '@/components/common/Button';
@@ -41,6 +42,8 @@ function DetailConstruction() {
 
   useEffect(() => {
     console.log('하자 체크 페이지');
+
+    // TODO : 페이지 진입 시 하자 체크 데이터 가져오기
   }, []);
 
   return (
@@ -48,7 +51,15 @@ function DetailConstruction() {
       className={selectedTab === 'defect' ? 'defect' : 'manage'}
     >
       <S.DetailConstructionCenterContent>
-        <CS.TemplateTitle>하자 체크</CS.TemplateTitle>
+        {/* TODO : 데이터 호출 후 라벨 알맞게 가공 */}
+        <CAS.ListCardLabelContainer>
+          <CAS.ListCardLabel>하자체크</CAS.ListCardLabel>
+        </CAS.ListCardLabelContainer>
+
+        {/* TODO : 데이터 호출 후 타이틀 알맞게 가공 */}
+        <CS.TemplateTitle>
+          영통구 인계동 5동 912호 전체공사 진행
+        </CS.TemplateTitle>
 
         {/* 페이지 네비게이션 */}
         <PageNav
