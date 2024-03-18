@@ -21,7 +21,6 @@ function EventContent({ eventInfo, colorIndex }: EvnetContentProps) {
     '#E1DCE4',
     '#F1DDF6',
   ];
-  console.log(colorIndex, color[colorIndex]);
 
   return (
     <S.EventContentContainer
