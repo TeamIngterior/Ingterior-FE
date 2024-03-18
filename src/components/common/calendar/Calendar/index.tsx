@@ -35,18 +35,6 @@ const scheduleList = [
   },
 ];
 
-const DetailInfo = ({
-  open,
-  setOpen,
-  selectedDate,
-}: {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  selectedDate: Date | null;
-}) => {
-  return <div>DetailInfo</div>;
-};
-
 const Calendar = () => {
   const {
     onDateClick,
@@ -62,8 +50,6 @@ const Calendar = () => {
     const openDate = new Date(schedule.openDate);
     const endDate = new Date(schedule.endDate || schedule.openDate);
 
-    // 이벤트 컬러가 있다면 이벤트 컬러를, 없다면 color 배열을 순서대로 선택
-
     return {
       title: schedule.title,
       start: openDate,
@@ -74,12 +60,6 @@ const Calendar = () => {
 
   return (
     <>
-      <DetailInfo
-        open={isOpenScheduleDialog}
-        setOpen={setIsOpenScheduleDialog}
-        selectedDate={selectedDate}
-      />
-
       <S.CalendarContainer>
         <FullCalendar
           locale="ko"
