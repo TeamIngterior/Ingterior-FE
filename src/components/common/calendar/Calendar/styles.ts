@@ -17,6 +17,7 @@ export const CalendarContainer = styled.div`
 
   .fc {
     height: 672px;
+    min-height: 672px;
 
     th[role='columnheader'] {
       height: 34px;
