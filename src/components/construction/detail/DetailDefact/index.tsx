@@ -15,7 +15,7 @@ function DetailDefact() {
   const defectList = [];
 
   return (
-    <>
+    <CS.DetailContent>
       {/* 버튼 */}
       <CS.DetailConstructionFunctionContainer>
         <Button
@@ -81,21 +81,8 @@ function DetailDefact() {
             </S.MemberListItem>
           </S.MemberList>
         </S.DetailConstructionMebmerContainer>
-
-        {/* 하자 체크 리스트 다운 / 현장 메세지 바로가기 / 현장 나가기 버튼 */}
-        <S.DetailConstructionButtonContainer>
-          <Button type="button" $styleType="revert" $fullWidth={true}>
-            하자체크 리스트 다운받기
-          </Button>
-          <Button type="button" $styleType="revert" $fullWidth={true}>
-            현장 메세지 바로가기
-          </Button>
-          <Button type="button" $styleType="revert" $fullWidth={true}>
-            현장 나가기
-          </Button>
-        </S.DetailConstructionButtonContainer>
       </S.DetailConstructionInfoContainer>
-    </>
+    </CS.DetailContent>
   );
 }
 

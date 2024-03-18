@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { calendarScheduleListState } from '@/atom/calendarState';
 
-const scheduleList = [
+const scheduleList: any[] = [
   {
     title: '공사',
     openDate: 'Mar 14 2024 04:01:56 GMT+0900',
@@ -20,7 +20,7 @@ const scheduleList = [
   {
     title: '공사1',
     openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
+    endDate: 'Mar 18 2024 06:01:56 GMT+0900',
   },
   {
     title: '공사2',
@@ -69,7 +69,7 @@ function DetailManage() {
 
   return (
     <>
-      <S.DetailManageContent>
+      <CS.DetailContent>
         <CS.DetailConstructionFunctionContainer>
           <Button
             type="button"
@@ -83,22 +83,33 @@ function DetailManage() {
 
         {/* 달력 */}
         <Calendar />
-      </S.DetailManageContent>
+      </CS.DetailContent>
 
       {/* 일정 디테일 - 해당 일자 클릭시에만  DetailInfo */}
       {isOpenScheduleDialog && (
         <S.DetailManageContainer>
-          <S.DetailManageContent>
+          <CS.DetailContent>
             <DetailInfo
               open={isOpenScheduleDialog}
               setOpen={setIsOpenScheduleDialog}
               selectedDate={selectedDate}
             />
-          </S.DetailManageContent>
+          </CS.DetailContent>
         </S.DetailManageContainer>
       )}
 
-      {scheduleList.length === 0 && <>일정이 없습니다.</>}
+      <CS.DetailContent>
+        {/* 일정 없을 때  */}
+        {scheduleList.length === 0 && (
+          <S.NoContent
+            onClick={() => navigate(`/construction/work/addition/${id}`)}
+          >
+            새로운 공사 일정을 추가해 보세요!
+          </S.NoContent>
+        )}
+
+        {/* 버튼 */}
+      </CS.DetailContent>
     </>
   );
 }

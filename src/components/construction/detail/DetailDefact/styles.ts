@@ -66,12 +66,3 @@ export const MemberProfileImage = styled.div`
     object-fit: cover;
   }
 `;
-
-export const DetailConstructionButtonContainer = styled.div`
-  button {
-    margin-bottom: ${theme.gap.gap4};
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-`;

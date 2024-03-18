@@ -7,6 +7,7 @@ import * as CS from '@components/template/styles';
 import * as DS from '@components/construction/detail/DetailManage/styles';
 import DetailDefact from '@/components/construction/detail/DetailDefact';
 import DetailManage from '@/components/construction/detail/DetailManage';
+import Button from '@/components/common/Button';
 
 const DETAIL_CONSTRUCTION_NAV = [
   {
@@ -46,7 +47,7 @@ function DetailConstruction() {
     <S.DetailConstructionContainer
       className={selectedTab === 'defect' ? 'defect' : 'manage'}
     >
-      <S.DetailConstructionHeaderContent>
+      <S.DetailConstructionCenterContent>
         <CS.TemplateTitle>하자 체크</CS.TemplateTitle>
 
         {/* 페이지 네비게이션 */}
@@ -59,7 +60,7 @@ function DetailConstruction() {
                 )
           }
         />
-      </S.DetailConstructionHeaderContent>
+      </S.DetailConstructionCenterContent>
 
       <S.DetailConstructionContentContainer>
         {/* 탭 */}
@@ -79,6 +80,22 @@ function DetailConstruction() {
         <S.DetailConstructionContent>
           {selectedTab === 'defect' ? <DetailDefact /> : <DetailManage />}
         </S.DetailConstructionContent>
+
+        {/* 버튼 */}
+        <S.DetailConstructionCenterContent>
+          {/* 하자 체크 리스트 다운 / 현장 메세지 바로가기 / 현장 나가기 버튼 */}
+          <S.DetailConstructionButtonContainer>
+            <Button type="button" $styleType="revert" $fullWidth={true}>
+              하자체크 리스트 다운받기
+            </Button>
+            <Button type="button" $styleType="revert" $fullWidth={true}>
+              현장 메세지 바로가기
+            </Button>
+            <Button type="button" $styleType="revert" $fullWidth={true}>
+              현장 나가기
+            </Button>
+          </S.DetailConstructionButtonContainer>
+        </S.DetailConstructionCenterContent>
       </S.DetailConstructionContentContainer>
     </S.DetailConstructionContainer>
   );

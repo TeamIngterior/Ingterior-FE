@@ -6,7 +6,7 @@ export const DetailConstructionContainer = styled.div`
   }
 `;
 
-export const DetailConstructionHeaderContent = styled.div`
+export const DetailConstructionCenterContent = styled.div`
   position: relative;
   width: 100%;
   max-width: calc(588px + 16px * 2);
@@ -55,3 +55,13 @@ export const DetailConstructionTab = styled.div`
 `;
 
 export const DetailConstructionContent = styled.div``;
+
+export const DetailConstructionButtonContainer = styled.div`
+  margin-top: ${theme.gap.gap7};
+  button {
+    margin-bottom: ${theme.gap.gap3};
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;
