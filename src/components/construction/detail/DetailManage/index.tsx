@@ -29,13 +29,18 @@ const scheduleList: any[] = [
   },
   {
     title: '공사3',
-    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 16 2024 06:01:56 GMT+0900',
+    openDate: 'Mar 19 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 23 2024 06:01:56 GMT+0900',
   },
   {
     title: '공사4',
-    openDate: 'Mar 15 2024 04:01:56 GMT+0900',
-    endDate: 'Mar 15 2024 06:01:56 GMT+0900',
+    openDate: 'Mar 20 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 20 2024 06:01:56 GMT+0900',
+  },
+  {
+    title: '공사5',
+    openDate: 'Mar 20 2024 04:01:56 GMT+0900',
+    endDate: 'Mar 20 2024 06:01:56 GMT+0900',
   },
 ];
 
