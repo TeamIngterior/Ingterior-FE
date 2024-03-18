@@ -4,6 +4,7 @@ import PageNav from '@/components/common/PageNav';
 
 import * as S from './styles';
 import * as CS from '@components/template/styles';
+import * as DS from '@components/construction/detail/DetailManage/styles';
 import DetailDefact from '@/components/construction/detail/DetailDefact';
 import DetailManage from '@/components/construction/detail/DetailManage';
 
@@ -35,26 +36,30 @@ const DETAIL_CONSTRUCTION_TAB = [
 
 function DetailConstruction() {
   // 탭 상태 : defect - 하자 체크(default), manage - 공사 관리
-  const [selectedTab, setSelectedTab] = useState<string>('defect');
+  const [selectedTab, setSelectedTab] = useState<string>('manage');
 
   useEffect(() => {
     console.log('하자 체크 페이지');
   }, []);
 
   return (
-    <S.DetailConstructionContainer>
-      <CS.TemplateTitle>하자 체크</CS.TemplateTitle>
+    <S.DetailConstructionContainer
+      className={selectedTab === 'defect' ? 'defect' : 'manage'}
+    >
+      <S.DetailConstructionHeaderContent>
+        <CS.TemplateTitle>하자 체크</CS.TemplateTitle>
 
-      {/* 페이지 네비게이션 */}
-      <PageNav
-        navList={
-          selectedTab === 'defect'
-            ? DETAIL_CONSTRUCTION_NAV
-            : DETAIL_CONSTRUCTION_NAV.map((nav, index) =>
-                index === 2 ? { ...nav, title: '공사관리' } : nav
-              )
-        }
-      />
+        {/* 페이지 네비게이션 */}
+        <PageNav
+          navList={
+            selectedTab === 'defect'
+              ? DETAIL_CONSTRUCTION_NAV
+              : DETAIL_CONSTRUCTION_NAV.map((nav, index) =>
+                  index === 2 ? { ...nav, title: '공사관리' } : nav
+                )
+          }
+        />
+      </S.DetailConstructionHeaderContent>
 
       <S.DetailConstructionContentContainer>
         {/* 탭 */}

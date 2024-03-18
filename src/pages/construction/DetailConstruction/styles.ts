@@ -1,7 +1,18 @@
 import styled from 'styled-components';
 import { theme } from '@assets/styles/theme';
 
-export const DetailConstructionContainer = styled.div``;
+export const DetailConstructionContainer = styled.div`
+  &.defect {
+  }
+`;
+
+export const DetailConstructionHeaderContent = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: calc(588px + 16px * 2);
+  padding: 0 16px;
+  margin: 0 auto;
+`;
 
 export const DetailConstructionForm = styled.form`
   margin-top: ${theme.gap.gap7};
@@ -12,6 +23,11 @@ export const DetailConstructionContentContainer = styled.div`
 `;
 
 export const DetailConstructionTabContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: calc(588px + 16px * 2);
+  padding: 0 16px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
