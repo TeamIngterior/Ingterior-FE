@@ -87,7 +87,7 @@ function AddDefect() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<OLMap | null>(null);
   const overlayRef = useRef<Overlay | null>(null);
-  const imageUrl = 'https://via.placeholder.com/500';
+  const imageUrl = 'https://via.placeholder.com/588';
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
