@@ -55,6 +55,10 @@ export const TemplateTitle = styled.h1`
     margin-bottom: ${theme.gap.gap2};
   }
 
+  .addWork & {
+    margin-bottom: ${theme.gap.gap2};
+  }
+
   @media (max-width: 500px) {
     margin-bottom: ${theme.gap.gap2};
   }
