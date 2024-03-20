@@ -10,6 +10,7 @@ import styles from '@/lib/DatePicker.module.css'; // 클래스 스타일
 
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { useState } from 'react';
 
 interface RulesProps {
   required?: string;
@@ -32,6 +33,14 @@ function DateInput({
   rules,
   defaultValue,
 }: DateInputProps) {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const onChange = (dates: [any, any]) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+
   const errorKEY = errors?.[name as string]?.message as string;
 
   const currentYear = new Date().getFullYear();
@@ -62,7 +71,12 @@ function DateInput({
 
   return (
     <S.InputContainer>
-      {label && <S.InputLabel htmlFor={name}>{label}</S.InputLabel>}
+      {label && (
+        <S.InputLabel htmlFor={name}>
+          {label}
+          <span className="required">*</span>
+        </S.InputLabel>
+      )}
 
       <Controller
         control={control}
@@ -77,9 +91,10 @@ function DateInput({
               dateFormat="yyyy.MM.dd"
               popperPlacement="bottom-end"
               autoComplete="off"
-              minDate={tomorrow}
               selected={field.value}
-              onChange={field.onChange}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={onChange}
               formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
               dayClassName={(d) =>
                 d.getMonth() === field.value?.getMonth() &&
@@ -91,6 +106,7 @@ function DateInput({
               showYearDropdown
               scrollableYearDropdown
               disabledKeyboardNavigation
+              selectsRange
               renderCustomHeader={({
                 date,
                 changeYear,
@@ -116,7 +132,7 @@ function DateInput({
                       ))}
                     </select>
                   </div>
-                  <div>
+                  <div style={{ marginLeft: 'auto' }}>
                     <button
                       type="button"
                       onClick={decreaseMonth}
@@ -124,8 +140,7 @@ function DateInput({
                       disabled={prevMonthButtonDisabled}
                     >
                       <AiOutlineLeft
-                        fill="#fff"
-                        className="w-[14px] h-[14px]"
+                        style={{ width: '14px', height: '14px' }}
                       />
                     </button>
                     <button
@@ -135,8 +150,7 @@ function DateInput({
                       disabled={nextMonthButtonDisabled}
                     >
                       <AiOutlineRight
-                        fill="#fff"
-                        className="w-[14px] h-[14px]"
+                        style={{ width: '14px', height: '14px' }}
                       />
                     </button>
                   </div>
