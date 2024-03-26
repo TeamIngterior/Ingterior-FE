@@ -3,9 +3,8 @@ import { theme } from '@/assets/styles/theme';
 
 export const ChattingContainer = styled.section`
   position: fixed;
-  top: 75vh;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 25px;
+  right: 25px;
 
   display: flex;
   justify-content: flex-end;
