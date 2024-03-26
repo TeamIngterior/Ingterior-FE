@@ -28,7 +28,14 @@ function Header() {
         <S.MenuContainer>
           <S.MenuList>
             {MENU_LINK.map((menu, index) => (
-              <S.MenuListItem key={index} onClick={() => navigate(menu.path)}>
+              <S.MenuListItem
+                key={index}
+                onClick={() => {
+                  menu.key === 3
+                    ? window.open(menu.path, '_blank')
+                    : navigate(menu.path);
+                }}
+              >
                 {menu.name}
               </S.MenuListItem>
             ))}

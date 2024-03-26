@@ -12,7 +12,7 @@ export const MENU_LINK = [
   {
     key: 3,
     name: '인테리어 TIP',
-    path: '',
+    path: 'https://ingterior.tistory.com/',
   },
 ];
 
@@ -30,7 +30,7 @@ export const SIDE_MENU_LINK = [
   {
     key: 3,
     name: '인테리어 TIP',
-    path: '',
+    path: 'https://ingterior.tistory.com/',
   },
   {
     key: 4,
