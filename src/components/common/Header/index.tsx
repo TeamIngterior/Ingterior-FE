@@ -48,7 +48,7 @@ function Header() {
             <>
               <S.UserProfile>
                 <img src="https://via.placeholder.com/48" alt="user profile" />
-                박지현&nbsp;님
+                김영진&nbsp;님
               </S.UserProfile>
               <S.MenuActionContainer onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <CloseIcon /> : <MenuIcon />}

@@ -7,7 +7,7 @@ import * as S from './styles';
 const INGTERIOR_INFO = ['상호명: 저메이킷(Jum8kit)', '대표: 김영진'];
 const BUSINESS_INFO = [
   '개인정보 보호 책임자: 김영진',
-  '사업자등록번호: 123-45-67890',
+  '사업자등록번호: 765-15-02278',
   'Email: Jum8kit@Gmail.Com',
 ];
 
