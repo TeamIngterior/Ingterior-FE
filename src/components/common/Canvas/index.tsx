@@ -59,10 +59,9 @@ function Canvas() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
 
-    const canvasParent = canvas.parentNode as HTMLElement;
-    const ctx = canvas.getContext('2d');
+    const canvasParent = canvas?.parentNode as HTMLElement;
+    const ctx = canvas?.getContext('2d');
 
     const markerImage = new Image();
     markerImage.src = Marker;
@@ -76,36 +75,41 @@ function Canvas() {
     let canvasWidth: string | number, canvasHeight: string | number;
 
     function resize() {
+      if (!canvas) return;
+
       canvasWidth = canvasParent.clientWidth;
       canvasHeight = canvasParent.clientHeight;
-      canvas!.style.width = canvasWidth + 'px';
-      canvas!.style.height = canvasHeight + 'px';
-      canvas!.width = canvasWidth;
-      canvas!.height = canvasHeight;
+      canvas.style.width = canvasWidth + 'px';
+      canvas.style.height = canvasHeight + 'px';
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
 
-      ctx?.clearRect(0, 0, canvas!.width, canvas!.height);
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      const originalCanvasWidth = 588;
+      const originalCanvasHeight = 588;
+
+      const ratioX: number = Number(canvasWidth) / originalCanvasWidth;
+      const ratioY: number = Number(canvasHeight) / originalCanvasHeight;
 
       preloadImages()
         .then(() => drawImage())
         .then(() => {
-          const originalCanvasWidth = 588;
-          const originalCanvasHeight = 588;
-
-          const ratioX: number = Number(canvasWidth) / originalCanvasWidth;
-          const ratioY: number = Number(canvasHeight) / originalCanvasHeight;
-
-          DISABLED_MARKER_ARRAY.forEach((coords, index) => {
-            const newX = coords.x * ratioX;
-            const newY = coords.y * ratioY;
-            disabledDrawMarker(newX, newY, index);
-          });
-
           if (markerPositionRef.current) {
             const { x, y } = markerPositionRef.current;
             const newX = x * ratioX;
             const newY = y * ratioY;
             drawMarker(newX, newY);
           }
+
+          // 모든 이미지가 로드된 이후 disabled marker 그리기
+          Promise.all([markerImage.decode(), disabledImage.decode()]).then(
+            () => {
+              drawDisabledMarkers();
+            }
+          );
         });
     }
 
@@ -131,7 +135,9 @@ function Canvas() {
     }
 
     function handleMouseEvent(event: MouseEvent) {
-      const rect = canvas!.getBoundingClientRect();
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
@@ -161,13 +167,15 @@ function Canvas() {
     }
 
     function handleMouseDown(x: number, y: number) {
+      if (!canvas) return;
+
       if (markerPositionRef.current) {
         const { x: markerX, y: markerY } = markerPositionRef.current;
         const distance = Math.sqrt((x - markerX) ** 2 + (y - markerY) ** 2);
         if (distance <= 5) {
           activeMarkerRef.current = { x: markerX, y: markerY };
-          canvas!.addEventListener('mousemove', handleMouseEvent);
-          canvas!.addEventListener('mouseup', handleMouseEvent);
+          canvas.addEventListener('mousemove', handleMouseEvent);
+          canvas.addEventListener('mouseup', handleMouseEvent);
         }
       }
     }
@@ -183,8 +191,10 @@ function Canvas() {
     }
 
     function handleMouseUp() {
-      canvas!.removeEventListener('mousemove', handleMouseEvent);
-      canvas!.removeEventListener('mouseup', handleMouseEvent);
+      if (!canvas) return;
+
+      canvas.removeEventListener('mousemove', handleMouseEvent);
+      canvas.removeEventListener('mouseup', handleMouseEvent);
       activeMarkerRef.current = null;
     }
 
@@ -225,8 +235,8 @@ function Canvas() {
 
     function drawDisabledMarkers() {
       DISABLED_MARKER_ARRAY.forEach(({ x, y }, index) => {
-        const ratioX = canvasRef.current!.width / 588;
-        const ratioY = canvasRef.current!.height / 588;
+        const ratioX = (canvasRef.current?.width ?? 0) / 588;
+        const ratioY = (canvasRef.current?.height ?? 0) / 588;
         const newX = x * ratioX;
         const newY = y * ratioY;
         disabledDrawMarker(newX, newY, index);
@@ -234,9 +244,11 @@ function Canvas() {
     }
 
     function disabledDrawMarker(x: number, y: number, index: number) {
+      if (!ctx) return;
+
       const text = (index + 1).toString();
 
-      if (disabledImage.complete && ctx) {
+      if (disabledImage.complete) {
         ctx?.drawImage(disabledImage, x - 16, y - 20, 32, 40);
 
         ctx.font = '16px Arial';
@@ -245,27 +257,25 @@ function Canvas() {
         ctx.fillText(text, x - 1, y + 4);
       } else {
         disabledImage.onload = function () {
-          if (ctx) {
-            ctx?.drawImage(disabledImage, x - 16, y - 20, 32, 40);
+          ctx.drawImage(disabledImage, x - 16, y - 20, 32, 40);
 
-            ctx.font = '16px Arial';
-            ctx.fillStyle = '#1e1e1e';
-            ctx.textAlign = 'center';
-            ctx.fillText(text, x - 1, y + 4);
-          }
+          ctx.font = '16px Arial';
+          ctx.fillStyle = '#1e1e1e';
+          ctx.textAlign = 'center';
+          ctx.fillText(text, x - 1, y + 4);
         };
       }
     }
 
     window.addEventListener('resize', debounce(resize, 100));
-    canvas.addEventListener('click', handleMouseEvent);
-    canvas.addEventListener('mousedown', handleMouseEvent);
+    canvas?.addEventListener('click', handleMouseEvent);
+    canvas?.addEventListener('mousedown', handleMouseEvent);
     resize();
 
     return () => {
       window.removeEventListener('resize', debounce(resize, 100));
-      canvas.removeEventListener('click', handleMouseEvent);
-      canvas.removeEventListener('mousedown', handleMouseEvent);
+      canvas?.removeEventListener('click', handleMouseEvent);
+      canvas?.removeEventListener('mousedown', handleMouseEvent);
     };
   }, []);
 
