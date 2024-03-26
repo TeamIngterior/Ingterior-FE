@@ -75,7 +75,7 @@ function AddDefect() {
 
   return (
     <S.AddDefectContainer>
-      <CS.TemplateTitle>하자 체크</CS.TemplateTitle>
+      <CS.TemplateTitle>새 하자 추가</CS.TemplateTitle>
 
       {/* 페이지 네비게이션 */}
       <PageNav navList={DEFECT_ADDITION_NAV} />
