@@ -14,7 +14,7 @@ export const TemplateContainer = styled.main`
 
   @media (max-width: 500px) {
     min-height: ${`calc(100% - ${theme.layoutComponent.header_mobile_height}px - ${theme.layoutComponent.footer_mobile_height}px)`};
-    padding: 16px 16px;
+    padding: 16px;
   }
 `;
 
