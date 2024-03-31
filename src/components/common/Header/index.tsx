@@ -14,6 +14,13 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
 
+  // 사이드바가 열리면 스크롤 이벤트 금지
+  if (isMenuOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+
   return (
     <S.HeaderContainer>
       <S.HeaderInner>
