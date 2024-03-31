@@ -8,9 +8,7 @@ export const DetailConstructionContainer = styled.div`
 
 export const DetailConstructionCenterContent = styled.div`
   position: relative;
-  width: 100%;
-  max-width: calc(588px + 16px * 2);
-  padding: 0 16px;
+  width: calc(588px);
   margin: 0 auto;
 `;
 
@@ -24,14 +22,11 @@ export const DetailConstructionContentContainer = styled.div`
 
 export const DetailConstructionTabContainer = styled.div`
   position: relative;
-  width: 100%;
-  max-width: calc(588px + 16px * 2);
-  padding: 0 16px;
+  width: calc(588px);
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   margin-bottom: ${theme.gap.gap3};
   border-bottom: 1px solid ${theme.color.gray03};
 `;

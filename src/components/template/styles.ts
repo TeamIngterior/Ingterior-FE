@@ -9,12 +9,12 @@ export const TemplateContainer = styled.main`
   position: relative;
 
   @media (max-width: 768px) {
-    padding: 56px 0;
+    padding: 56px 16px;
   }
 
   @media (max-width: 500px) {
     min-height: ${`calc(100% - ${theme.layoutComponent.header_mobile_height}px - ${theme.layoutComponent.footer_mobile_height}px)`};
-    padding: 16px 0;
+    padding: 16px 16px;
   }
 `;
 
