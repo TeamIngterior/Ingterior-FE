@@ -46,19 +46,23 @@ export const SIDE_MENU_LINK = [
 
 export const SETTING_LINK = [
   {
+    key: 1,
     name: '후기 쓰기',
     path: '/setting/review',
   },
   {
+    key: 2,
     name: '개발자 후원하기',
     path: '/setting/donate',
   },
   {
+    key: 3,
     name: '개발자에게 문의하기',
     path: '/setting/contact',
   },
   {
+    key: 4,
     name: '회원 탈퇴',
-    path: '/setting/withdrawal',
+    path: '',
   },
 ];
