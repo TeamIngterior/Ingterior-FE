@@ -3,14 +3,14 @@ import { Controller, useForm } from 'react-hook-form';
 
 import * as S from './styles';
 import * as CS from '@components/template/styles';
-import * as CRS from '@components/common/ColorRadio/styles';
+import * as CRS from '@/components/construction/ColorRadio/styles';
 import * as IS from '@components/common/Input/styles';
 import * as IES from '@components/common/FileUploader/ImageEditor/styles';
 
 import { RiPencilLine } from 'react-icons/ri';
 import PageNav from '@/components/common/PageNav';
 import Input from '@/components/common/Input';
-import ColorRadio from '@/components/common/ColorRadio';
+import ColorRadio from '@/components/construction/ColorRadio';
 import MultiUploader from '@/components/common/FileUploader/MultiUploader';
 import Button from '@/components/common/Button';
 import DateInput from '@/components/common/DateInput';
