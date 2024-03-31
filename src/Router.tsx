@@ -16,6 +16,7 @@ const DetailConstruction = lazy(
 );
 const AddDefect = lazy(() => import('./pages/construction/AddDefect'));
 const AddWork = lazy(() => import('./pages/construction/AddWork'));
+const MyPage = lazy(() => import('./pages/mypage/MyPage'));
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,15 @@ const router = createBrowserRouter([
             // 새 공사 추가
             path: 'work/addition/:id',
             element: <AddWork />,
+          },
+        ],
+      },
+      {
+        path: 'mypage',
+        children: [
+          {
+            index: true,
+            element: <MyPage />,
           },
         ],
       },
