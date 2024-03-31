@@ -6,7 +6,7 @@ interface OptionProps {
   onSelectedOption: any;
 }
 
-function CkeckOption({ onSelectedOption }: OptionProps) {
+function CheckOption({ onSelectedOption }: OptionProps) {
   const [selectedOptions, setSelectedOptions] = useState<boolean>(false);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ function CkeckOption({ onSelectedOption }: OptionProps) {
   );
 }
 
-export default CkeckOption;
+export default CheckOption;
