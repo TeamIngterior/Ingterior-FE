@@ -195,6 +195,42 @@ export const InputCheckOptionbox = styled.label`
   }
 `;
 
+export const InputRadioContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  width: 100%;
+  gap: ${theme.gap.gap2};
+`;
+
+export const InputRadionbox = styled.label`
+  display: flex;
+  align-items: center;
+
+  input {
+    display: none;
+
+    & + span {
+      ${theme.typography.label.lb1}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 48px;
+      background-color: ${theme.color.gray02};
+      color: ${theme.color.gray04};
+      border-radius: 4px;
+    }
+
+    &:checked + span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: ${theme.color.gray01};
+      background-color: ${theme.color.primary04};
+    }
+  }
+`;
+
 export const InputErrorMessage = styled.p`
   margin-top: 4px;
   font-size: 14px;
