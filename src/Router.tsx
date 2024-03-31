@@ -16,7 +16,7 @@ const DetailConstruction = lazy(
 );
 const AddDefect = lazy(() => import('./pages/construction/AddDefect'));
 const AddWork = lazy(() => import('./pages/construction/AddWork'));
-const MyPage = lazy(() => import('./pages/mypage/MyPage'));
+const Setting = lazy(() => import('./pages/setting/Setting'));
 
 const router = createBrowserRouter([
   {
@@ -64,11 +64,11 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'mypage',
+        path: 'setting',
         children: [
           {
             index: true,
-            element: <MyPage />,
+            element: <Setting />,
           },
         ],
       },
