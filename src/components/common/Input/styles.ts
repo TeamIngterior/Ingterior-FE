@@ -158,6 +158,43 @@ export const InputCheckbox = styled.input<InputCSSProps>`
   }
 `;
 
+export const InputCheckOptionbox = styled.label`
+  display: inline-flex;
+
+  input {
+    display: none;
+
+    & + span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      min-width: 24px;
+      height: 24px;
+      border: 1px solid ${theme.color.gray04};
+      border-radius: 4px;
+
+      svg {
+        display: none;
+      }
+    }
+
+    &:checked + span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      min-width: 24px;
+      height: 24px;
+      background-color: ${theme.color.primary07};
+
+      svg {
+        display: block;
+      }
+    }
+  }
+`;
+
 export const InputErrorMessage = styled.p`
   margin-top: 4px;
   font-size: 14px;
