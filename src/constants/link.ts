@@ -2,7 +2,7 @@ export const MENU_LINK = [
   {
     key: 1,
     name: '인테리어 간편견적',
-    path: '',
+    path: '/simple-estimate',
   },
   {
     key: 2,
