@@ -5,6 +5,8 @@ import App from './App';
 
 const Home = lazy(() => import('./pages/Home'));
 const SignIn = lazy(() => import('./pages/user/SignIn'));
+const SimpleEstimate = lazy(() => import('./pages/estimate/SimpleEstimate'));
+
 const ConstructionList = lazy(
   () => import('./pages/construction/ConstructionList')
 );
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: 'signin',
         children: [{ index: true, element: <SignIn /> }],
+      },
+      {
+        path: '/simple-estimate',
+        element: <SimpleEstimate />,
       },
       {
         path: 'construction',
