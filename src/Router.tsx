@@ -16,7 +16,12 @@ const DetailConstruction = lazy(
 );
 const AddDefect = lazy(() => import('./pages/construction/AddDefect'));
 const AddWork = lazy(() => import('./pages/construction/AddWork'));
+
 const Setting = lazy(() => import('./pages/setting/Setting'));
+const Review = lazy(() => import('./pages/setting/Review'));
+const Donate = lazy(() => import('./pages/setting/Donate'));
+const Contact = lazy(() => import('./pages/setting/Contact'));
+const Withdrawal = lazy(() => import('./pages/setting/Withdrawal'));
 
 const router = createBrowserRouter([
   {
@@ -69,6 +74,22 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Setting />,
+          },
+          {
+            path: 'review',
+            element: <Review />,
+          },
+          {
+            path: 'donate',
+            element: <Donate />,
+          },
+          {
+            path: 'contact',
+            element: <Contact />,
+          },
+          {
+            path: 'withdrawal',
+            element: <Withdrawal />,
           },
         ],
       },

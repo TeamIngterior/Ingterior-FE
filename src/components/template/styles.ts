@@ -22,6 +22,7 @@ export const TemplateInner = styled.section`
   position: relative;
   width: 100%;
   max-width: calc(588px + 16px * 2);
+  height: 100%;
   padding: 0 16px;
   margin: 0 auto;
 

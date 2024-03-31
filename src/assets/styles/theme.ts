@@ -56,7 +56,7 @@ const typography = {
       color: ${color.gray06};
     `,
     h2: `
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 500;
       letter-spacing: 0em;
       color: ${color.gray06};      
