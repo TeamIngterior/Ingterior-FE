@@ -10,6 +10,7 @@ import Checkbox from '@/components/common/Checkbox';
 import CkeckOption from '@/components/common/CheckOption';
 import CheckOption from '@/components/common/CheckOption';
 import { useEffect } from 'react';
+import AgreementBox from '@/components/setting/AgreementBox';
 
 const CONTACT_NAV = [
   {
@@ -142,20 +143,13 @@ function Contact() {
           name="agreement"
           control={control}
           render={({ field: { onChange } }) => (
-            <S.AgreementContainer>
-              <S.AgreementTitle>개인정보 수집 및 이용 동의</S.AgreementTitle>
-              <S.AgreementContent>
-                저메이킷&#40;jum8kit&#41;에서는 문의처리를 위해 이메일주소와
-                내용을 수집하며, 전자상거래법에 따라 3년 보관 후 파기합니다.
-                동의 거부 시 문의에 제한이 있을 수 있습니다.
-              </S.AgreementContent>
-              <S.AgreementCheck>
-                <CheckOption
-                  onSelectedOption={(option: any) => onChange(option)}
-                />
-                <p>개인정보 수집 및 이용에 동의 합니다.</p>
-              </S.AgreementCheck>
-            </S.AgreementContainer>
+            <AgreementBox
+              title="개인정보 수집 및 이용 동의"
+              content="저메이킷(jum8kit)에서는 문의처리를 위해 이메일주소와 내용을 수집하며, 전자상거래법에 따라 3년 보관 후 파기합니다.
+              동의 거부 시 문의에 제한이 있을 수 있습니다."
+              agreementContext="개인정보 수집 및 이용에 동의합니다."
+              onChange={onChange}
+            />
           )}
         />
 
