@@ -89,6 +89,17 @@ const GlobalStyles = createGlobalStyle`
       '맑은 고딕', 돋움, Dotum, Helvetica, Arial, sans-serif;
   }
 
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
   button {
     margin: 0;
     padding: 0;

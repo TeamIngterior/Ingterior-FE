@@ -21,6 +21,7 @@ export const commonInputStyle = css`
   font: inherit;
   border-radius: 4px;
   border: 1px solid ${theme.color.gray03};
+  overflow: hidden;
 
   &::placeholder {
     color: ${theme.color.gray04};
@@ -50,7 +51,9 @@ export const InputContainer = styled.div<InputCSSProps>`
 `;
 
 export const InputContentContainer = styled.div<InputCSSProps>`
+  ${commonInputStyle}
   position: relative;
+
   display: ${(props) => props.$isHorizontal && 'flex'};
   gap: ${(props) => props.$isHorizontal && theme.gap.gap1};
 `;
@@ -71,9 +74,8 @@ export const InputLabel = styled.label`
 `;
 
 export const Input = styled.input<InputCSSProps>`
-  ${commonInputStyle}
   ${handleSizeProps}
-
+  width:100%;
   padding: 0 ${theme.gap.gap2};
 
   ${(props) =>
@@ -205,6 +207,7 @@ export const InputRadioContainer = styled.div`
 export const InputRadionbox = styled.label`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   input {
     display: none;

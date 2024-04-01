@@ -9,3 +9,17 @@ export const SimpleEstimateForm = styled.form`
   gap: 40px 0;
   margin-top: ${theme.gap.gap7};
 `;
+
+export const SimpleEstimateTip = styled.div`
+  position: relative;
+
+  .infoIcon {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    color: ${theme.color.primary07};
+  }
+`;

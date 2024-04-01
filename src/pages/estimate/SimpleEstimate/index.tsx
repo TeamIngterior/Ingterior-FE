@@ -6,6 +6,8 @@ import {
   BATHROOM_OPTIONS,
 } from '@/constants/estimateOption';
 
+import { FiInfo } from 'react-icons/fi';
+
 import PageNav from '@/components/common/PageNav';
 import Input from '@/components/common/Input';
 import Radiobox from '@/components/common/Radiobox';
@@ -13,6 +15,7 @@ import Button from '@/components/common/Button';
 
 import * as CS from '@components/template/styles';
 import * as S from './styles';
+import { useTheme } from 'styled-components';
 
 const ESTIMATE_LINK = [
   {
@@ -26,6 +29,7 @@ const ESTIMATE_LINK = [
 ];
 
 function SimpleEstimate() {
+  const theme = useTheme();
   const {
     register,
     handleSubmit,
@@ -51,17 +55,32 @@ function SimpleEstimate() {
 
       <S.SimpleEstimateForm onSubmit={handleSubmit(onSubmit)}>
         {/* 공급가액 */}
-        <Input
-          type="text"
-          inputType="input"
-          label="공급면적"
-          labelOption={<span className="required">*</span>}
-          {...register('area', {
-            required: true,
-          })}
-          placeholder="공급면적을 입력해주세요. (Ex 112㎡)"
-          errors={errors}
-        />
+        <S.SimpleEstimateTip>
+          <Input
+            type="number"
+            inputType="input"
+            label="공급면적"
+            labelOption={<span className="required">*</span>}
+            $isHorizontal={true}
+            {...register('area', {
+              required: true,
+            })}
+            placeholder="공급면적을 입력해주세요. (Ex 112㎡)"
+            errors={errors}
+          >
+            <span
+              style={{
+                display: 'inline-flex',
+                alignSelf: 'center',
+                paddingRight: '16px',
+                color: `${theme.color.gray04}`,
+              }}
+            >
+              ㎡
+            </span>
+          </Input>
+          <FiInfo className="infoIcon" />
+        </S.SimpleEstimateTip>
 
         {/* 샷시 교체 */}
         <Radiobox
