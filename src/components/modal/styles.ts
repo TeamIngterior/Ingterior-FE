@@ -29,7 +29,7 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
 
   .closeButton {
     position: absolute;
-    z-index: 1;
+    z-index: 5;
     top: ${theme.gap.gap1};
     right: ${theme.gap.gap1};
     width: 40px;
@@ -57,6 +57,19 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
 
     @media (max-width: 620px) {
       max-width: calc(100% - 32px);
+    }
+  }
+
+  /* 간편 견적 */
+  .estimateTip & {
+    max-height: 343px;
+
+    @media (max-width: 620px) {
+      max-width: calc(100% - 32px);
+    }
+
+    @media (max-width: 580px) {
+      max-height: 364px;
     }
   }
 `;

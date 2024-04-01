@@ -16,6 +16,8 @@ import Button from '@/components/common/Button';
 import * as CS from '@components/template/styles';
 import * as S from './styles';
 import { useTheme } from 'styled-components';
+import { useModal } from '@/hooks/useModal';
+import EstimateTip from '@/components/modal/EstimateTip';
 
 const ESTIMATE_LINK = [
   {
@@ -30,6 +32,8 @@ const ESTIMATE_LINK = [
 
 function SimpleEstimate() {
   const theme = useTheme();
+  const { openModal } = useModal('estimateTip');
+
   const {
     register,
     handleSubmit,
@@ -47,80 +51,85 @@ function SimpleEstimate() {
   console.log(watch());
 
   return (
-    <S.SimpleEstimateContainer>
-      <CS.TemplateTitle>인테리어 간편견적</CS.TemplateTitle>
+    <>
+      {' '}
+      <S.SimpleEstimateContainer>
+        <CS.TemplateTitle>인테리어 간편견적</CS.TemplateTitle>
 
-      {/* 페이지 네비게이션 */}
-      <PageNav navList={ESTIMATE_LINK} />
+        {/* 페이지 네비게이션 */}
+        <PageNav navList={ESTIMATE_LINK} />
 
-      <S.SimpleEstimateForm onSubmit={handleSubmit(onSubmit)}>
-        {/* 공급가액 */}
-        <S.SimpleEstimateTip>
-          <Input
-            type="number"
-            inputType="input"
-            label="공급면적"
+        <S.SimpleEstimateForm onSubmit={handleSubmit(onSubmit)}>
+          {/* 공급가액 */}
+          <S.SimpleEstimateTip>
+            <Input
+              type="number"
+              inputType="input"
+              label="공급면적"
+              labelOption={<span className="required">*</span>}
+              $isHorizontal={true}
+              {...register('area', {
+                required: true,
+              })}
+              placeholder="공급면적을 입력해주세요. (Ex 112㎡)"
+              errors={errors}
+            >
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignSelf: 'center',
+                  paddingRight: '16px',
+                  color: `${theme.color.gray04}`,
+                }}
+              >
+                ㎡
+              </span>
+            </Input>
+            <FiInfo className="infoIcon" onClick={openModal} />
+          </S.SimpleEstimateTip>
+
+          {/* 샷시 교체 */}
+          <Radiobox
+            label="샷시 교체"
             labelOption={<span className="required">*</span>}
-            $isHorizontal={true}
-            {...register('area', {
+            control={control}
+            options={SASH_OPTIONS}
+            {...register('sash', {
               required: true,
             })}
-            placeholder="공급면적을 입력해주세요. (Ex 112㎡)"
-            errors={errors}
-          >
-            <span
-              style={{
-                display: 'inline-flex',
-                alignSelf: 'center',
-                paddingRight: '16px',
-                color: `${theme.color.gray04}`,
-              }}
-            >
-              ㎡
-            </span>
-          </Input>
-          <FiInfo className="infoIcon" />
-        </S.SimpleEstimateTip>
+          />
 
-        {/* 샷시 교체 */}
-        <Radiobox
-          label="샷시 교체"
-          labelOption={<span className="required">*</span>}
-          control={control}
-          options={SASH_OPTIONS}
-          {...register('sash', {
-            required: true,
-          })}
-        />
+          {/* 발코니 확장 */}
+          <Radiobox
+            label="발코니 확장"
+            labelOption={<span className="required">*</span>}
+            control={control}
+            options={BALCONY_OPTIONS}
+            {...register('balcony', {
+              required: true,
+            })}
+          />
 
-        {/* 발코니 확장 */}
-        <Radiobox
-          label="발코니 확장"
-          labelOption={<span className="required">*</span>}
-          control={control}
-          options={BALCONY_OPTIONS}
-          {...register('balcony', {
-            required: true,
-          })}
-        />
+          {/* 욕실 갯수 */}
+          <Radiobox
+            label="욕실 갯수"
+            labelOption={<span className="required">*</span>}
+            control={control}
+            options={BATHROOM_OPTIONS}
+            {...register('bathroom', {
+              required: true,
+            })}
+          />
 
-        {/* 욕실 갯수 */}
-        <Radiobox
-          label="욕실 갯수"
-          labelOption={<span className="required">*</span>}
-          control={control}
-          options={BATHROOM_OPTIONS}
-          {...register('bathroom', {
-            required: true,
-          })}
-        />
-
-        {/* 제출 버튼 */}
-        <Button $styleType={isValid ? 'solid' : 'disabled'} $fullWidth>
-          간편 견적 보기
-        </Button>
-      </S.SimpleEstimateForm>
-    </S.SimpleEstimateContainer>
+          {/* 제출 버튼 */}
+          <Button $styleType={isValid ? 'solid' : 'disabled'} $fullWidth>
+            간편 견적 보기
+          </Button>
+        </S.SimpleEstimateForm>
+      </S.SimpleEstimateContainer>
+      {/* 팁 모달 */}
+      <EstimateTip />
+    </>
   );
 }
 

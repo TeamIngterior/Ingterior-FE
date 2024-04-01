@@ -21,5 +21,6 @@ export const SimpleEstimateTip = styled.div`
     width: 18px;
     height: 18px;
     color: ${theme.color.primary07};
+    cursor: pointer;
   }
 `;
