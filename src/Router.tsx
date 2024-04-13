@@ -6,6 +6,9 @@ import App from './App';
 const Home = lazy(() => import('./pages/Home'));
 const SignIn = lazy(() => import('./pages/user/SignIn'));
 const SimpleEstimate = lazy(() => import('./pages/estimate/SimpleEstimate'));
+const SimpleEstimateResult = lazy(
+  () => import('./pages/estimate/SimpleEstimateResult')
+);
 
 const ConstructionList = lazy(
   () => import('./pages/construction/ConstructionList')
@@ -41,8 +44,17 @@ const router = createBrowserRouter([
         children: [{ index: true, element: <SignIn /> }],
       },
       {
-        path: '/simple-estimate',
-        element: <SimpleEstimate />,
+        path: 'estimate',
+        children: [
+          {
+            path: 'simple-estimate',
+            element: <SimpleEstimate />,
+          },
+          {
+            path: 'simple-estimate/result',
+            element: <SimpleEstimateResult />,
+          },
+        ],
       },
       {
         path: 'construction',
