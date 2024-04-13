@@ -57,8 +57,6 @@ function Contact() {
     console.log('새 현장 추가', data);
   };
 
-  console.log(watch('agreement'));
-
   return (
     <S.ContactContainer className="setting">
       <CS.TemplateTitle>개발자에게 문의하기</CS.TemplateTitle>
@@ -154,9 +152,7 @@ function Contact() {
         />
 
         <Button
-          $styleType={
-            isValid && watch('agreement') !== false ? 'solid' : 'disabled'
-          }
+          $styleType={isValid !== false ? 'solid' : 'disabled'}
           $fullWidth
         >
           문의하기
