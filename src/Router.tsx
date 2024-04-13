@@ -21,6 +21,7 @@ const Setting = lazy(() => import('./pages/setting/Setting'));
 const Review = lazy(() => import('./pages/setting/Review'));
 const Donate = lazy(() => import('./pages/setting/Donate'));
 const Contact = lazy(() => import('./pages/setting/Contact'));
+const Withdrawal = lazy(() => import('./pages/setting/Withdrawal'));
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
           {
             path: 'contact',
             element: <Contact />,
+          },
+          {
+            path: 'withdrawal',
+            element: <Withdrawal />,
           },
         ],
       },
