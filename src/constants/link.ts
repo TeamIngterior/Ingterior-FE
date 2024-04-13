@@ -63,6 +63,6 @@ export const SETTING_LINK = [
   {
     key: 4,
     name: '회원 탈퇴',
-    path: '',
+    path: '/setting/withdrawal',
   },
 ];
