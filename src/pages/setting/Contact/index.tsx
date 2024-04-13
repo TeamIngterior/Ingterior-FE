@@ -1,16 +1,13 @@
+import { Controller, useForm } from 'react-hook-form';
+
 import PageNav from '@/components/common/PageNav';
+import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
+import AgreementBox from '@/components/setting/AgreementBox';
 
 import * as CS from '@/components/template/styles';
 import * as IS from '@components/common/Input/styles';
 import * as S from './styles';
-import Input from '@/components/common/Input';
-import { Controller, useForm } from 'react-hook-form';
-import Button from '@/components/common/Button';
-import Checkbox from '@/components/common/Checkbox';
-import CkeckOption from '@/components/common/CheckOption';
-import CheckOption from '@/components/common/CheckOption';
-import { useEffect } from 'react';
-import AgreementBox from '@/components/setting/AgreementBox';
 
 const CONTACT_NAV = [
   {
