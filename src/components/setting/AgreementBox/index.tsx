@@ -8,7 +8,7 @@ function AgreementBox({
   onChange,
 }: {
   title: string;
-  content: string;
+  content: string | React.ReactNode;
   agreementContext: string;
   onChange: any;
 }) {
