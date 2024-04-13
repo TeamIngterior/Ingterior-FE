@@ -1,4 +1,11 @@
+import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
+import { useRecoilState } from 'recoil';
+import { estimateState } from '@/atom/estimateState';
+
+import { useModal } from '@/hooks/useModal';
 
 import {
   SASH_OPTIONS,
@@ -15,8 +22,7 @@ import Button from '@/components/common/Button';
 
 import * as CS from '@components/template/styles';
 import * as S from './styles';
-import { useTheme } from 'styled-components';
-import { useModal } from '@/hooks/useModal';
+
 import EstimateTip from '@/components/modal/EstimateTip';
 
 const ESTIMATE_LINK = [
@@ -32,7 +38,9 @@ const ESTIMATE_LINK = [
 
 function SimpleEstimate() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const { openModal } = useModal('estimateTip');
+  const [estimateData, setEstimateData] = useRecoilState(estimateState);
 
   const {
     register,
@@ -45,14 +53,21 @@ function SimpleEstimate() {
   });
 
   const onSubmit = async (data: any) => {
-    console.log('새 현장 추가', data);
+    setEstimateData({
+      ...estimateData,
+      area: data.area,
+      sash: data.sash,
+      balcony: data.balcony,
+      bathroom: data.bathroom,
+    });
+
+    navigate('/estimate/simple-estimate/result');
   };
 
   console.log(watch());
 
   return (
     <>
-      {' '}
       <S.SimpleEstimateContainer>
         <CS.TemplateTitle>인테리어 간편견적</CS.TemplateTitle>
 
