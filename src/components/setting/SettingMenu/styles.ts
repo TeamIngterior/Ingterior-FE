@@ -9,6 +9,7 @@ export const SettingMenuContainer = styled.div`
   width: 100%;
   height: 57px;
   border-bottom: 1px solid #d9d9d9;
+  cursor: pointer;
 
   .arrowIcon {
     width: 24px;
