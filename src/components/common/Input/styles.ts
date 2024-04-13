@@ -82,9 +82,7 @@ export const Input = styled.input<InputCSSProps>`
     props.readOnly &&
     `
         color: ${theme.color.gray06};
-        &:focus-within {
-            border: 1px solid ${theme.color.gray06};
-        }
+    
   `}
 
   &.disabled {
