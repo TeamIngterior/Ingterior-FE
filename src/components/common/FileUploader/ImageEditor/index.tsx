@@ -1,5 +1,5 @@
 import { useImageEdit } from '@/hooks/useImageEdit';
-import { useId } from 'react';
+import { useEffect, useId } from 'react';
 
 import { useModal } from '@/hooks/useModal';
 
@@ -18,12 +18,14 @@ function ImageEditor({
   canvasRef,
   isEditor,
   isMultiple = false,
+  onSelectedFiles,
 }: {
   label?: string;
   labelOption?: React.ReactNode;
   canvasRef?: React.RefObject<HTMLCanvasElement>;
   isEditor?: boolean;
   isMultiple?: boolean;
+  onSelectedFiles?: (files: string | string[]) => void;
 }) {
   const {
     image,
@@ -39,6 +41,15 @@ function ImageEditor({
 
   const labelID = useId();
   const { openModal } = useModal('editConstructionImage');
+
+  useEffect(() => {
+    // 처음 열릴 때 input에 등록된 이미지 제거
+    if (image) deleteImage();
+  }, []);
+
+  useEffect(() => {
+    if (onSelectedFiles) onSelectedFiles(editedImage || image);
+  }, [image, editedImage]);
 
   // 편집 기능 O 단일 이미지 업로드
   const renderEditorButtons = () => (

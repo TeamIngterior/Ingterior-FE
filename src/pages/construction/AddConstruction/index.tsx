@@ -35,8 +35,7 @@ const ADD_CONSTRUCTION_NAV = [
 function AddConstruction() {
   const navigate = useNavigate();
   const { handleFormSubmit, isPending } = useConstruction();
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [uploaedFiles, setUploadedFiles] = useState<any>([]);
+  const [selectedFiles, setSelectedFiles] = useState<any>();
 
   const {
     register,
@@ -48,13 +47,46 @@ function AddConstruction() {
     mode: 'onBlur',
   });
 
+  const handleSelectedFiles = (fileData: string) => {
+    try {
+      // TODO : 111 을 memberId로 변경
+      const fileName = `${new Date().getTime()}${111}`;
+
+      // MIME 타입 및 base64 데이터 추출
+      const matches = fileData.match(/^data:(.*);base64,(.*)$/);
+      if (!matches || matches.length !== 3) {
+        throw new Error('올바른 파일 형식이 아닙니다.');
+      }
+
+      const mimeType = matches[1];
+      const base64Data = matches[2];
+      const bytes = atob(base64Data);
+      const byteNumbers = new Array(bytes.length);
+
+      for (let i = 0; i < bytes.length; i++) {
+        byteNumbers[i] = bytes.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: mimeType });
+
+      const file = new File([blob], fileName + '.' + mimeType.split('/')[1], {
+        type: mimeType,
+      });
+
+      setSelectedFiles(file);
+    } catch (error) {
+      console.error('base64 파일 변환을 실패했습니다:', error);
+    }
+  };
+
   const onSubmit = async (data: any) => {
     console.log('새 현장 추가', data);
 
     const constructionName = data.constructionName;
     const usage = data.usage.length > 1 ? '0' : '1';
 
-    handleFormSubmit({ constructionName, usage }, selectedFiles[0]);
+    handleFormSubmit({ constructionName, usage }, selectedFiles);
     navigate('/construction/list');
   };
 
@@ -65,6 +97,10 @@ function AddConstruction() {
     );
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  useEffect(() => {
+    console.log('selectedFiles:', selectedFiles);
+  }, [selectedFiles]);
 
   return (
     <>
@@ -120,20 +156,17 @@ function AddConstruction() {
           />
 
           {/* 현장 도면 이미지 */}
-          <Controller
-            name="constructionImage"
-            control={control}
-            render={({ field: { onChange } }) => (
-              <ImageEditor
-                label="현장 도면 이미지를 업로드해주세요."
-                labelOption={
-                  <>
-                    <span className="subLabel">&nbsp;&#40;선택&#41;</span>
-                  </>
-                }
-                isEditor={false}
-              />
-            )}
+          <ImageEditor
+            label="현장 도면 이미지를 업로드해주세요."
+            onSelectedFiles={(files: any) => {
+              handleSelectedFiles(files);
+            }}
+            labelOption={
+              <>
+                <span className="subLabel">&nbsp;&#40;선택&#41;</span>
+              </>
+            }
+            isEditor={false}
           />
 
           {/* 제출 버튼 */}
