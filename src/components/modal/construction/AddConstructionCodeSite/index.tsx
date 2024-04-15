@@ -55,7 +55,7 @@ function AddConstructionCodeSite() {
   // 현장 코드 추가
   const onSubmit = async (data: any) => {
     try {
-      joinSiteMutation(data.siteCode);
+      joinSiteMutation(data.constructionId);
 
       closeModal(() => {
         reset();
@@ -97,7 +97,7 @@ function AddConstructionCodeSite() {
               inputType="input"
               $isHorizontal={true}
               placeholder="공유받은 코드를 입력해 주세요."
-              {...register('siteCode')}
+              {...register('constructionId')}
               errors={errors}
             ></Input>
             <Button size="sm" $styleType="revert">
