@@ -24,9 +24,9 @@ export const useConstructionList = () => {
   });
 
   // 현장 목록을 현장 코드로 조회해서 있는지 검증
-  const isValidateData = async (siteCode: string) => {
+  const isValidateData = async (constructionId: string) => {
     try {
-      const response = await constructionListByCodeRequest(siteCode);
+      const response = await constructionListByCodeRequest(constructionId);
       return response;
     } catch (error) {
       console.error('Error Fetching data: ', error);
