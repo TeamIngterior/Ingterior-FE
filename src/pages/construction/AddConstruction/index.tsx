@@ -34,7 +34,7 @@ const ADD_CONSTRUCTION_NAV = [
 
 function AddConstruction() {
   const navigate = useNavigate();
-  const { handleFormSubmit, isPending } = useConstruction();
+  const { handleFormSubmit } = useConstruction();
   const [selectedFiles, setSelectedFiles] = useState<any>();
 
   const {
