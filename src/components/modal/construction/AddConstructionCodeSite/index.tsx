@@ -84,7 +84,13 @@ function AddConstructionCodeSite() {
       <CS.ModalContentContainer>
         <CS.ModalHeader>현장 코드 입력</CS.ModalHeader>
         <CS.ModalContent>
-          <form onSubmit={handleSubmit(onEnterCodeSubmit)}>
+          <form
+            onSubmit={handleSubmit(onEnterCodeSubmit)}
+            style={{
+              display: 'flex',
+              gap: '0 8px',
+            }}
+          >
             <Input
               type="text"
               size="sm"
@@ -93,11 +99,10 @@ function AddConstructionCodeSite() {
               placeholder="공유받은 코드를 입력해 주세요."
               {...register('siteCode')}
               errors={errors}
-            >
-              <Button size="sm" $styleType="revert">
-                코드 입력
-              </Button>
-            </Input>
+            ></Input>
+            <Button size="sm" $styleType="revert">
+              코드 입력
+            </Button>
           </form>
 
           {
