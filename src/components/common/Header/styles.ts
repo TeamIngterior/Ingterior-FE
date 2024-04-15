@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import { theme } from '@assets/styles/theme';
 
 export const HeaderContainer = styled.header`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: ${theme.layoutComponent.header_height}px;
   border-bottom: 1px solid ${theme.color.gray03};
+  z-index: 11;
 
   @media (max-width: 500px) {
     height: ${theme.layoutComponent.header_mobile_height}px;

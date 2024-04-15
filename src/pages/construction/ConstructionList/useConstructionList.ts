@@ -9,11 +9,12 @@ export const useConstructionList = () => {
   const queryClient = useQueryClient();
 
   // 현장 목록 조회
+  // TODO : params memberId 로그인 처리 후 수정
   const { data: constructionListData } = useQuery({
     queryKey: ['constructionList'],
     queryFn: async () => {
       try {
-        const response = await constructionListRequest();
+        const response = await constructionListRequest('111');
         return response.data;
       } catch (error) {
         console.error('Error Fetching data: ', error);

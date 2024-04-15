@@ -1,21 +1,27 @@
 import instance from '.';
 
 export interface ConstructionListDataModel {
-  id: number;
-  title: string;
-  category: string[];
-  createdAt: string;
-  user: {
-    usercode: string;
-    profileImg: string;
-  };
-  constructionSiteCode: string;
-  isOwner: boolean;
+  constructionId: number;
+  constructionName: string;
+  constructionCode: string;
+  usage: number;
+  regDate: string;
+  memberCode: string;
+  memberImgUrls: string[];
+  creator: boolean;
+  liked: boolean;
 }
 
 // 현장 목록 조회
-export const constructionListRequest = async () => {
-  return instance.get(`${import.meta.env.VITE_SERVER_URL}/construction/list`);
+export const constructionListRequest = async (memberId: string) => {
+  return instance.get(
+    `${import.meta.env.VITE_SERVER_URL}/construction/constructions`,
+    {
+      params: {
+        memberId,
+      },
+    }
+  );
 };
 
 // 현장 목록을 현장 코드로 조회해서 있는지 검증

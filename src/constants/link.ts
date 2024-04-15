@@ -7,7 +7,7 @@ export const MENU_LINK = [
   {
     key: 2,
     name: '인테리어 공사관리',
-    path: '',
+    path: '/construction/list',
   },
   {
     key: 3,
@@ -20,12 +20,12 @@ export const SIDE_MENU_LINK = [
   {
     key: 1,
     name: '인테리어 간편견적',
-    path: '',
+    path: '/estimate/simple-estimate',
   },
   {
     key: 2,
     name: '인테리어 공사관리',
-    path: '',
+    path: '/construction/list',
   },
   {
     key: 3,
@@ -34,11 +34,6 @@ export const SIDE_MENU_LINK = [
   },
   {
     key: 4,
-    name: '메세지',
-    path: '/message',
-  },
-  {
-    key: 5,
     name: '설정',
     path: '/setting',
   },

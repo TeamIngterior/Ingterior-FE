@@ -4,6 +4,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { ConstructionListDataModel } from '@/apis/construction';
 
+import { formatDate } from '@/utils/date';
+
 import { TiStarFullOutline } from 'react-icons/ti';
 import { IoIosArrowForward } from 'react-icons/io';
 import Button from '@/components/common/Button';
@@ -18,6 +20,7 @@ function ConstructionListCard({
   type?: string;
 }) {
   const navigate = useNavigate();
+  const regDate = formatDate(cardData.regDate);
 
   return (
     <>
@@ -26,40 +29,49 @@ function ConstructionListCard({
           <>
             {/* 현장 라벨 */}
             <S.ListCardLabelContainer>
-              {cardData.category.map((category, index) => (
-                <S.ListCardLabel key={index}>{category}</S.ListCardLabel>
-              ))}
+              {cardData.usage === 0 ? (
+                <>
+                  <S.ListCardLabel>하자체크</S.ListCardLabel>
+                  <S.ListCardLabel>공사관리</S.ListCardLabel>
+                </>
+              ) : (
+                <S.ListCardLabel>하자체크</S.ListCardLabel>
+              )}
             </S.ListCardLabelContainer>
             {/* 현장 제목 & 즐겨찾기  */}{' '}
             <S.ListCardTitleContainer>
-              <S.ListCardTitle>{cardData.title}</S.ListCardTitle>
+              <S.ListCardTitle>{cardData.constructionName}</S.ListCardTitle>
 
               {/* 즐겨찾기 아이콘 */}
-              <S.IconContainer>
-                <TiStarFullOutline className="bookmarkIcon" />
-              </S.IconContainer>
+              {cardData.liked && (
+                <S.IconContainer>
+                  <TiStarFullOutline className="bookmarkIcon" />
+                </S.IconContainer>
+              )}
             </S.ListCardTitleContainer>
           </>
         )}
 
         {/* 현장 정보 */}
-        <S.ListCardInfoContainer className={cardData.isOwner ? 'owner' : ''}>
+        <S.ListCardInfoContainer className={cardData.creator ? 'owner' : ''}>
           {type === 'card' && (
             <S.ListCardTitle className="constructionManage">
-              {cardData.title}
+              {cardData.constructionName}
             </S.ListCardTitle>
           )}
 
           <S.ListCardInfo>
             {/* 프로필 사진 */}
             <S.ListCardProfileImg>
-              <img src={cardData.user.profileImg} alt="프로필 사진" />
+              {/* TODO : 이미지 4장 템플릿 */}
+              {/* <img src={cardData.memberImgUrls[0]} alt="프로필 사진" /> */}
+              <img src={'https://via.placeholder.com/150'} alt="프로필 사진" />
             </S.ListCardProfileImg>
 
             {/* 유저 코드 & 생성일 */}
             <S.ListCardProfileInfo>
-              <p>생성자:&nbsp;{cardData.user.usercode}</p>
-              <p>{cardData.createdAt}</p>
+              <p>생성자:&nbsp;{cardData.memberCode}</p>
+              <p>{regDate}</p>
             </S.ListCardProfileInfo>
 
             {type !== 'card' && (
@@ -71,7 +83,7 @@ function ConstructionListCard({
                   $styleType="initial"
                   className="detailButton"
                   onClickHandler={() =>
-                    navigate(`/construction/${cardData.id}`)
+                    navigate(`/construction/${cardData.constructionId}`)
                   }
                 >
                   <IoIosArrowForward />
@@ -84,11 +96,11 @@ function ConstructionListCard({
           <S.LinkShareContainer>
             <S.LinkShareText>
               현장코드:&nbsp;
-              <span>{cardData.constructionSiteCode}</span>
+              <span>{cardData.constructionCode}</span>
             </S.LinkShareText>
 
             <CopyToClipboard
-              text={cardData.constructionSiteCode}
+              text={cardData.constructionCode}
               onCopy={() => alert('클립보드에 복사되었습니다.')}
             >
               <Button size="sm" $styleType="revert">
