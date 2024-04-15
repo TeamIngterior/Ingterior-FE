@@ -25,23 +25,19 @@ export const constructionListRequest = async (memberId: string) => {
 };
 
 // 현장 목록을 현장 코드로 조회해서 있는지 검증
-export const constructionListByCodeRequest = async (
-  constructionSiteCode: string
-) => {
-  return instance.get(
-    `${import.meta.env.VITE_SERVER_URL}/construction/list/code`,
-    {
-      params: {
-        code: constructionSiteCode,
-      },
-    }
-  );
+export const constructionListByCodeRequest = async (constructionId: string) => {
+  return instance.get(`${import.meta.env.VITE_SERVER_URL}/construction`, {
+    params: {
+      constructionId,
+    },
+  });
 };
 
 // 코드로 현장 참여
-export const joinConstructionRequest = async (constructionSiteCode: string) => {
+export const joinConstructionRequest = async (constructionId: string) => {
   return instance.post(`${import.meta.env.VITE_SERVER_URL}/construction/join`, {
-    constructionSiteCode,
+    memberId: '111',
+    constructionId,
   });
 };
 
@@ -56,4 +52,14 @@ export const addConstructionRequest = async (data: any) => {
       },
     }
   );
+};
+
+// 현장 삭제
+export const deleteConstructionRequest = async (constructionId: string) => {
+  return instance.delete(`${import.meta.env.VITE_SERVER_URL}/construction`, {
+    data: {
+      memberId: '111',
+      constructionId: constructionId,
+    },
+  });
 };
