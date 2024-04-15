@@ -1,9 +1,15 @@
-import { addConstructionRequest } from '@/apis/construction';
-import { useMutation } from '@tanstack/react-query';
+import {
+  addConstructionRequest,
+  deleteConstructionRequest,
+} from '@/apis/construction';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AddConstructionFormModel } from './model';
 
 export const useConstruction = () => {
-  const { mutate, isPending } = useMutation({
+  const queryClient = useQueryClient();
+
+  //  현장 추가
+  const { mutate, isPending: isAddConstructionPending } = useMutation({
     mutationFn: (formData: FormData) => addConstructionRequest(formData),
     onSuccess: () => {
       alert('Construction added successfully');
@@ -39,8 +45,22 @@ export const useConstruction = () => {
     mutate(formData);
   };
 
+  //  현장 삭제
+  const handleDeleteConstruction = async (constructionId: number) => {
+    try {
+      await deleteConstructionRequest(String(constructionId));
+
+      queryClient.invalidateQueries({
+        queryKey: ['constructionList'],
+      });
+    } catch (error) {
+      console.error('Failed to delete construction:', error);
+    }
+  };
+
   return {
     handleFormSubmit,
-    isPending,
+    handleDeleteConstruction,
+    isAddConstructionPending,
   };
 };
