@@ -78,18 +78,19 @@ function AddConstruction() {
 
           {/* 현장 유형 */}
           <Controller
-            name="constructionType"
+            name="usage"
             control={control}
             render={({ field: { onChange } }) => (
               <Checkbox
                 label="현장의 유형을 선택해주세요."
+                style={{ border: 'none' }}
                 labelOption={
                   <>
                     <span className="required">*</span>&nbsp;
                     <span className="subLabel">다중선택가능</span>
                   </>
                 }
-                name="constructionType"
+                name="usage"
                 options={[
                   {
                     id: 'constructionType1',

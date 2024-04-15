@@ -15,6 +15,7 @@ interface CheckboxProps {
   supportText?: string;
   options: OptionProps[];
   onSelectedOption: any;
+  style?: React.CSSProperties;
   errors: any;
 }
 
@@ -27,6 +28,7 @@ function Checkbox(
     options,
     errors,
     onSelectedOption,
+    style,
     ...rest
   }: CheckboxProps,
   ref: React.Ref<HTMLInputElement>
@@ -60,7 +62,7 @@ function Checkbox(
         </S.InputLabel>
       )}
 
-      <S.InputContentContainer>
+      <S.InputContentContainer style={style}>
         <S.CheckboxContainer>
           {options.map(({ text, icon }, index) => (
             <S.Checkbox key={text}>
