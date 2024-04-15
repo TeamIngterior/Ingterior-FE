@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useForm, Controller } from 'react-hook-form';
 
+import { useConstruction } from '@/hooks/page/useContruction';
 import { useModal } from '@/hooks/useModal';
 
 import { IoMdCheckmark } from 'react-icons/io';
-
 import PageNav from '@/components/common/PageNav';
 import Input from '@/components/common/Input';
 import Checkbox from '@/components/common/Checkbox';
@@ -31,6 +33,8 @@ const ADD_CONSTRUCTION_NAV = [
 ];
 
 function AddConstruction() {
+  const navigate = useNavigate();
+  const { handleFormSubmit, isPending } = useConstruction();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploaedFiles, setUploadedFiles] = useState<any>([]);
 
@@ -46,6 +50,12 @@ function AddConstruction() {
 
   const onSubmit = async (data: any) => {
     console.log('새 현장 추가', data);
+
+    const constructionName = data.constructionName;
+    const usage = data.usage.length > 1 ? '0' : '1';
+
+    handleFormSubmit({ constructionName, usage }, selectedFiles[0]);
+    navigate('/construction/list');
   };
 
   // 디버깅용 코드
@@ -129,9 +139,7 @@ function AddConstruction() {
           {/* 제출 버튼 */}
           <Button
             $styleType={
-              watch('constructionName') && watch('constructionType')
-                ? 'solid'
-                : 'disabled'
+              watch('constructionName') && watch('usage') ? 'solid' : 'disabled'
             }
             $fullWidth={true}
           >

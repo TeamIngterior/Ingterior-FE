@@ -44,3 +44,16 @@ export const joinConstructionRequest = async (constructionSiteCode: string) => {
     constructionSiteCode,
   });
 };
+
+// 현장 추가
+export const addConstructionRequest = async (data: any) => {
+  return instance.post(
+    `${import.meta.env.VITE_SERVER_URL}/construction`,
+    data,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
+};
