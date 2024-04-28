@@ -2,16 +2,22 @@ import { useNavigate } from 'react-router-dom';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+import { useConstruction } from '@/hooks/page/useContruction';
+
 import { ConstructionListDataModel } from '@/apis/construction';
 
 import { formatDate } from '@/utils/date';
 
 import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 import { IoIosArrowForward } from 'react-icons/io';
+import MoreIcon from '@assets/icon/menuMore.svg?react';
+import DeleteIcon from '@assets/icon/delete.svg?react';
+import EditIcon from '@assets/icon/edit.svg?react';
+
+import DropdownMenu from '@/components/common/DropdownMenu';
 import Button from '@/components/common/Button';
 
 import * as S from './styles';
-import { useConstruction } from '@/hooks/page/useContruction';
 
 function ConstructionListCard({
   cardData,
@@ -44,14 +50,25 @@ function ConstructionListCard({
                 <S.ListCardLabel>하자체크</S.ListCardLabel>
               )}
 
-              <button
-                type="button"
-                onClick={() =>
-                  handleDeleteConstruction(cardData.constructionId)
-                }
+              {/* 편집, 삭제 */}
+              <DropdownMenu
+                options={[
+                  {
+                    label: '편집',
+                    icon: <EditIcon />,
+                    onClickHandler: () =>
+                      navigate(`/construction/${cardData.constructionId}/edit`),
+                  },
+                  {
+                    label: '삭제',
+                    icon: <DeleteIcon />,
+                    onClickHandler: () =>
+                      handleDeleteConstruction(cardData.constructionId),
+                  },
+                ]}
               >
-                현장 삭제
-              </button>
+                <MoreIcon />
+              </DropdownMenu>
             </S.ListCardLabelContainer>
             {/* 현장 제목 & 즐겨찾기  */}{' '}
             <S.ListCardTitleContainer>

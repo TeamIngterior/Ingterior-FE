@@ -18,7 +18,9 @@ export const RemodelingListCardContainer = styled.article`
 // 현장 라벨 (카테고리)
 export const ListCardLabelContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: ${theme.gap.gap1};
+  padding-right: ${theme.gap.gap1};
   margin-bottom: ${theme.gap.gap1};
 `;
 
