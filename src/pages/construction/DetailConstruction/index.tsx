@@ -49,7 +49,7 @@ function DetailConstruction() {
     useConstruction(constructionId);
 
   // 탭 상태 : defect - 하자 체크(default), manage - 공사 관리
-  const [selectedTab, setSelectedTab] = useState<string>('manage');
+  const [selectedTab, setSelectedTab] = useState<string>('defect');
 
   console.log(constructionDetailData, 'constructionDetailData');
 
@@ -114,14 +114,16 @@ function DetailConstruction() {
             <Button type="button" $styleType="revert" $fullWidth={true}>
               현장 메세지 바로가기
             </Button>
+
+            {/* 현장 나가기 */}
             <Button
               type="button"
               $styleType="revert"
               $fullWidth={true}
-              // onClick={() => {
-              //   handleLeaveConstruction(info[0].constructionId);
-              //   navigate('/construction/list');
-              // }}
+              onClickHandler={() => {
+                handleLeaveConstruction(constructionDetailData.constructionId);
+                navigate('/construction/list');
+              }}
             >
               현장 나가기
             </Button>
