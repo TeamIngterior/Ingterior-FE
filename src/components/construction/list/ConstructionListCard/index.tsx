@@ -76,7 +76,7 @@ function ConstructionListCard({
             </S.ListCardLabelContainer>
             {/* 현장 제목 & 즐겨찾기  */}{' '}
             <S.ListCardTitleContainer>
-              <S.ListCardTitle>{cardData?.name}</S.ListCardTitle>
+              <S.ListCardTitle>{cardData?.constructionName}</S.ListCardTitle>
 
               {/* 즐겨찾기 아이콘 */}
               <S.IconContainer
@@ -96,7 +96,7 @@ function ConstructionListCard({
         <S.ListCardInfoContainer className={cardData?.creator ? 'owner' : ''}>
           {type === 'card' && (
             <S.ListCardTitle className="constructionManage">
-              {cardData?.name}
+              {cardData?.constructionName || cardData?.name}
             </S.ListCardTitle>
           )}
 

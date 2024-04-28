@@ -2,7 +2,8 @@ import instance from '.';
 
 export interface ConstructionListDataModel {
   constructionId: number;
-  constructionName: string;
+  constructionName?: string;
+  name?: string;
   constructionCode: string;
   usage: number;
   regDate: string;
