@@ -63,3 +63,11 @@ export const deleteConstructionRequest = async (constructionId: string) => {
     },
   });
 };
+
+// 현장 좋아요
+export const likeConstructionRequest = async (constructionId: string) => {
+  return instance.post(`${import.meta.env.VITE_SERVER_URL}/construction/like`, {
+    memberId: '111',
+    constructionId,
+  });
+};

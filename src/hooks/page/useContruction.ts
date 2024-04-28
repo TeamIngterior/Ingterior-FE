@@ -1,6 +1,7 @@
 import {
   addConstructionRequest,
   deleteConstructionRequest,
+  likeConstructionRequest,
 } from '@/apis/construction';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AddConstructionFormModel } from './model';
@@ -58,9 +59,23 @@ export const useConstruction = () => {
     }
   };
 
+  // 현장 좋아요
+  const handleLikeConstruction = async (constructionId: number) => {
+    try {
+      await likeConstructionRequest(String(constructionId));
+
+      queryClient.invalidateQueries({
+        queryKey: ['constructionList'],
+      });
+    } catch (error) {
+      console.error('Failed to like construction:', error);
+    }
+  };
+
   return {
     handleFormSubmit,
     handleDeleteConstruction,
+    handleLikeConstruction,
     isAddConstructionPending,
   };
 };

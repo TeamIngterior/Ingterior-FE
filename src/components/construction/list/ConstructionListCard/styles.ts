@@ -63,7 +63,12 @@ export const IconContainer = styled.div`
     width: 20px;
     min-width: 20px;
     height: 20px;
-    color: #ffd700;
+    color: ${theme.color.gray03};
+    cursor: pointer;
+
+    &.active {
+      color: #ffd700;
+    }
   }
 `;
 

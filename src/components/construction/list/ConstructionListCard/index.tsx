@@ -6,7 +6,7 @@ import { ConstructionListDataModel } from '@/apis/construction';
 
 import { formatDate } from '@/utils/date';
 
-import { TiStarFullOutline } from 'react-icons/ti';
+import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 import { IoIosArrowForward } from 'react-icons/io';
 import Button from '@/components/common/Button';
 
@@ -21,9 +21,12 @@ function ConstructionListCard({
   type?: string;
 }) {
   const navigate = useNavigate();
-  const { handleDeleteConstruction } = useConstruction();
+  const { handleDeleteConstruction, handleLikeConstruction } =
+    useConstruction();
 
   const regDate = formatDate(cardData.regDate);
+
+  console.log('cardData', cardData);
 
   return (
     <>
@@ -55,11 +58,15 @@ function ConstructionListCard({
               <S.ListCardTitle>{cardData.constructionName}</S.ListCardTitle>
 
               {/* 즐겨찾기 아이콘 */}
-              {cardData.liked && (
-                <S.IconContainer>
-                  <TiStarFullOutline className="bookmarkIcon" />
-                </S.IconContainer>
-              )}
+              <S.IconContainer
+                onClick={() => handleLikeConstruction(cardData.constructionId)}
+              >
+                {cardData.liked ? (
+                  <TiStarFullOutline className="bookmarkIcon active" />
+                ) : (
+                  <TiStarOutline className="bookmarkIcon" />
+                )}
+              </S.IconContainer>
             </S.ListCardTitleContainer>
           </>
         )}
