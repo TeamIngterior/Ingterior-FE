@@ -41,14 +41,16 @@ function ConstructionListCard({
           <>
             {/* 현장 라벨 */}
             <S.ListCardLabelContainer>
-              {cardData.usage === 0 ? (
-                <>
+              <div className="labelContainer">
+                {cardData.usage === 0 ? (
+                  <>
+                    <S.ListCardLabel>하자체크</S.ListCardLabel>
+                    <S.ListCardLabel>공사관리</S.ListCardLabel>
+                  </>
+                ) : (
                   <S.ListCardLabel>하자체크</S.ListCardLabel>
-                  <S.ListCardLabel>공사관리</S.ListCardLabel>
-                </>
-              ) : (
-                <S.ListCardLabel>하자체크</S.ListCardLabel>
-              )}
+                )}
+              </div>
 
               {/* 편집, 삭제 */}
               <DropdownMenu

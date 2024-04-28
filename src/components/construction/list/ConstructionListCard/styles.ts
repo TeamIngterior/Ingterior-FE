@@ -19,9 +19,13 @@ export const RemodelingListCardContainer = styled.article`
 export const ListCardLabelContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: ${theme.gap.gap1};
   padding-right: ${theme.gap.gap1};
   margin-bottom: ${theme.gap.gap1};
+
+  .labelContainer {
+    display: flex;
+    gap: ${theme.gap.gap1};
+  }
 `;
 
 export const ListCardLabel = styled.span`
