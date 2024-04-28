@@ -1,15 +1,22 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useRecoilState } from 'recoil';
+
+import { useConstruction } from '@/hooks/page/useContruction';
 
 import { chatSidebarInfoState, chatSidebarState } from '@/atom/chatState';
 
 import { IoCloseSharp } from 'react-icons/io5';
 
 import * as S from './styles';
-import { useEffect } from 'react';
 
 function ChatSidebar() {
+  const navigate = useNavigate();
   const [isMenu, setIsMenu] = useRecoilState(chatSidebarState);
   const [info, setInfo] = useRecoilState(chatSidebarInfoState);
+
+  const { handleLeaveConstruction } = useConstruction();
 
   useEffect(() => {
     console.log(info);
@@ -80,7 +87,12 @@ function ChatSidebar() {
               <S.ChattingSidebarFooterButton>
                 현장 메세지 기록 다운받기
               </S.ChattingSidebarFooterButton>
-              <S.ChattingSidebarFooterButton>
+              <S.ChattingSidebarFooterButton
+                onClick={() => {
+                  handleLeaveConstruction(info[0].constructionId);
+                  navigate('/construction/list');
+                }}
+              >
                 현장 나가기
               </S.ChattingSidebarFooterButton>
             </S.ChattingSidebarFooter>
