@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { theme } from '@/assets/styles/theme';
 
 export const SideMenu = styled.aside`
-  position: absolute;
-  top: calc(100% + 1px);
+  position: fixed;
+  top: ${theme.layoutComponent.header_height}px;
   right: 0;
   min-width: 384px;
   height: 100%;
@@ -14,6 +14,7 @@ export const SideMenu = styled.aside`
   z-index: 10;
 
   @media (max-width: 500px) {
+    top: ${theme.layoutComponent.header_mobile_height}px;
     min-width: 100%;
     min-height: ${`calc(100dvh - ${theme.layoutComponent.header_mobile_height}px)`};
     border-left: none;
