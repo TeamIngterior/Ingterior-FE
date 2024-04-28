@@ -11,6 +11,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import Button from '@/components/common/Button';
 
 import * as S from './styles';
+import { useConstruction } from '@/hooks/page/useContruction';
 
 function ConstructionListCard({
   cardData,
@@ -20,6 +21,8 @@ function ConstructionListCard({
   type?: string;
 }) {
   const navigate = useNavigate();
+  const { handleDeleteConstruction } = useConstruction();
+
   const regDate = formatDate(cardData.regDate);
 
   return (
@@ -37,6 +40,15 @@ function ConstructionListCard({
               ) : (
                 <S.ListCardLabel>하자체크</S.ListCardLabel>
               )}
+
+              <button
+                type="button"
+                onClick={() =>
+                  handleDeleteConstruction(cardData.constructionId)
+                }
+              >
+                현장 삭제
+              </button>
             </S.ListCardLabelContainer>
             {/* 현장 제목 & 즐겨찾기  */}{' '}
             <S.ListCardTitleContainer>
