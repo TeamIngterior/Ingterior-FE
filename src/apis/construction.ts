@@ -24,6 +24,15 @@ export const constructionListRequest = async (memberId: string) => {
   );
 };
 
+// 현장 개별 조회
+export const constructionDetailRequest = async (constructionId: string) => {
+  return instance.get(`${import.meta.env.VITE_SERVER_URL}/construction`, {
+    params: {
+      constructionId,
+    },
+  });
+};
+
 // 현장 목록을 현장 코드로 조회해서 있는지 검증
 export const constructionListByCodeRequest = async (constructionId: string) => {
   return instance.get(`${import.meta.env.VITE_SERVER_URL}/construction`, {
@@ -70,4 +79,17 @@ export const likeConstructionRequest = async (constructionId: string) => {
     memberId: '111',
     constructionId,
   });
+};
+
+// 현장 나가기
+export const leaveConstructionRequest = async (constructionId: string) => {
+  return instance.delete(
+    `${import.meta.env.VITE_SERVER_URL}/construction/leave`,
+    {
+      data: {
+        memberId: '111',
+        constructionId,
+      },
+    }
+  );
 };

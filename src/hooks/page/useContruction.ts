@@ -1,13 +1,36 @@
 import {
   addConstructionRequest,
+  constructionDetailRequest,
   deleteConstructionRequest,
+  leaveConstructionRequest,
   likeConstructionRequest,
 } from '@/apis/construction';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AddConstructionFormModel } from './model';
 
-export const useConstruction = () => {
+export const useConstruction = (constructionId?: string) => {
   const queryClient = useQueryClient();
+
+  // 현장 개별 조회
+  const {
+    data: constructionDetailData,
+    isLoading: isConstructionDetailLoading,
+  } = useQuery({
+    queryKey: constructionId ? ['constructionDetail', constructionId] : [],
+    queryFn: async () => {
+      try {
+        if (constructionId) {
+          const response = await constructionDetailRequest(constructionId);
+          return response.data;
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.error('Error Fetching data: ', error);
+        throw error;
+      }
+    },
+  });
 
   //  현장 추가
   const { mutate, isPending: isAddConstructionPending } = useMutation({
@@ -72,10 +95,25 @@ export const useConstruction = () => {
     }
   };
 
+  // 현장 나가기
+  const handleLeaveConstruction = async (constructionId: number) => {
+    try {
+      await leaveConstructionRequest(String(constructionId));
+
+      queryClient.invalidateQueries({
+        queryKey: ['constructionList'],
+      });
+    } catch (error) {
+      console.error('Failed to leave construction:', error);
+    }
+  };
+
   return {
+    constructionDetailData,
     handleFormSubmit,
     handleDeleteConstruction,
     handleLikeConstruction,
+    handleLeaveConstruction,
     isAddConstructionPending,
   };
 };
