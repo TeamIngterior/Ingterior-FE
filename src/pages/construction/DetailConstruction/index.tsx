@@ -101,7 +101,11 @@ function DetailConstruction() {
 
         {/* 컨텐츠 */}
         <S.DetailConstructionContent>
-          {selectedTab === 'defect' ? <DetailDefact /> : <DetailManage />}
+          {selectedTab === 'defect' ? (
+            <DetailDefact detailData={constructionDetailData} />
+          ) : (
+            <DetailManage />
+          )}
         </S.DetailConstructionContent>
 
         {/* 버튼 */}

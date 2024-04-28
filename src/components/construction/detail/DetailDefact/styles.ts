@@ -6,6 +6,11 @@ export const CanvasContainer = styled.div`
   height: 588px;
   background-color: #f4f4f4;
   margin-bottom: ${theme.gap.gap3};
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const DefectListContainer = styled.div`
@@ -48,7 +53,7 @@ export const MemberListItem = styled.li`
   align-items: center;
   padding: ${theme.gap.gap1} ${theme.gap.gap2};
 
-  &:hover {
+  &:first-of-type {
     background-color: ${theme.color.primary01};
   }
 `;

@@ -30,7 +30,7 @@ function ConstructionListCard({
   const { handleDeleteConstruction, handleLikeConstruction } =
     useConstruction();
 
-  const regDate = formatDate(cardData.regDate);
+  const regDate = formatDate(cardData?.regDate);
 
   console.log('cardData', cardData);
 
@@ -42,7 +42,7 @@ function ConstructionListCard({
             {/* 현장 라벨 */}
             <S.ListCardLabelContainer>
               <div className="labelContainer">
-                {cardData.usage === 0 ? (
+                {cardData?.usage === 0 ? (
                   <>
                     <S.ListCardLabel>하자체크</S.ListCardLabel>
                     <S.ListCardLabel>공사관리</S.ListCardLabel>
@@ -59,13 +59,15 @@ function ConstructionListCard({
                     label: '편집',
                     icon: <EditIcon />,
                     onClickHandler: () =>
-                      navigate(`/construction/${cardData.constructionId}/edit`),
+                      navigate(
+                        `/construction/${cardData?.constructionId}/edit`
+                      ),
                   },
                   {
                     label: '삭제',
                     icon: <DeleteIcon />,
                     onClickHandler: () =>
-                      handleDeleteConstruction(cardData.constructionId),
+                      handleDeleteConstruction(cardData?.constructionId),
                   },
                 ]}
               >
@@ -74,13 +76,13 @@ function ConstructionListCard({
             </S.ListCardLabelContainer>
             {/* 현장 제목 & 즐겨찾기  */}{' '}
             <S.ListCardTitleContainer>
-              <S.ListCardTitle>{cardData.constructionName}</S.ListCardTitle>
+              <S.ListCardTitle>{cardData?.name}</S.ListCardTitle>
 
               {/* 즐겨찾기 아이콘 */}
               <S.IconContainer
-                onClick={() => handleLikeConstruction(cardData.constructionId)}
+                onClick={() => handleLikeConstruction(cardData?.constructionId)}
               >
-                {cardData.liked ? (
+                {cardData?.liked ? (
                   <TiStarFullOutline className="bookmarkIcon active" />
                 ) : (
                   <TiStarOutline className="bookmarkIcon" />
@@ -91,10 +93,10 @@ function ConstructionListCard({
         )}
 
         {/* 현장 정보 */}
-        <S.ListCardInfoContainer className={cardData.creator ? 'owner' : ''}>
+        <S.ListCardInfoContainer className={cardData?.creator ? 'owner' : ''}>
           {type === 'card' && (
             <S.ListCardTitle className="constructionManage">
-              {cardData.constructionName}
+              {cardData?.name}
             </S.ListCardTitle>
           )}
 
@@ -102,13 +104,13 @@ function ConstructionListCard({
             {/* 프로필 사진 */}
             <S.ListCardProfileImg>
               {/* TODO : 이미지 4장 템플릿 */}
-              {/* <img src={cardData.memberImgUrls[0]} alt="프로필 사진" /> */}
+              {/* <img src={cardData?.memberImgUrls[0]} alt="프로필 사진" /> */}
               <img src={'https://via.placeholder.com/150'} alt="프로필 사진" />
             </S.ListCardProfileImg>
 
             {/* 유저 코드 & 생성일 */}
             <S.ListCardProfileInfo>
-              <p>생성자:&nbsp;{cardData.memberCode}</p>
+              <p>생성자:&nbsp;{cardData?.memberCode}</p>
               <p>{regDate}</p>
             </S.ListCardProfileInfo>
 
@@ -121,7 +123,7 @@ function ConstructionListCard({
                   $styleType="initial"
                   className="detailButton"
                   onClickHandler={() =>
-                    navigate(`/construction/${cardData.constructionId}`)
+                    navigate(`/construction/${cardData?.constructionId}`)
                   }
                 >
                   <IoIosArrowForward />
@@ -134,11 +136,11 @@ function ConstructionListCard({
           <S.LinkShareContainer>
             <S.LinkShareText>
               현장코드:&nbsp;
-              <span>{cardData.constructionCode}</span>
+              <span>{cardData?.constructionCode}</span>
             </S.LinkShareText>
 
             <CopyToClipboard
-              text={cardData.constructionCode}
+              text={cardData?.constructionCode}
               onCopy={() => alert('클립보드에 복사되었습니다.')}
             >
               <Button size="sm" $styleType="revert">

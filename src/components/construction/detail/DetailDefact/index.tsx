@@ -7,7 +7,8 @@ import Button from '@/components/common/Button';
 import * as CS from '../styles';
 import * as S from './styles';
 
-function DetailDefact() {
+// TODO : Type 정의 필요
+function DetailDefact({ detailData }: { detailData: any }) {
   const { pathname } = useLocation();
   const id = pathname.split('/').pop();
   const navigate = useNavigate();
@@ -29,14 +30,18 @@ function DetailDefact() {
       </CS.DetailConstructionFunctionContainer>
 
       {/* 캔버스 영역 */}
-      <S.CanvasContainer></S.CanvasContainer>
+      <S.CanvasContainer>
+        <img src={detailData?.drawingImageUrl} alt="도면 이미지" />
+      </S.CanvasContainer>
 
       {/* 하자 리스트 */}
       <S.DefectListContainer>
         {defectList.length !== 0 ? (
           <></>
         ) : (
-          <S.NoDefectContainer>
+          <S.NoDefectContainer
+            onClick={() => navigate(`/construction/defect/addition/${id}`)}
+          >
             새로운 하자를 추가해 보세요!
           </S.NoDefectContainer>
         )}
@@ -47,21 +52,7 @@ function DetailDefact() {
         <S.DetailConstructionInfoTitle>현장 정보</S.DetailConstructionInfoTitle>
 
         {/* 현장 정보 카드 */}
-        <ConstructionListCard
-          type="card"
-          cardData={{
-            id: 1,
-            title: '현장명',
-            category: ['카테고리1', '카테고리2'],
-            isOwner: true,
-            user: {
-              profileImg: 'https://via.placeholder.com/150',
-              usercode: 'usercode',
-            },
-            constructionSiteCode: 'code',
-            createdAt: '2024-03-01',
-          }}
-        />
+        <ConstructionListCard type="card" cardData={detailData} />
 
         {/* 참여자 목록 */}
         <S.DetailConstructionMebmerContainer>
@@ -70,14 +61,13 @@ function DetailDefact() {
           <S.MemberList>
             <S.MemberListItem>
               {/* 프로필 이미지  */}
-              <S.MemberProfileImage>
-                <img
-                  src="https://via.placeholder.com/150"
-                  alt="프로필 이미지"
-                />
-              </S.MemberProfileImage>
+              {detailData?.memberThumnails?.map((info: any, index: number) => (
+                <S.MemberProfileImage key={index}>
+                  <img src={info?.imgUrl} alt="프로필 이미지" />
+                </S.MemberProfileImage>
+              ))}
               {/* 참여자 정보 */}
-              1GA001
+              {detailData?.memberCode}
             </S.MemberListItem>
           </S.MemberList>
         </S.DetailConstructionMebmerContainer>
