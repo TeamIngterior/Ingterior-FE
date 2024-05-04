@@ -5,6 +5,7 @@ import { useModal } from '@/hooks/useModal';
 import LogoHorizontal from '@assets/ingteriorLogo_horizon.svg?react';
 
 import * as S from './styles';
+import TermsModal from '@/components/modal/TermsModal';
 
 const INGTERIOR_INFO = ['상호명: 저메이킷(Jum8kit)', '대표: 김영진'];
 const BUSINESS_INFO = [
@@ -18,37 +19,42 @@ function Footer() {
   const { openModal } = useModal('terms');
 
   return (
-    <S.FooterContainer>
-      <S.FooterInner>
-        <LogoHorizontal
-          className="logo"
-          onClick={() => {
-            navigate('/');
-          }}
-        />
+    <>
+      <S.FooterContainer>
+        <S.FooterInner>
+          <LogoHorizontal
+            className="logo"
+            onClick={() => {
+              navigate('/');
+            }}
+          />
 
-        <S.FooterContent>
-          <S.FooterContentList>
-            {INGTERIOR_INFO.map((info, index) => (
-              <S.FooterContentListItem key={index}>
-                {info}
-              </S.FooterContentListItem>
-            ))}
-          </S.FooterContentList>
-          <S.FooterContentList className="business">
-            {BUSINESS_INFO.map((info, index) => (
-              <S.FooterContentListItem key={index}>
-                {info}
-              </S.FooterContentListItem>
-            ))}
-          </S.FooterContentList>
-        </S.FooterContent>
+          <S.FooterContent>
+            <S.FooterContentList>
+              {INGTERIOR_INFO.map((info, index) => (
+                <S.FooterContentListItem key={index}>
+                  {info}
+                </S.FooterContentListItem>
+              ))}
+            </S.FooterContentList>
+            <S.FooterContentList className="business">
+              {BUSINESS_INFO.map((info, index) => (
+                <S.FooterContentListItem key={index}>
+                  {info}
+                </S.FooterContentListItem>
+              ))}
+            </S.FooterContentList>
+          </S.FooterContent>
 
-        <S.FooterLinkContainer>
-          <S.FooterLink onClick={openModal}>이용약관</S.FooterLink>
-        </S.FooterLinkContainer>
-      </S.FooterInner>
-    </S.FooterContainer>
+          <S.FooterLinkContainer>
+            <S.FooterLink onClick={openModal}>이용약관</S.FooterLink>
+          </S.FooterLinkContainer>
+        </S.FooterInner>
+      </S.FooterContainer>
+
+      {/* 이용약관  */}
+      <TermsModal />
+    </>
   );
 }
 
