@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useModal } from '@/hooks/useModal';
+
 import LogoHorizontal from '@assets/ingteriorLogo_horizon.svg?react';
 
 import * as S from './styles';
@@ -13,6 +15,7 @@ const BUSINESS_INFO = [
 
 function Footer() {
   const navigate = useNavigate();
+  const { openModal } = useModal('terms');
 
   return (
     <S.FooterContainer>
@@ -42,7 +45,7 @@ function Footer() {
         </S.FooterContent>
 
         <S.FooterLinkContainer>
-          <S.FooterLink>이용약관</S.FooterLink>
+          <S.FooterLink onClick={openModal}>이용약관</S.FooterLink>
         </S.FooterLinkContainer>
       </S.FooterInner>
     </S.FooterContainer>

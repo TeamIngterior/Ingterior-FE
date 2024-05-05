@@ -6,10 +6,9 @@ export const ChattingContainer = styled.section`
   bottom: 25px;
   right: 25px;
 
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
-  width: 100%;
-  max-width: calc(1200px + 16px * 2);
+  width: fit-content;
   padding: 0 ${theme.gap.gap2};
 `;
 
