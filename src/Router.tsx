@@ -75,6 +75,11 @@ const router = createBrowserRouter([
             element: <AddConstruction />,
           },
           {
+            // 현장 편집
+            path: 'edit/:id',
+            element: <DetailConstruction />,
+          },
+          {
             // 새 하자 추가
             path: 'defect/addition/:id',
             element: <AddDefect />,

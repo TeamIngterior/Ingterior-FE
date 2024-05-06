@@ -60,7 +60,7 @@ function ConstructionListCard({
                     icon: <EditIcon />,
                     onClickHandler: () =>
                       navigate(
-                        `/construction/${cardData?.constructionId}/edit`
+                        `/construction/edit/${cardData?.constructionId}`
                       ),
                   },
                   {
