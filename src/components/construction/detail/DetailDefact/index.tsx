@@ -59,16 +59,17 @@ function DetailDefact({ detailData }: { detailData: any }) {
           <S.MemberListHeader>현장 참여자</S.MemberListHeader>
 
           <S.MemberList>
-            <S.MemberListItem>
-              {/* 프로필 이미지  */}
-              {detailData?.memberThumnails?.map((info: any, index: number) => (
+            {/* 프로필 이미지  */}
+            {detailData?.memberThumnails?.map((info: any, index: number) => (
+              <S.MemberListItem>
                 <S.MemberProfileImage key={index}>
-                  <img src={info?.imgUrl} alt="프로필 이미지" />
+                  <img src={info?.imgUrl[index]} alt="프로필 이미지" />
                 </S.MemberProfileImage>
-              ))}
-              {/* 참여자 정보 */}
-              {detailData?.memberCode}
-            </S.MemberListItem>
+
+                {/* 참여자 정보 */}
+                {detailData?.memberCode}
+              </S.MemberListItem>
+            ))}
           </S.MemberList>
         </S.DetailConstructionMebmerContainer>
       </S.DetailConstructionInfoContainer>
