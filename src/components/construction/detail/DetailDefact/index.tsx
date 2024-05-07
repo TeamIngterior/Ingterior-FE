@@ -15,6 +15,18 @@ function DetailDefact({ detailData }: { detailData: any }) {
 
   const defectList = [];
 
+  // 참여자 정렬
+  const sortedMembers = detailData?.memberThumnails?.sort(
+    (a: { permission: string }, b: { permission: string }) => {
+      if (a.permission === 'ADMIN' && b.permission !== 'ADMIN') {
+        return -1;
+      } else if (a.permission !== 'ADMIN' && b.permission === 'ADMIN') {
+        return 1;
+      }
+      return 0;
+    }
+  );
+
   return (
     <CS.DetailContent>
       {/* 버튼 */}
@@ -60,14 +72,14 @@ function DetailDefact({ detailData }: { detailData: any }) {
 
           <S.MemberList>
             {/* 프로필 이미지  */}
-            {detailData?.memberThumnails?.map((info: any, index: number) => (
-              <S.MemberListItem>
-                <S.MemberProfileImage key={index}>
-                  <img src={info?.imgUrl[index]} alt="프로필 이미지" />
+            {sortedMembers?.map((info: any, index: number) => (
+              <S.MemberListItem key={index}>
+                <S.MemberProfileImage>
+                  <img src={info?.imgUrl} alt="Profile image" />
                 </S.MemberProfileImage>
 
                 {/* 참여자 정보 */}
-                {detailData?.memberCode}
+                {info?.memberCode}
               </S.MemberListItem>
             ))}
           </S.MemberList>
