@@ -8,6 +8,10 @@ export const TemplateContainer = styled.main`
   padding: ${theme.layoutComponent.main_template_padding}px 0;
   position: relative;
 
+  &.home {
+    padding: 0;
+  }
+
   @media (max-width: 768px) {
     padding: 56px 16px;
   }

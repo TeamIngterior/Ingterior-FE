@@ -15,7 +15,10 @@ function MainTemplate({ children }: MainTemplateProps) {
 
   useEffect(() => {
     const regex = /\/construction\/\d+$/;
-    if (regex.test(pathname)) {
+
+    if (pathname === '/') {
+      setIsContainer(false);
+    } else if (regex.test(pathname)) {
       setIsContainer(false);
     } else {
       setIsContainer(true);
@@ -30,7 +33,7 @@ function MainTemplate({ children }: MainTemplateProps) {
   }, [pathname]);
 
   return (
-    <S.TemplateContainer>
+    <S.TemplateContainer className={pathname === '/' ? 'home' : ''}>
       {isContainer ? <S.TemplateInner>{children}</S.TemplateInner> : children}
 
       {/** 채팅(메세지) */}
