@@ -45,7 +45,11 @@ function Home() {
               <br /> 우리집 인테리어 비용을 대략적으로 알 수 있어요
             </S.HomeSectionDescription>
 
-            <Button type="button" className="mainLandingButton">
+            <Button
+              type="button"
+              className="mainLandingButton"
+              onClickHandler={() => navigate('/estimate/simple-estimate')}
+            >
               간편견적 바로가기
             </Button>
           </S.HomeSectionContent>
@@ -69,7 +73,11 @@ function Home() {
               간편하게 하자를 기록하고 공유할 수 있어요.
             </S.HomeSectionDescription>
 
-            <Button type="button" className="mainLandingButton">
+            <Button
+              type="button"
+              className="mainLandingButton"
+              onClickHandler={() => navigate('/construction/list')}
+            >
               하자체크 바로가기
             </Button>
           </S.HomeSectionContent>
@@ -100,7 +108,11 @@ function Home() {
               있어요
             </S.HomeSectionDescription>
 
-            <Button type="button" className="mainLandingButton">
+            <Button
+              type="button"
+              className="mainLandingButton"
+              onClickHandler={() => navigate('/construction/list')}
+            >
               공사관리 바로가기
             </Button>
           </S.HomeSectionContent>
