@@ -61,7 +61,7 @@ export const ModalContainer = styled.div<DefaultModalCSSProps>`
   }
 
   /* 간편 견적 */
-  .estimateTip,
+  .estimateTip &,
   .terms & {
     max-height: 343px;
 
