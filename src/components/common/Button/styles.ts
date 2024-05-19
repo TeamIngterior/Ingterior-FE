@@ -122,4 +122,12 @@ export const Button = styled.button<ButtonCSSProps>`
     width: 100%;
     max-width: 180px;
   }
+
+  /* 메인 랜딩 페이지 버튼 */
+  &.mainLandingButton {
+    ${theme.typography.label.lb1}
+    min-width:fit-content;
+    color: #fff;
+    padding: 8px 24px;
+  }
 `;
