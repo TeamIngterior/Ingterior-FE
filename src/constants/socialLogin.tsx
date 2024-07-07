@@ -8,6 +8,20 @@ import InstagramLogo from '@assets/socialLogin/logo_instagram.svg?react';
 
 export const SOCIAL_LOGIN = [
   {
+    title: '구글로 이용하기',
+    $fullWidth: true,
+    icon: <GoogleLogo />,
+    style: {
+      backgroundColor: `${theme.color.gray01}`,
+      color: `${theme.color.gray06}`,
+      border: `1px solid ${theme.color.gray03}`,
+    },
+    onClickHandler: googleLoginRequest,
+  },
+];
+
+const SOCIAL_LOGIN2 = [
+  {
     title: '카카오톡으로 이용하기',
     $fullWidth: true,
     icon: <KakaoLogo />,
