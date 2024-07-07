@@ -38,17 +38,6 @@ function SignIn() {
             )
           )
         )}
-
-        <Button
-          $fullWidth={true}
-          onClickHandler={() =>
-            (window.location.href = `${
-              import.meta.env.VITE_SERVER_URL
-            }/member/google`)
-          }
-        >
-          구글로 이용하기 window.location
-        </Button>
       </S.LoginContent>
     </>
   );
