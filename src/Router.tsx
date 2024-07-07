@@ -2,6 +2,7 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
+import LoginAuth from './pages/user/LoginAuth';
 
 const Home = lazy(() => import('./pages/Home'));
 const SignIn = lazy(() => import('./pages/user/SignIn'));
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: 'signin',
         children: [{ index: true, element: <SignIn /> }],
+      },
+      {
+        path: 'oauth/google',
+        children: [{ index: true, element: <LoginAuth /> }],
       },
       {
         path: 'estimate',
