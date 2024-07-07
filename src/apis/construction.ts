@@ -48,7 +48,7 @@ export const constructionListByCodeRequest = async (
 // 코드로 현장 참여
 export const joinConstructionRequest = async (constructionId: number) => {
   return instance.post(`${import.meta.env.VITE_SERVER_URL}/construction/join`, {
-    memberId: '111',
+    memberId: 111,
     constructionId,
   });
 };
