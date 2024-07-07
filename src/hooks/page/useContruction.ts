@@ -4,6 +4,7 @@ import {
   deleteConstructionRequest,
   leaveConstructionRequest,
   likeConstructionRequest,
+  uploadConstructionImageRequest,
 } from '@/apis/construction';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AddConstructionFormModel } from './model';
@@ -34,7 +35,7 @@ export const useConstruction = (constructionId?: string) => {
 
   //  현장 추가
   const { mutate, isPending: isAddConstructionPending } = useMutation({
-    mutationFn: (formData: FormData) => addConstructionRequest(formData),
+    mutationFn: (formData: any) => addConstructionRequest(formData),
     onSuccess: () => {
       alert('Construction added successfully');
     },
@@ -43,28 +44,34 @@ export const useConstruction = (constructionId?: string) => {
     },
   });
 
-  const handleFormSubmit = async (
-    data: AddConstructionFormModel,
-    file?: any
-  ) => {
-    const formData = new FormData();
+  const { mutate: imageUpload } = useMutation({
+    mutationFn: (formData: any) => uploadConstructionImageRequest(formData),
+    onSuccess: () => {
+      alert('Construction added successfully');
+    },
+    onError: (error: any) => {
+      console.error('Failed to add construction:', error);
+    },
+  });
 
+  const handleImageUpload = async (data: any) => {
+    const formData = new FormData();
     const requestBlob = new Blob([JSON.stringify(data)], {
       type: 'application/json',
     });
 
-    formData.append('memberId', '111');
-    formData.append('usage', data.usage);
-    formData.append('constructionName', data.constructionName);
+    formData.append('photo', requestBlob);
 
-    // 이미지 추가
-    formData.append('drawingImageUrl', requestBlob);
+    imageUpload(formData);
+  };
 
-    if (file && typeof file !== 'string') {
-      formData.append('file', file);
-    } else {
-      formData.append('file', '');
-    }
+  const handleFormSubmit = async (data: AddConstructionFormModel) => {
+    // 폼 데이터 추가
+    const formData = {
+      memberId: 111,
+      usage: Number(data.usage),
+      constructionName: data.constructionName,
+    };
 
     mutate(formData);
   };
@@ -111,6 +118,7 @@ export const useConstruction = (constructionId?: string) => {
   return {
     constructionDetailData,
     handleFormSubmit,
+    handleImageUpload,
     handleDeleteConstruction,
     handleLikeConstruction,
     handleLeaveConstruction,

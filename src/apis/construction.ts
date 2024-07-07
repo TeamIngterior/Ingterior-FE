@@ -55,8 +55,13 @@ export const joinConstructionRequest = async (constructionId: number) => {
 
 // 현장 추가
 export const addConstructionRequest = async (data: any) => {
+  return instance.post(`${import.meta.env.VITE_SERVER_URL}/construction`, data);
+};
+
+// 현장 추가 - 이미지 업로드
+export const uploadConstructionImageRequest = async (data: any) => {
   return instance.post(
-    `${import.meta.env.VITE_SERVER_URL}/construction`,
+    `${import.meta.env.VITE_SERVER_URL}/photo/construction`,
     data,
     {
       headers: {

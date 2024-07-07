@@ -34,7 +34,7 @@ const ADD_CONSTRUCTION_NAV = [
 
 function AddConstruction() {
   const navigate = useNavigate();
-  const { handleFormSubmit } = useConstruction();
+  const { handleFormSubmit, handleImageUpload } = useConstruction();
   const [selectedFiles, setSelectedFiles] = useState<any>();
 
   const {
@@ -86,8 +86,15 @@ function AddConstruction() {
     const constructionName = data.constructionName;
     const usage = data.usage.length > 1 ? '0' : '1';
 
-    handleFormSubmit({ constructionName, usage }, selectedFiles);
-    navigate('/construction/list');
+    const response = await handleFormSubmit({ constructionName, usage });
+
+    console.log('응답값', response);
+
+    if (selectedFiles) {
+      handleImageUpload(selectedFiles);
+    }
+
+    // navigate('/construction/list');
   };
 
   // 디버깅용 코드
