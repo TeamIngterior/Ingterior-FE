@@ -34,17 +34,18 @@ function AddConstructionCodeSite() {
   // 현장 코드 검증
   const onEnterCodeSubmit = async (data: any) => {
     try {
-      const response = await isValidateData(data.siteCode);
-      const status = response.data?.status;
-      const responseData = response.data?.data ?? null;
+      const response = await isValidateData(data.constructionCode);
+      const status = response.status;
+      const responseData = response.data ?? null;
 
+      console.log(status, responseData, 'status, responseData');
       setIsValidate({ status });
 
       if (status === 409) {
         setValidData(responseData);
       } else if (status === 200) {
         setValidData(responseData);
-        console.log(responseData);
+        console.log('responseData', responseData);
       }
     } catch (error) {
       console.error('Error Fetching data: ', error);
@@ -55,7 +56,8 @@ function AddConstructionCodeSite() {
   // 현장 코드 추가
   const onSubmit = async (data: any) => {
     try {
-      joinSiteMutation(data.constructionId);
+      joinSiteMutation(validData.constructionId);
+      console.log(validData, 'validData');
 
       closeModal(() => {
         reset();
@@ -97,7 +99,7 @@ function AddConstructionCodeSite() {
               inputType="input"
               $isHorizontal={true}
               placeholder="공유받은 코드를 입력해 주세요."
-              {...register('constructionId')}
+              {...register('constructionCode')}
               errors={errors}
             ></Input>
             <Button size="sm" $styleType="revert">
@@ -125,20 +127,20 @@ function AddConstructionCodeSite() {
               <>
                 <S.ListCardModalContainer>
                   <S.ListCardModalTitle>
-                    {validData?.title}
+                    {validData?.constructionName}
                   </S.ListCardModalTitle>
 
                   <LS.ListCardInfoContainer>
                     <LS.ListCardInfo>
                       <LS.ListCardProfileImg>
                         <img
-                          src={validData?.user?.profileImg}
+                          src={validData?.memberThumnails[0]}
                           alt="현장 이미지"
                         />
                       </LS.ListCardProfileImg>
                       <LS.ListCardProfileInfo>
-                        <p>생성자: {validData?.user?.usercode}</p>
-                        <p>{validData?.createdAt}</p>
+                        <p>생성자: {validData?.memberCode}</p>
+                        <p>{validData?.regDate}</p>
                       </LS.ListCardProfileInfo>
                     </LS.ListCardInfo>
                   </LS.ListCardInfoContainer>

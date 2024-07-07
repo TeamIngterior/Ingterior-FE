@@ -35,16 +35,18 @@ export const constructionDetailRequest = async (constructionId: string) => {
 };
 
 // 현장 목록을 현장 코드로 조회해서 있는지 검증
-export const constructionListByCodeRequest = async (constructionId: string) => {
-  return instance.get(`${import.meta.env.VITE_SERVER_URL}/construction`, {
+export const constructionListByCodeRequest = async (
+  constructionCode: string
+) => {
+  return instance.get(`${import.meta.env.VITE_SERVER_URL}/construction/code`, {
     params: {
-      constructionId,
+      constructionCode,
     },
   });
 };
 
 // 코드로 현장 참여
-export const joinConstructionRequest = async (constructionId: string) => {
+export const joinConstructionRequest = async (constructionId: number) => {
   return instance.post(`${import.meta.env.VITE_SERVER_URL}/construction/join`, {
     memberId: '111',
     constructionId,
